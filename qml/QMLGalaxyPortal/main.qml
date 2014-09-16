@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
+import QtQuick.Window 2.2
 
 // http://qt-project.org/wiki/JSONListModel
 // https://github.com/kromain/qml-utils
@@ -9,24 +10,23 @@ import QtQuick.XmlListModel 2.0
 
 Rectangle {
     id: screen
-    width: 360
-    height: 360
+    width: Screen.width
+    height: Screen.height
 
-    XmlListModel {
+    /*XmlListModel {
         id : listmodel
         source: "http://api.flickr.com/services/feeds/photos_public.gne?format=atom&tags=cats"
         query: "/feed/entry"
         namespaceDeclarations: "declare default element namespace 'http://www.w3.org/2005/Atom';"
         XmlRole { name: "title"; query: "title/string()" }
         XmlRole { name: "imagesource"; query: "link[@rel=\"enclosure\"]/@href/string()" }
-    }
+    }*/
 
     JSONListModel {
-                    id: jsonModel1
-                    source: "jsonData.txt"
-
-                    query: "$.store.book[*]"
-                }
+        id: jsonModel1
+        source: "jsonData.txt"
+        query: "$.store.book[*]"
+    }
 
     transitions: [
         Transition {
@@ -60,7 +60,8 @@ Rectangle {
 
             delegate: Image {
                 width: parent.width
-                height: 80
+                // pixelDensity: the number of physical pixels per millimeter.
+                height: Screen.pixelDensity * 9;
                 source: "images/gradient_invertedcenternarrow.png"
 
                 Image {
