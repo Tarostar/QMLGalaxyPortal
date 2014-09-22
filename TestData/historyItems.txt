@@ -1,0 +1,20 @@
+{
+"slug": null, 
+"user_id": "f10540a7a95199b6", 
+"name": "HistoryOne", 
+"tags": ["MyTag"], 
+"deleted": false, 
+"state_ids": {"paused": [], "ok": ["062485f16c4c4fc0", "938500654203a0bf", "8f322d32fe406384"], "failed_metadata": [], "upload": [], "discarded": [], "resubmitted": [], "running": [], "setting_metadata": [], "error": [], "new": [], "queued": [], "empty": []}, 
+"state": "ok", 
+"purged": false, 
+"state_details": {"paused": 0, "ok": 3, "failed_metadata": 0, "upload": 0, "discarded": 0, "resubmitted": 0, "running": 0, "setting_metadata": 0, "error": 0, "new": 0, "queued": 0, "empty": 0}, 
+"genome_build": "?", 
+"published": false, 
+"nice_size": "5.7 MB", 
+"model_class": "History", 
+"annotation": "", 
+"contents_url": "/api/histories/a64cc31632c2a7bf/contents", 
+"id": "a64cc31632c2a7bf", 
+"empty": false, 
+"importable": false
+}

@@ -2,6 +2,10 @@
  *
  * Copyright (c) 2012 Romain Pokrzywka (KDAB) (romain@kdab.com)
  * Licensed under the MIT licence (http://opensource.org/licenses/mit-license.php)
+ *
+ * Discovered at http://qt-project.org/wiki/JSONListModel
+ * Downloaded from https://github.com/kromain/qml-utils
+ *
  */
 
 import QtQuick 2.0
@@ -37,7 +41,7 @@ Item {
         var objectArray = parseJSONString(json, query);
         for ( var key in objectArray ) {
             var jo = objectArray[key];
-            jsonModel.append( jo );
+            jsonModel.insert(0, jo );
         }
     }
 

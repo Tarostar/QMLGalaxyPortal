@@ -1,120 +1,36 @@
 import QtQuick 2.3
-//import QtQuick.XmlListModel 2.0
 import QtQuick.Window 2.2
 
-// http://qt-project.org/wiki/JSONListModel
-// https://github.com/kromain/qml-utils
+import "utils.js" as Utils
 
 Rectangle {
     id: screen
     width: Screen.width
     height: Screen.height
 
-    /*XmlListModel {
-        id : listmodel
-        source: "http://api.flickr.com/services/feeds/photos_public.gne?format=atom&tags=cats"
-        query: "/feed/entry"
-        namespaceDeclarations: "declare default element namespace 'http://www.w3.org/2005/Atom';"
-        XmlRole { name: "title"; query: "title/string()" }
-        XmlRole { name: "imagesource"; query: "link[@rel=\"enclosure\"]/@href/string()" }
-    }*/
+    // Galaxy API key for the dataSource used to retrieve data for user
+    property string dataKey: "48878f3f037cdc0c1be3157296e2c964"
+    property string dataSource: "https://test.galaxyproject.org"
+    // https://usegalaxy.org (218afad6146272c7c771688e10fb9884)
 
-    /**
-    * Density Categories in dpi and dots per mm + multiplier for sizes
-    * ldpi (low) ~120dpi (4.7 d/mm) x0.75
-    * mdpi (medium) ~160dpi (6.30 d/mm) x1
-    * hdpi (high) ~240dpi  (9.5 d/mm) x1.5
-    * xhdpi (extra-high) ~320dpi (12.6 d/mm) x2
-    * xxhdpi (extra-extra-high) ~480dpi (18.9 d/mm) x3
-    * xxxhdpi (extra-extra-extra-high) ~640dpi (25 d/mm) x4
-    */
 
-    /**
-    * Item at mdpi
-    * item: 9mm (48dp) height and screen-width wide
-    * ldpi: 36 (width: 320, 480)
-    * mdpi: 48 (width: 480, 600, 1024, 1280)
-    * hdpi: 72 (width: 1920)
-    * xhdpi: 96 (width: 2560)
-    */
 
-    /**
-    * Typical screen widths
-    * 320dp: a typical phone screen (240x320 ldpi, 320x480 mdpi, 480x800 hdpi, etc).
-    * 480dp: a tweener tablet like the Streak (480x800 mdpi).
-    * 600dp: a 7” tablet (600x1024 mdpi).
-    * 720dp: a 10” tablet (720x1280 mdpi, 800x1280 mdpi, etc).
-    */
-
-    // support different widths?
-    // http://developer.android.com/guide/practices/screens_support.html#DeclaringTabletLayouts
-    // ldpi, mdpi: 320x480
-    // ldpi, mdpi, hdpi: ->480x800<-
-    // mdpi, hdpi: 600x1024
-    // mdpi: 1024x768 (1280x768, 1280x800)
-    // hdpi: 1920x1200 (1920x1152)
-    // xhdpi: 2560x1600 (2048x1536, 2560x1536)
-
-    // images for different device densities are determined by the device's pixel density
     property var res: ["ldpi", "mdpi","hdpi","xhdpi"]
-    readonly property int resIndex: {
-        if (Screen.pixelDensity < 6.3) // ldpi
-            0
-        else if (Screen.pixelDensity < 9.5) // mdpi
-            1
-        else if (Screen.pixelDensity < 12.6) // hdpi
-            2
-        else // anything larger use xhdpi
-            3
-        // TODO: add xxhdpi and xxxhdpi
-    }
-
-    // width we use for images that want to be full screen width uses closest category
     property var devwidth: ["320", "480", "600", "1024", "1280", "1920", "2560"]
-    readonly property int widthIndex: {
-        if (Screen.width <= 400)
-            0
-        else if (Screen.width <= 540)
-            1
-        else if (Screen.width <= 812)
-            2
-        else if (Screen.width <= 1152)
-            3
-        else if (Screen.width <= 1600)
-            4
-        else if (Screen.width <= 2240)
-            5
-        else // any larger screen width uses the 2560 image width
-            6
+    readonly property int resIndex: Utils.getResolutionIndex(Screen.pixelDensity)
+    readonly property int widthIndex: Utils.getScreenWidthIndex(Screen.width)
+
+    JSONListModel {
+        id: jsonHistoryJobsModel
+        source: "not-set"
+        query: "$.*"
     }
 
     JSONListModel {
-        id: jsonModel1
-        //source: "jsonData.txt"
-        //query: "$.store.book[*]"
-        source: "https://usegalaxy.org/api/histories?key=218afad6146272c7c771688e10fb9884"
-        query: "$.[*]"
+        id: jsonHistoriesModel
+        source: dataSource + "/api/histories?key=" + dataKey
+        query: "$.*"
     }
-
-    transitions: [
-        Transition {
-            NumberAnimation {
-                target: screenlayout
-                easing: Easing.OutCubic
-                property: "x"
-                duration: 500
-            }
-        }
-    ]
-    states: [
-        State {
-            name: "view"
-            PropertyChanges {
-                target: screenlayout
-                x: -screen.width
-            }
-        }
-    ]
 
     Row {
         id: screenlayout
@@ -122,15 +38,17 @@ Rectangle {
             id: listview
             width: screen.width
             height: screen.height
-            model: jsonModel1.model
+            model: jsonHistoriesModel.model
 
+            // note, delegate can just specify an "id"
+            // also note can simply use "Component"
             delegate: Rectangle {
+                id: listItem
                 width: parent.width
                 // pixelDensity: the number of physical pixels per millimeter.
                 height: Screen.pixelDensity * 9;
-                //source: "images/gradient_invertedcenternarrow.png"
                 //source: "../../Images/" + res[resIndex] + "/item_" + devwidth[widthIndex] + ".png"
-                color: "lightsteelblue"
+                color: "ivory" // "lightsteelblue"
 
                 Image {
                     id: thumbnail
@@ -140,7 +58,7 @@ Rectangle {
                     height: parent.height / 2
                     width: parent.height / 2
                     fillMode: Image.PreserveAspectFit
-                    source: "qrc:/images/main_icon"
+                    source: "qrc:/resources/main_image"
                     //source: imagesource
                     //onSourceChanged: print(imagesource)
                 }
@@ -152,7 +70,7 @@ Rectangle {
                     anchors.rightMargin: 5
                     anchors.verticalCenter: parent.verticalCenter
                     elide: Text.ElideMiddle
-                    text: name + " - " + url
+                    text: model.name
                     font.pixelSize: 15
                 }
                 Line {
@@ -162,29 +80,114 @@ Rectangle {
                 }
 
                 MouseArea {
+                    hoverEnabled: true
                     anchors.fill: parent
-                    onClicked: screen.state = "view"
+                    onEntered: {listItem.color = "lemonchiffon" }
+                    onExited: {listItem.color = "ivory" }
+                    onClicked: {
+                        jsonHistoryJobsModel.source = dataSource + "/api/histories/" + model.id + "/contents?key=" + dataKey;
+                        /*itemTitle.text = model.name;
+                        itemDetails.text =  "Url: " + model.url +
+                                            "\nID: " + model.id +
+                                            "\nDeleted: " + model.deleted +
+                                            "\nPublished: " + model.published
+
+                        itemTags.text = "Tags:"*/
+                        screen.state = "historyItems"
+                    }
                 }
             }
         }
-        Rectangle {
-            color: "lightsteelblue"
-            width: screen.width
-            height: screen.height
-            Text {
+        ListView {
+                id: historyItems
+                width: screen.width
+                height: screen.height
+                model: jsonHistoryJobsModel.model
+
+                // note, delegate can just specify an "id"
+                // also note can simply use "Component"
+                delegate: Rectangle {
+                    id: historyItem
+                    width: parent.width
+                    // pixelDensity: the number of physical pixels per millimeter.
+                    height: Screen.pixelDensity * 9;
+                    color: "ivory"
+
+                Text {
+                    id: historyItemTitle
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.leftMargin: 20
+                    anchors.rightMargin: 5
+                    anchors.verticalCenter: parent.verticalCenter
+                    elide: Text.ElideMiddle
+                    text: model.name + "\n "
+                    font.pixelSize: 15
+                }
+                Line {
+                    id: historyItemSeparator
+                    anchors.left: parent.left
+                    width: parent.width
+                }
+                MouseArea {
+                    // TODO: this should drill deeper and separate key for returning
+                    anchors.fill: parent
+                    onClicked: screen.state = ""
+                }
+            }
+
+            /*Text {
+                id: itemTitle
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: 20
                 anchors.rightMargin: 5
-                id: details
-                text: "Logical: " + Screen.logicalPixelDensity.toFixed(2) + " dots/mm (" + (Screen.logicalPixelDensity * 25.4).toFixed(2) + " dots/inch)"
+                anchors.topMargin: 5
+                text: "n/a"
+                // Behavior on opacity { NumberAnimation {}}
+                font.pixelSize: 20
+                font.bold: true
+            }
+            Text {
+                id: itemDetails
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 20
+                anchors.rightMargin: 5
+                anchors.topMargin: 5
+                anchors.top: itemTitle.bottom
+                text: "no data"
                 // Behavior on opacity { NumberAnimation {}}
                 font.pixelSize: 15
             }
-            MouseArea {
-                anchors.fill: parent
-                onClicked: screen.state = ""
-            }
+            Text {
+                id: itemTags
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 20
+                anchors.rightMargin: 5
+                anchors.top: itemDetails.bottom
+                text: "no tag data"
+                // Behavior on opacity { NumberAnimation {}}
+                font.pixelSize: 12
+                font.italic: true
+            }*/
+        }
+
+    }
+    transitions: Transition {
+        NumberAnimation {
+            target: screenlayout
+            easing: Easing.OutCubic
+            property: "x"
+            duration: 500
+        }
+    }
+    states: State {
+        name: "historyItems"
+        PropertyChanges {
+            target: screenlayout
+            x: -screen.width
         }
     }
 }

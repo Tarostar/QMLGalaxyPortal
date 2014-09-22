@@ -1,0 +1,308 @@
+Starting remote process.D/dalvikvm( 1240): Not late-enabling CheckJNI (already on)
+D/dalvikvm( 1240): GC_CONCURRENT freed 221K, 9% free 2934K/3220K, paused 4ms+4ms, total 81ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 375K, 13% free 2952K/3392K, paused 4ms+12ms, total 58ms
+D/dalvikvm( 1240): Trying to load lib /data/data/org.claus.test/lib/libgnustl_shared.so 0xb3db4598
+D/dalvikvm( 1240): Added shared lib /data/data/org.claus.test/lib/libgnustl_shared.so 0xb3db4598
+D/dalvikvm( 1240): No JNI_OnLoad found in /data/data/org.claus.test/lib/libgnustl_shared.so 0xb3db4598, skipping init
+D/dalvikvm( 1240): Trying to load lib /data/data/org.claus.test/lib/libQt5Core.so 0xb3db4598
+D/dalvikvm( 1240): Added shared lib /data/data/org.claus.test/lib/libQt5Core.so 0xb3db4598
+D/dalvikvm( 1240): Trying to load lib /data/data/org.claus.test/lib/libQt5Network.so 0xb3db4598
+D/dalvikvm( 1240): Added shared lib /data/data/org.claus.test/lib/libQt5Network.so 0xb3db4598
+D/dalvikvm( 1240): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Network.so 0xb3db4598, skipping init
+D/dalvikvm( 1240): Trying to load lib /data/data/org.claus.test/lib/libQt5Qml.so 0xb3db4598
+D/dalvikvm( 1240): Added shared lib /data/data/org.claus.test/lib/libQt5Qml.so 0xb3db4598
+D/dalvikvm( 1240): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Qml.so 0xb3db4598, skipping init
+D/dalvikvm( 1240): Trying to load lib /data/data/org.claus.test/lib/libQt5Gui.so 0xb3db4598
+D/dalvikvm( 1240): Added shared lib /data/data/org.claus.test/lib/libQt5Gui.so 0xb3db4598
+D/dalvikvm( 1240): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Gui.so 0xb3db4598, skipping init
+D/dalvikvm( 1240): Trying to load lib /data/data/org.claus.test/lib/libQt5Quick.so 0xb3db4598
+D/dalvikvm( 1240): Added shared lib /data/data/org.claus.test/lib/libQt5Quick.so 0xb3db4598
+D/dalvikvm( 1240): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Quick.so 0xb3db4598, skipping init
+D/dalvikvm( 1240): Trying to load lib /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3db4598
+D/dalvikvm( 1240): Added shared lib /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3db4598
+D/dalvikvm( 1240): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3db4598, skipping init
+D/dalvikvm( 1240): Trying to load lib /data/data/org.claus.test/qt-reserved-files/plugins/platforms/android/libqtforandroid.so 0xb3db4598
+D/dalvikvm( 1240): Added shared lib /data/data/org.claus.test/qt-reserved-files/plugins/platforms/android/libqtforandroid.so 0xb3db4598
+I/Qt      ( 1240): qt start
+D/dalvikvm( 1240): Trying to load lib /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3db4598
+D/dalvikvm( 1240): Shared lib '/data/data/org.claus.test/lib/libQt5QuickParticles.so' already loaded in same CL 0xb3db4598
+D/dalvikvm( 1240): Trying to load lib /data/app-lib/org.claus.test-1/libQMLGalaxyPortal.so 0xb3db4598
+D/Qt      ( 1240): qml\qqmlengine.cpp:1453 (QQmlDebuggingEnabler::QQmlDebuggingEnabler(bool)): QML debugging is enabled. Only use this in a safe environment.
+D/dalvikvm( 1240): Added shared lib /data/app-lib/org.claus.test-1/libQMLGalaxyPortal.so 0xb3db4598
+D/dalvikvm( 1240): No JNI_OnLoad found in /data/app-lib/org.claus.test-1/libQMLGalaxyPortal.so 0xb3db4598, skipping init
+D/gralloc_goldfish( 1240): Emulator without GPU emulation detected.
+D/dalvikvm( 1240): GC_CONCURRENT freed 439K, 15% free 2965K/3472K, paused 4ms+43ms, total 166ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 324K, 13% free 3042K/3472K, paused 6ms+4ms, total 49ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 403K, 15% free 3054K/3556K, paused 4ms+2ms, total 45ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 442K, 15% free 3054K/3568K, paused 15ms+5ms, total 66ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 411K, 14% free 3068K/3568K, paused 6ms+5ms, total 109ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 422K, 15% free 3057K/3568K, paused 14ms+2ms, total 43ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 390K, 15% free 3064K/3568K, paused 6ms+43ms, total 152ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 420K, 14% free 3077K/3568K, paused 4ms+5ms, total 79ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 449K, 15% free 3061K/3580K, paused 24ms+4ms, total 74ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 406K, 14% free 3080K/3580K, paused 7ms+31ms, total 80ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 442K, 15% free 3066K/3580K, paused 5ms+2ms, total 49ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 414K, 15% free 3066K/3580K, paused 5ms+5ms, total 47ms
+D/dalvikvm( 1240): GC_CONCURRENT freed 417K, 15% free 3069K/3580K, paused 4ms+11ms, total 67ms
+W/Qt      ( 1240): eglconvenience\qeglconvenience.cpp:314 (void* QEglConfigChooser::chooseConfig()): Cant find EGLConfig, returning null config
+W/Qt      ( 1240): scenegraph\qsgcontext.cpp:432 (virtual void QSGRenderContext::initialize(QOpenGLContext*)): QSGContext::initialize: depth buffer support missing, expect rendering errors
+W/Qt      ( 1240): scenegraph\qsgcontext.cpp:434 (virtual void QSGRenderContext::initialize(QOpenGLContext*)): QSGContext::initialize: stencil buffer support missing, expect rendering errors
+I/ARMAssembler( 1240): generated scanline__00000077:03010108_00000A08_00000000 [  4 ipp] (25 ins) at [0xa965b1f0:0xa965b254] in 10000000 ns
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:322 (bool QOpenGLShaderPrivate::compile(QOpenGLShader*)): QOpenGLShader::compile(Vertex): failed
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:322 (bool QOpenGLShaderPrivate::compile(QOpenGLShader*)): QOpenGLShader::compile(Fragment): failed
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): scenegraph\coreapi\qsgmaterial.cpp:369 (virtual void QSGMaterialShader::compile()): QSGMaterialShader: Shader compilation failed:
+W/Qt      ( 1240): scenegraph\coreapi\qsgmaterial.cpp:370 (virtual void QSGMaterialShader::compile()): ""
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:1781 (int QOpenGLShaderProgram::uniformLocation(const char*) const): QOpenGLShaderProgram::uniformLocation( matrix ): shader program is not linked
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:1781 (int QOpenGLShaderProgram::uniformLocation(const char*) const): QOpenGLShaderProgram::uniformLocation( opacity ): shader program is not linked
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:322 (bool QOpenGLShaderPrivate::compile(QOpenGLShader*)): QOpenGLShader::compile(Vertex): failed
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:322 (bool QOpenGLShaderPrivate::compile(QOpenGLShader*)): QOpenGLShader::compile(Fragment): failed
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): scenegraph\coreapi\qsgmaterial.cpp:369 (virtual void QSGMaterialShader::compile()): QSGMaterialShader: Shader compilation failed:
+W/Qt      ( 1240): scenegraph\coreapi\qsgmaterial.cpp:370 (virtual void QSGMaterialShader::compile()): ""
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:1781 (int QOpenGLShaderProgram::uniformLocation(const char*) const): QOpenGLShaderProgram::uniformLocation( matrix ): shader program is not linked
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:1781 (int QOpenGLShaderProgram::uniformLocation(const char*) const): QOpenGLShaderProgram::uniformLocation( textureScale ): shader program is not linked
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:1781 (int QOpenGLShaderProgram::uniformLocation(const char*) const): QOpenGLShaderProgram::uniformLocation( color ): shader program is not linked
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:1781 (int QOpenGLShaderProgram::uniformLocation(const char*) const): QOpenGLShaderProgram::uniformLocation( alphaMin ): shader program is not linked
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:1781 (int QOpenGLShaderProgram::uniformLocation(const char*) const): QOpenGLShaderProgram::uniformLocation( alphaMax ): shader program is not linked
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1240): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:322 (bool QOpenGLShaderPrivate::compile(QOpenGLShader*)): QOpenGLShader::compile(Vertex): failed
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:322 (bool QOpenGLShaderPrivate::compile(QOpenGLShader*)): QOpenGLShader::compile(Fragment): failed
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+W/Qt      ( 1240): scenegraph\coreapi\qsgmaterial.cpp:369 (virtual void QSGMaterialShader::compile()): QSGMaterialShader: Shader compilation failed:
+W/Qt      ( 1240): scenegraph\coreapi\qsgmaterial.cpp:370 (virtual void QSGMaterialShader::compile()): ""
+W/Qt      ( 1240): opengl\qopenglshaderprogram.cpp:1781 (int QOpenGLShaderProgram::uniformLocation(const char*) const): QOpenGLShaderProgram::uniformLocation( qt_Matrix ): shader program is not linked
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API
+E/libEGL  ( 1240): called unimplemented OpenGL ES API

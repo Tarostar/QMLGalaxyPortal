@@ -1,0 +1,107 @@
+Starting remote process.D/dalvikvm( 1230): Not late-enabling CheckJNI (already on)
+D/dalvikvm( 1230): GC_CONCURRENT freed 211K, 9% free 3066K/3348K, paused 22ms+4ms, total 109ms
+D/dalvikvm( 1230): GC_CONCURRENT freed 387K, 13% free 3079K/3540K, paused 4ms+2ms, total 49ms
+D/dalvikvm( 1230): GC_FOR_ALLOC freed 145K, 14% free 3151K/3628K, paused 20ms, total 23ms
+D/dalvikvm( 1230): Trying to load lib /data/data/org.claus.test/lib/libgnustl_shared.so 0xb3d0def0
+D/dalvikvm( 1230): Added shared lib /data/data/org.claus.test/lib/libgnustl_shared.so 0xb3d0def0
+D/dalvikvm( 1230): No JNI_OnLoad found in /data/data/org.claus.test/lib/libgnustl_shared.so 0xb3d0def0, skipping init
+D/dalvikvm( 1230): Trying to load lib /data/data/org.claus.test/lib/libQt5Core.so 0xb3d0def0
+D/dalvikvm( 1230): Added shared lib /data/data/org.claus.test/lib/libQt5Core.so 0xb3d0def0
+D/dalvikvm( 1230): Trying to load lib /data/data/org.claus.test/lib/libQt5Network.so 0xb3d0def0
+D/dalvikvm( 1230): Added shared lib /data/data/org.claus.test/lib/libQt5Network.so 0xb3d0def0
+D/dalvikvm( 1230): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Network.so 0xb3d0def0, skipping init
+D/dalvikvm( 1230): Trying to load lib /data/data/org.claus.test/lib/libQt5Qml.so 0xb3d0def0
+D/dalvikvm( 1230): Added shared lib /data/data/org.claus.test/lib/libQt5Qml.so 0xb3d0def0
+D/dalvikvm( 1230): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Qml.so 0xb3d0def0, skipping init
+D/dalvikvm( 1230): Trying to load lib /data/data/org.claus.test/lib/libQt5Gui.so 0xb3d0def0
+D/dalvikvm( 1230): Added shared lib /data/data/org.claus.test/lib/libQt5Gui.so 0xb3d0def0
+D/dalvikvm( 1230): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Gui.so 0xb3d0def0, skipping init
+D/dalvikvm( 1230): Trying to load lib /data/data/org.claus.test/lib/libQt5Quick.so 0xb3d0def0
+D/dalvikvm( 1230): Added shared lib /data/data/org.claus.test/lib/libQt5Quick.so 0xb3d0def0
+D/dalvikvm( 1230): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Quick.so 0xb3d0def0, skipping init
+D/dalvikvm( 1230): Trying to load lib /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3d0def0
+D/dalvikvm( 1230): Added shared lib /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3d0def0
+D/dalvikvm( 1230): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3d0def0, skipping init
+D/dalvikvm( 1230): Trying to load lib /data/data/org.claus.test/qt-reserved-files/plugins/platforms/android/libqtforandroid.so 0xb3d0def0
+D/dalvikvm( 1230): Added shared lib /data/data/org.claus.test/qt-reserved-files/plugins/platforms/android/libqtforandroid.so 0xb3d0def0
+I/Qt      ( 1230): qt start
+D/dalvikvm( 1230): Trying to load lib /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3d0def0
+D/dalvikvm( 1230): Shared lib '/data/data/org.claus.test/lib/libQt5QuickParticles.so' already loaded in same CL 0xb3d0def0
+D/dalvikvm( 1230): Trying to load lib /data/app-lib/org.claus.test-1/libQMLGalaxyPortal.so 0xb3d0def0
+D/Qt      ( 1230): qml\qqmlengine.cpp:1453 (QQmlDebuggingEnabler::QQmlDebuggingEnabler(bool)): QML debugging is enabled. Only use this in a safe environment.
+D/dalvikvm( 1230): Added shared lib /data/app-lib/org.claus.test-1/libQMLGalaxyPortal.so 0xb3d0def0
+D/dalvikvm( 1230): No JNI_OnLoad found in /data/app-lib/org.claus.test-1/libQMLGalaxyPortal.so 0xb3d0def0, skipping init
+D/        ( 1230): HostConnection::get() New Host Connection established 0xb71b59f0, tid 1251
+D/        ( 1230): HostConnection::get() New Host Connection established 0xb71b8550, tid 1230
+W/EGL_emulation( 1230): eglSurfaceAttrib not implemented
+D/OpenGLRenderer( 1230): Enabling debug mode 0
+W/EGL_emulation( 1230): eglSurfaceAttrib not implemented
+D/        ( 1230): HostConnection::get() New Host Connection established 0xb72898d0, tid 1255
+
+
+"org.claus.test" terminated.
+Starting remote process.D/dalvikvm( 1460): Not late-enabling CheckJNI (already on)
+D/dalvikvm( 1460): GC_CONCURRENT freed 215K, 9% free 3064K/3352K, paused 5ms+4ms, total 103ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 392K, 14% free 3081K/3544K, paused 4ms+3ms, total 56ms
+D/dalvikvm( 1460): GC_FOR_ALLOC freed 139K, 14% free 3151K/3644K, paused 19ms, total 19ms
+D/dalvikvm( 1460): Trying to load lib /data/data/org.claus.test/lib/libgnustl_shared.so 0xb3d0eed0
+D/dalvikvm( 1460): Added shared lib /data/data/org.claus.test/lib/libgnustl_shared.so 0xb3d0eed0
+D/dalvikvm( 1460): No JNI_OnLoad found in /data/data/org.claus.test/lib/libgnustl_shared.so 0xb3d0eed0, skipping init
+D/dalvikvm( 1460): Trying to load lib /data/data/org.claus.test/lib/libQt5Core.so 0xb3d0eed0
+D/dalvikvm( 1460): Added shared lib /data/data/org.claus.test/lib/libQt5Core.so 0xb3d0eed0
+D/dalvikvm( 1460): Trying to load lib /data/data/org.claus.test/lib/libQt5Network.so 0xb3d0eed0
+D/dalvikvm( 1460): Added shared lib /data/data/org.claus.test/lib/libQt5Network.so 0xb3d0eed0
+D/dalvikvm( 1460): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Network.so 0xb3d0eed0, skipping init
+D/dalvikvm( 1460): Trying to load lib /data/data/org.claus.test/lib/libQt5Qml.so 0xb3d0eed0
+D/dalvikvm( 1460): Added shared lib /data/data/org.claus.test/lib/libQt5Qml.so 0xb3d0eed0
+D/dalvikvm( 1460): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Qml.so 0xb3d0eed0, skipping init
+D/dalvikvm( 1460): Trying to load lib /data/data/org.claus.test/lib/libQt5Gui.so 0xb3d0eed0
+D/dalvikvm( 1460): Added shared lib /data/data/org.claus.test/lib/libQt5Gui.so 0xb3d0eed0
+D/dalvikvm( 1460): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Gui.so 0xb3d0eed0, skipping init
+D/dalvikvm( 1460): Trying to load lib /data/data/org.claus.test/lib/libQt5Quick.so 0xb3d0eed0
+D/dalvikvm( 1460): Added shared lib /data/data/org.claus.test/lib/libQt5Quick.so 0xb3d0eed0
+D/dalvikvm( 1460): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5Quick.so 0xb3d0eed0, skipping init
+D/dalvikvm( 1460): Trying to load lib /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3d0eed0
+D/dalvikvm( 1460): Added shared lib /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3d0eed0
+D/dalvikvm( 1460): No JNI_OnLoad found in /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3d0eed0, skipping init
+D/dalvikvm( 1460): Trying to load lib /data/data/org.claus.test/qt-reserved-files/plugins/platforms/android/libqtforandroid.so 0xb3d0eed0
+D/dalvikvm( 1460): Added shared lib /data/data/org.claus.test/qt-reserved-files/plugins/platforms/android/libqtforandroid.so 0xb3d0eed0
+I/Qt      ( 1460): qt start
+D/dalvikvm( 1460): Trying to load lib /data/data/org.claus.test/lib/libQt5QuickParticles.so 0xb3d0eed0
+D/dalvikvm( 1460): Shared lib '/data/data/org.claus.test/lib/libQt5QuickParticles.so' already loaded in same CL 0xb3d0eed0
+D/dalvikvm( 1460): Trying to load lib /data/app-lib/org.claus.test-1/libQMLGalaxyPortal.so 0xb3d0eed0
+D/Qt      ( 1460): qml\qqmlengine.cpp:1453 (QQmlDebuggingEnabler::QQmlDebuggingEnabler(bool)): QML debugging is enabled. Only use this in a safe environment.
+D/dalvikvm( 1460): Added shared lib /data/app-lib/org.claus.test-1/libQMLGalaxyPortal.so 0xb3d0eed0
+D/dalvikvm( 1460): No JNI_OnLoad found in /data/app-lib/org.claus.test-1/libQMLGalaxyPortal.so 0xb3d0eed0, skipping init
+D/        ( 1460): HostConnection::get() New Host Connection established 0xb70a6430, tid 1460
+W/EGL_emulation( 1460): eglSurfaceAttrib not implemented
+D/OpenGLRenderer( 1460): Enabling debug mode 0
+D/dalvikvm( 1460): GC_CONCURRENT freed 338K, 12% free 3240K/3652K, paused 5ms+6ms, total 72ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 353K, 12% free 3308K/3740K, paused 4ms+12ms, total 44ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 440K, 14% free 3296K/3812K, paused 4ms+6ms, total 48ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 408K, 14% free 3299K/3812K, paused 10ms+5ms, total 52ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 426K, 14% free 3303K/3812K, paused 4ms+2ms, total 45ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 415K, 14% free 3316K/3812K, paused 4ms+10ms, total 42ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 435K, 14% free 3313K/3824K, paused 4ms+17ms, total 65ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 451K, 14% free 3319K/3824K, paused 14ms+2ms, total 56ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 427K, 14% free 3320K/3824K, paused 4ms+11ms, total 43ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 450K, 14% free 3323K/3848K, paused 14ms+14ms, total 57ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 432K, 15% free 3306K/3848K, paused 7ms+4ms, total 49ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 456K, 14% free 3328K/3848K, paused 5ms+4ms, total 68ms
+D/dalvikvm( 1460): GC_CONCURRENT freed 378K, 12% free 3443K/3900K, paused 4ms+2ms, total 81ms
+W/EGL_emulation( 1460): eglSurfaceAttrib not implemented
+D/        ( 1460): HostConnection::get() New Host Connection established 0xb71c1858, tid 1481
+D/        ( 1460): HostConnection::get() New Host Connection established 0xb73760c8, tid 1496
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object
+W/Qt      ( 1460): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15 ((null)): assets:/qml/QMLGalaxyPortal/JSONListModel.qml:15:32: QML ListModel: append: value is not an object

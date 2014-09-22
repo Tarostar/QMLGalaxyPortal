@@ -1,0 +1,14 @@
+[
+{"deleted": false, 
+"history_id": "a64cc31632c2a7bf", 
+"visible": true, 
+"hid": 1, 
+"id": "062485f16c4c4fc0", 
+"history_content_type": "dataset", 
+"name": "UCSC Main on Human: encodeGencodeGeneKnownMar07 (genome)", 
+"resubmitted": false, 
+"url": "/api/histories/a64cc31632c2a7bf/contents/datasets/062485f16c4c4fc0", 
+"state": "ok", 
+"type": "file", 
+"purged": false}, 
+{"deleted": false, "history_id": "a64cc31632c2a7bf", "visible": true, "hid": 2, "id": "938500654203a0bf", "history_content_type": "dataset", "name": "UCSC Main on Lancelet: blastHg18KG (genome)", "resubmitted": false, "url": "/api/histories/a64cc31632c2a7bf/contents/datasets/938500654203a0bf", "state": "ok", "type": "file", "purged": false}, {"deleted": false, "history_id": "a64cc31632c2a7bf", "visible": true, "hid": 3, "id": "8f322d32fe406384", "history_content_type": "dataset", "name": "UCSC Main on C. elegans: pubsBingBlat (genome)", "resubmitted": false, "url": "/api/histories/a64cc31632c2a7bf/contents/datasets/8f322d32fe406384", "state": "ok", "type": "file", "purged": false}]

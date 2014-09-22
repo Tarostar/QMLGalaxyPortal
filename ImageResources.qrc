@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/images">
-        <file alias="main_icon">images/QMLGalaxyPortal80.png</file>
-        <file>qml/QMLGalaxyPortal80.png</file>
-    </qresource>
-</RCC>

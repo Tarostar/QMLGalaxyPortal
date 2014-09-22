@@ -1,0 +1,20 @@
+[
+    {
+    "name": "MyHistory", 
+    "tags": ["test"], 
+    "deleted": false, 
+    "url": "/api/histories/8b857f15403a37e6", 
+    "published": false, 
+    "model_class": "History", 
+    "id": "8b857f15403a37e6"
+    }, 
+    {
+    "name": "Second History", 
+    "tags": [], 
+    "deleted": false, 
+    "url": "/api/histories/f118eaf14177a107", 
+    "published": false, 
+    "model_class": "History", 
+    "id": "f118eaf14177a107"
+    }
+]

@@ -23,4 +23,4 @@ OTHER_FILES += \
     images/QMLGalaxyPortal80.png
 
 RESOURCES += \
-    ImageResources.qrc
+    resources.qrc
