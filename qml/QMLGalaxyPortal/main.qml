@@ -122,16 +122,15 @@ Rectangle {
             id: listview
             width: screen.width
             height: screen.height
-            //model: 20
-            //model: listmodel
             model: jsonModel1.model
 
-            delegate: Image {
+            delegate: Rectangle {
                 width: parent.width
                 // pixelDensity: the number of physical pixels per millimeter.
                 height: Screen.pixelDensity * 9;
                 //source: "images/gradient_invertedcenternarrow.png"
-                source: "Images/" + res[resIndex] + "/item_" + devwidth[widthIndex] + ".png"
+                //source: "../../Images/" + res[resIndex] + "/item_" + devwidth[widthIndex] + ".png"
+                color: "lightsteelblue"
 
                 Image {
                     id: thumbnail
@@ -141,7 +140,7 @@ Rectangle {
                     height: parent.height / 2
                     width: parent.height / 2
                     fillMode: Image.PreserveAspectFit
-                    source: "images/QMLGalaxyPortal80.png"
+                    source: "qrc:/images/main_icon"
                     //source: imagesource
                     //onSourceChanged: print(imagesource)
                 }
@@ -153,22 +152,35 @@ Rectangle {
                     anchors.rightMargin: 5
                     anchors.verticalCenter: parent.verticalCenter
                     elide: Text.ElideMiddle
-                    text: Screen.pixelDensity + " => x9 = " + Screen.pixelDensity * 9
-                    // text: name + " - " + url
-                    font.pixelSize: 20
+                    text: name + " - " + url
+                    font.pixelSize: 15
                 }
+                Line {
+                    id: seperator
+                    anchors.left: parent.left
+                    width: parent.width
+                }
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: screen.state = "view"
                 }
             }
         }
-        Text {
-            id: details
+        Rectangle {
+            color: "lightsteelblue"
             width: screen.width
             height: screen.height
-            text: "Logical: " + Screen.logicalPixelDensity.toFixed(2) + " dots/mm (" + (Screen.logicalPixelDensity * 25.4).toFixed(2) + " dots/inch)"
-            // Behavior on opacity { NumberAnimation {}}
+            Text {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 20
+                anchors.rightMargin: 5
+                id: details
+                text: "Logical: " + Screen.logicalPixelDensity.toFixed(2) + " dots/mm (" + (Screen.logicalPixelDensity * 25.4).toFixed(2) + " dots/inch)"
+                // Behavior on opacity { NumberAnimation {}}
+                font.pixelSize: 15
+            }
             MouseArea {
                 anchors.fill: parent
                 onClicked: screen.state = ""
