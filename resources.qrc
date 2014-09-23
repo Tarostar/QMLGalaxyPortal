@@ -6,5 +6,8 @@
         <file>resources/icons/biotech-64.png</file>
         <file>resources/icons/biotech-128.png</file>
         <file alias="main_image">resources/images/QMLGalaxyPortal80.png</file>
+        <file>resources/icons/btn.png</file>
+        <file>resources/icons/btn_highlighted.png</file>
+        <file>resources/icons/search.png</file>
     </qresource>
 </RCC>

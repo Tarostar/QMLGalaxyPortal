@@ -1,0 +1,46 @@
+Text {
+                id: itemTitle
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 20
+                anchors.rightMargin: 5
+                anchors.topMargin: 5
+                text: "n/a"
+                // Behavior on opacity { NumberAnimation {}}
+                font.pixelSize: 20
+                font.bold: true
+            }
+            Text {
+                id: itemDetails
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 20
+                anchors.rightMargin: 5
+                anchors.topMargin: 5
+                anchors.top: itemTitle.bottom
+                text: "no data"
+                // Behavior on opacity { NumberAnimation {}}
+                font.pixelSize: 15
+            }
+            Text {
+                id: itemTags
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: 20
+                anchors.rightMargin: 5
+                anchors.top: itemDetails.bottom
+                text: "no tag data"
+                // Behavior on opacity { NumberAnimation {}}
+                font.pixelSize: 12
+                font.italic: true
+            }
+
+
+itemTitle.text = model.name;
+                        itemDetails.text =  "Url: " + model.url +
+                                            "\nID: " + model.id +
+                                            "\nDeleted: " + model.deleted +
+                                            "\nPublished: " + model.published
+
+                        // itemTags.text = "Tags:"
+                        screen.state = "historyItems"
