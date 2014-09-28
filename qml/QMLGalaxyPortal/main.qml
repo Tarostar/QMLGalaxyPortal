@@ -81,8 +81,8 @@ Rectangle {
                     Text {
                         id: itemtitle
                         anchors.left: parent.left
-                        anchors.right: forwardarrow.left
-                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.leftMargin: 20
                         anchors.rightMargin: 5
                         anchors.verticalCenter: parent.verticalCenter
                         elide: Text.ElideMiddle
@@ -90,10 +90,10 @@ Rectangle {
                         font.pixelSize: 15
                     }
                     Image {
-                        id: forwardarrow
-                        anchors.right: parent.right
+                        id: arrow                        
+                        anchors.left: itemtitle.right
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.rightMargin: 10
+                        anchors.leftMargin: 5
                         height: parent.height / 2
                         width: parent.height / 2
                         fillMode: Image.PreserveAspectFit
