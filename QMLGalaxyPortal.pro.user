@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.0.0, 2014-09-23T12:39:32. -->
+<!-- Written by QtCreator 3.0.0, 2014-09-29T09:04:43. -->
 <qtcreator>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
-  <value type="int">1</value>
+  <value type="int">0</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.EditorSettings</variable>
@@ -384,7 +384,7 @@
      </valuemap>
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.1">
       <value type="QString" key="BuildTargetSdk">android-16</value>
-      <value type="QString" key="InputFile">/home/claus/Projects/qt/GalPort/build-QMLGalaxyPortal-Android_for_armeabi_v7a_GCC_4_8_Qt_5_3_2-Debug/android-libQMLGalaxyPortal.so-deployment-settings.json</value>
+      <value type="QString" key="InputFile"></value>
       <value type="QString" key="KeystoreLocation"></value>
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Deploy to Android device</value>

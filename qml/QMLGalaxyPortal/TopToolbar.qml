@@ -26,16 +26,19 @@ Rectangle {
     }
 
     Button {
-        anchors.left: toolbarTitle.right
-        anchors.leftMargin: 10
-        height: parent.height / 2
-        width: parent.height / 2
-        icon: "qrc:/resources/resources/icons/search.png"
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        height: parent.height
+        width: parent.height
+        anchors.rightMargin: 10
+        image: "qrc:/resources/resources/icons/mdpi/ic_action_settings.png"
+        pressedImage: "qrc:/resources/resources/icons/mdpi/ic_action_settings_pressed.png"
         onClicked: {
             // TODO: test
             toolbarTitle.text = "click-click";
             // ensure keyboard is hidden and reset any states before
             // showing the dialog
+            dlgSettings.open();
             /*if (!settingsDialog.show) {
                 Qt.inputMethod.hide()
                 root.state = ""

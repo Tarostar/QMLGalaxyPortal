@@ -8,6 +8,12 @@ Rectangle {
     width: Screen.width
     height: Screen.height
 
+    DlgSettings {
+        id: dlgSettings
+        width: parent.width
+        height: parent.height
+    }
+
     // Galaxy API key for the dataSource used to retrieve data for user
     // local instance
     property string dataKey: "0f303101f8a957e35106c049f7ac38f9"

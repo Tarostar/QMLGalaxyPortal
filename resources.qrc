@@ -9,5 +9,13 @@
         <file>resources/icons/btn.png</file>
         <file>resources/icons/btn_highlighted.png</file>
         <file>resources/icons/search.png</file>
+        <file>resources/icons/xxhdpi/ic_action_settings.png</file>
+        <file>resources/icons/xxhdpi/ic_action_settings_pressed.png</file>
+        <file>resources/icons/mdpi/ic_action_settings.png</file>
+        <file>resources/icons/mdpi/ic_action_settings_pressed.png</file>
+        <file>resources/icons/hdpi/ic_action_settings.png</file>
+        <file>resources/icons/hdpi/ic_action_settings_pressed.png</file>
+        <file>resources/icons/xhdpi/ic_action_settings.png</file>
+        <file>resources/icons/xhdpi/ic_action_settings_pressed.png</file>
     </qresource>
 </RCC>
