@@ -38,7 +38,11 @@ Rectangle {
             toolbarTitle.text = "click-click";
             // ensure keyboard is hidden and reset any states before
             // showing the dialog
-            dlgSettings.open();
+
+            //dlgSettings.open();
+
+            screen.state = "test";
+
             /*if (!settingsDialog.show) {
                 Qt.inputMethod.hide()
                 root.state = ""

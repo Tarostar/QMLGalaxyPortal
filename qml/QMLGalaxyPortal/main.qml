@@ -175,12 +175,24 @@ Rectangle {
             duration: 500
         }
     }
-    states: State {
+    states: [
+        State {
+            name: "test"
+            PropertyChanges {
+                target: menu
+                opacity: 0
+                visible: false
+            }
+        },
+        State {
         name: "historyItems"
         PropertyChanges {
             target: screenlayout
             x: -screen.width
         }
     }
+    ]
+
+
 }
 
