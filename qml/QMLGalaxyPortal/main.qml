@@ -8,11 +8,8 @@ Rectangle {
     width: Screen.width
     height: Screen.height
 
-    DlgSettings {
-        id: dlgSettings
-        width: parent.width
-        height: parent.height
-    }
+    // loader to spawn pages on top of list (e.g. for settings)
+    Loader {  z: 1; id: mainLoader }
 
     // Galaxy API key for the dataSource used to retrieve data for user
     // local instance
@@ -65,6 +62,8 @@ Rectangle {
             id: topToolbar
             width: screen.width
             height: Screen.pixelDensity * 9
+            settingsButton.visible: true
+            backButton.visible: false
         }
         Row {
             id: screenlayout
@@ -175,7 +174,7 @@ Rectangle {
             duration: 500
         }
     }
-    states: [
+    states: /*[
         State {
             name: "test"
             PropertyChanges {
@@ -183,7 +182,7 @@ Rectangle {
                 opacity: 0
                 visible: false
             }
-        },
+        },*/
         State {
         name: "historyItems"
         PropertyChanges {
@@ -191,7 +190,7 @@ Rectangle {
             x: -screen.width
         }
     }
-    ]
+    //]
 
 
 }

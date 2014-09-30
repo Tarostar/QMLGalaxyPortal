@@ -1,9 +1,15 @@
 import QtQuick 2.3
 
 Rectangle {
+
     color: "burlywood"
 
-    Image {
+    // expose toolbar properties so they can be changed
+    property alias toolbarTitle: title
+    property alias settingsButton: settings
+    property alias backButton: back
+
+    /*Image {
         // TODO: image used must depend on resolution
         id: toolbarImage
         anchors.left: parent.left
@@ -13,19 +19,36 @@ Rectangle {
         width: parent.height / 2
         fillMode: Image.PreserveAspectFit
         source: "qrc:/resources/resources/icons/biotech-32.png"
-    }
+    }*/
 
     Text {
-        id: toolbarTitle
-        anchors.left: toolbarImage.right
-        anchors.leftMargin: 10
+        id: title
+        anchors.left: back.right
+        anchors.leftMargin: 5
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle
         text: "Galaxy Portal"
         font.pixelSize: 15
     }
 
+    // back button
     Button {
+        id: back
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+        height: parent.height
+        width: parent.height
+        anchors.rightMargin: 10
+        image: "qrc:/resources/resources/icons/mdpi/ic_action_back.png"
+        pressedImage: "qrc:/resources/resources/icons/mdpi/ic_action_back_pressed.png"
+        onClicked: {
+            mainLoader.source = "";
+        }
+    }
+
+    // settings button
+    Button {
+        id: settings
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         height: parent.height
@@ -34,22 +57,7 @@ Rectangle {
         image: "qrc:/resources/resources/icons/mdpi/ic_action_settings.png"
         pressedImage: "qrc:/resources/resources/icons/mdpi/ic_action_settings_pressed.png"
         onClicked: {
-            // TODO: test
-            toolbarTitle.text = "click-click";
-            // ensure keyboard is hidden and reset any states before
-            // showing the dialog
-
-            //dlgSettings.open();
-
-            screen.state = "test";
-
-            /*if (!settingsDialog.show) {
-                Qt.inputMethod.hide()
-                root.state = ""
-            }
-
-            // toggle the dialog
-            settingsDialog.show = !settingsDialog.show*/
+            mainLoader.source = "Settings.qml";
         }
     }
 

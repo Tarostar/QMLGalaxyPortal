@@ -12,6 +12,7 @@ Dialog {
             id: backButton
             color: "burlywood"
             width: parent.width
+            z: 1110
             height: Screen.pixelDensity * 9
         }
         Rectangle {
