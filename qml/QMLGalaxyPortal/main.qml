@@ -8,36 +8,39 @@ Rectangle {
     width: Screen.width
     height: Screen.height
 
+    property string currentHistory: ""
+
     // loader to spawn pages on top of list (e.g. for settings)
     Loader {  z: 1; id: mainLoader }
 
     // Galaxy API key for the dataSource used to retrieve data for user
     // local instance
     property string dataKey: "0f303101f8a957e35106c049f7ac38f9"
-    property string dataSource: "http://localhost"
+    property string dataSource: "http://10.0.0.80"
     // test galaxy
-    /*
+/*
     property string dataKey: "48878f3f037cdc0c1be3157296e2c964"
     property string dataSource: "https://test.galaxyproject.org"
-    */
+*/
     // https://usegalaxy.org (218afad6146272c7c771688e10fb9884)
 
 
-
-    property var res: ["ldpi", "mdpi","hdpi","xhdpi"]
+    // Properties to manage different device resolutions and screen sizes (handled in utils.js).
+    property var res: ["mdpi","hdpi","xhdpi", "xxhdpi"]
     property var devwidth: ["320", "480", "600", "1024", "1280", "1920", "2560"]
     readonly property int resIndex: Utils.getResolutionIndex(Screen.pixelDensity)
     readonly property int widthIndex: Utils.getScreenWidthIndex(Screen.width)
 
-    JSONListModel {
-        id: jsonHistoryJobsModel
-        source: "http://localhost/api/histories/ebfb8f50c6abde6d/contents?key=0f303101f8a957e35106c049f7ac38f9"
-        query: "$.*"
-    }
-
+    // Model for the list of histories (main list).
     JSONListModel {
         id: jsonHistoriesModel
         source: dataSource + "/api/histories?key=" + dataKey
+        query: "$.*"
+    }
+
+    // Model for the list of jobs in a selected history (source set when history selected).
+    JSONListModel {
+        id: jsonHistoryJobsModel
         query: "$.*"
     }
 
@@ -56,112 +59,35 @@ Rectangle {
         font.pixelSize: 20
     }*/
 
-
     Column {
         TopToolbar {
-            id: topToolbar
+            id: mainActionbar
             width: screen.width
             height: Screen.pixelDensity * 9
-            settingsButton.visible: true
-            backButton.visible: false
+            settingsButton.visible: screen.state === "" ? true : false
+            backButton.visible: screen.state === "" ? false : true
+            toolbarTitle.text: screen.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
         }
         Row {
             id: screenlayout
             ListView {
-                id: listview
+                id: historyListView
                 width: screen.width
                 height: screen.height
                 model: jsonHistoriesModel.model
-
-                // note, delegate can just specify an "id"
-                // also note can simply use "Component"
-                delegate: Rectangle {
-                    id: listItem
-                    width: parent.width
-                    // pixelDensity: the number of physical pixels per millimeter.
-                    height: Screen.pixelDensity * 9;
-                    //source: "../../Images/" + res[resIndex] + "/item_" + devwidth[widthIndex] + ".png"
-                    color: "ivory" // "lightsteelblue"
-
-                    Text {
-                        id: itemtitle
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.leftMargin: 20
-                        anchors.rightMargin: 5
-                        anchors.verticalCenter: parent.verticalCenter
-                        elide: Text.ElideMiddle
-                        text: model.name
-                        font.pixelSize: 15
-                    }
-                    Image {
-                        id: arrow                        
-                        anchors.left: itemtitle.right
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.leftMargin: 5
-                        height: parent.height / 2
-                        width: parent.height / 2
-                        fillMode: Image.PreserveAspectFit
-                        // TODO: scale image to resolution
-                        source: "qrc:/resources/resources/icons/biotech-64.png"
-                        //source: imagesource
-                        //onSourceChanged: print(imagesource)
-                    }
-                    Line {
-                        id: seperator
-                        anchors.left: parent.left
-                        width: parent.width
-                    }
-
-                    MouseArea {
-                        hoverEnabled: true
-                        anchors.fill: parent
-                        onEntered: {listItem.color = "lemonchiffon" }
-                        onExited: {listItem.color = "ivory" }
-                        onClicked: {
-                            jsonHistoryJobsModel.source = dataSource + "/api/histories/" + model.id + "/contents?key=" + dataKey;
-                            screen.state = "historyItems";
-                        }
-                    }
-                }
+                delegate: HistoryDelegate {}
             }
             ListView {
-                    id: historyItems
+                    id: jobListItems
                     width: screen.width
                     height: screen.height
                     model: jsonHistoryJobsModel.model
+                    delegate: JobDelegate {}
 
-                    // note, delegate can just specify an "id"
-                    // also note can simply use "Component"
-                    delegate: Rectangle {
-                        id: historyItem
-                        width: parent.width
-                        // pixelDensity: the number of physical pixels per millimeter.
-                        height: Screen.pixelDensity * 9;
-                        color: "ivory"
-
-                    Text {
-                        id: historyItemTitle
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.leftMargin: 20
-                        anchors.rightMargin: 5
-                        anchors.verticalCenter: parent.verticalCenter
-                        elide: Text.ElideMiddle
-                        text: model.name
-                        font.pixelSize: 15
-                    }
-                    Line {
-                        id: historyItemSeparator
-                        anchors.left: parent.left
-                        width: parent.width
-                    }
-                    MouseArea {
-                        // TODO: this should drill deeper and separate key for returning
-                        anchors.fill: parent
-                        onClicked: screen.state = ""
-                    }
-                }
+                    /*add: Transition {
+                        NumberAnimation { property: "hm"; from: 0.0; to: 1.0; duration: 300.0; easing.type: Easing.OutQuad }
+                        PropertyAction { property: "appear"; value: 250.0 }
+                    }*/
             }
 
         }
@@ -171,7 +97,7 @@ Rectangle {
             target: screenlayout
             easing: Easing.OutCubic
             property: "x"
-            duration: 500
+            duration: 500.0
         }
     }
     states: /*[

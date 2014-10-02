@@ -1,4 +1,5 @@
 import QtQuick 2.3
+import QtQuick.Window 2.2
 
 Rectangle {
 
@@ -8,6 +9,11 @@ Rectangle {
     property alias toolbarTitle: title
     property alias settingsButton: settings
     property alias backButton: back
+    property url backSource: ""
+    property url backState: ""
+
+    // draws buttons at original size for a given resolution (i.e. mdpi, hdpi, xhdpi or xxhdpi)
+    property string iconRoot: "qrc:/resources/resources/icons/" + res[resIndex] + "/"
 
     /*Image {
         // TODO: image used must depend on resolution
@@ -36,13 +42,14 @@ Rectangle {
         id: back
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
-        height: parent.height
-        width: parent.height
+        height: image.sourceSize.height
+        width: image.sourceSize.width
         anchors.rightMargin: 10
-        image: "qrc:/resources/resources/icons/mdpi/ic_action_back.png"
-        pressedImage: "qrc:/resources/resources/icons/mdpi/ic_action_back_pressed.png"
+        imageSource: iconRoot + "ic_action_back.png"
+        pressedImageSource: iconRoot + "ic_action_back_pressed.png"
         onClicked: {
-            mainLoader.source = "";
+            mainLoader.source = backSource;
+            screen.state = backState
         }
     }
 
@@ -51,11 +58,11 @@ Rectangle {
         id: settings
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
-        height: parent.height
-        width: parent.height
+        height: image.sourceSize.height
+        width: image.sourceSize.width
         anchors.rightMargin: 10
-        image: "qrc:/resources/resources/icons/mdpi/ic_action_settings.png"
-        pressedImage: "qrc:/resources/resources/icons/mdpi/ic_action_settings_pressed.png"
+        imageSource: iconRoot + "ic_action_settings.png"
+        pressedImageSource: iconRoot + "ic_action_settings_pressed.png"
         onClicked: {
             mainLoader.source = "Settings.qml";
         }

@@ -26,7 +26,7 @@ Rectangle {
         text:"First page loaded"
     }*/
 
-    Button {
+    /*Button {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: 100
@@ -37,7 +37,7 @@ Rectangle {
         onClicked: {
             mainLoader.source = "";
         }
-    }
+    }*/
 
     /*Button{id:buttonPage1
      //Position the button in page1Container rectangle

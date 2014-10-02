@@ -3,8 +3,9 @@ import QtQuick 2.3
 Item {
     id: button
 
-    property url image
-    property url pressedImage
+    property url imageSource
+    property url pressedImageSource
+    property alias image: buttonImage
 
     signal clicked
 
@@ -13,7 +14,7 @@ Item {
         width: parent.width
         height: parent.height
         fillMode: Image.PreserveAspectFit
-        source: mouseArea.pressed ? button.pressedImage : button.image
+        source: mouseArea.pressed ? button.pressedImageSource : button.imageSource
     }
 
     MouseArea {

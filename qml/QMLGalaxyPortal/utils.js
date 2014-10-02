@@ -1,17 +1,17 @@
 function getResolutionIndex(pixelDensity) {
 
     // images for different device densities are determined by the device's pixel density
-    if (pixelDensity < 6.3) // ldpi
-        return 0;
-    else if (pixelDensity < 9.5) // mdpi
-        return 1;
-    else if (pixelDensity < 12.6) // hdpi
-        return 2;
+    if (pixelDensity < 6.3)
+        return 0; // mdpi
+    else if (pixelDensity < 9.5)
+        return 1; // hdpi
+    else if (pixelDensity < 12.6)
+        return 2; // xhdpi
 
-    // anything larger use xhdpi
+    // anything larger use xxhdpi
     return 3;
 
-    // TODO: add xxhdpi and xxxhdpi
+
 }
 
 function getScreenWidthIndex(width) {
