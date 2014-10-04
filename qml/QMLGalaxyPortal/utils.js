@@ -1,3 +1,48 @@
+function itemColour(state, selected)
+{
+    // Returns colour coding based on item state (from json data) and whether item is in a selected state (e.g. clicked or mouse hover).
+
+    if (state === "ok")
+        return selected ? "lemonchiffon" : "ivory";
+
+    if (state === "error")
+        return selected ? "red" : "tomato";
+
+    if (state === "discarded")
+        return selected ? "gray" : "lightgray";
+
+    if (state === "empty")
+        return selected ? "lemonchiffon" : "white";
+
+    if (state === "failed_metadata")
+        return selected ? "#c1cdc1" : "Honeydew";
+
+    if (state === "new")
+        return selected ? "#cdc9c9" : "#f5f5f5";
+
+    if (state === "paused")
+        return selected ? "yellow" : "gold";
+
+    if (state === "queued")
+        return selected ? "deepskyblue" : "skyblue";
+
+    if (state === "resubmitted")
+        return selected ? "cyan" : "lightcyan";
+
+    if (state === "running")
+        return selected ? "#66cdaa" : "aquamarine";
+
+    if (state === "setting_metadata")
+        return selected ? "lemonchiffon" : "ivory";
+
+    if (state === "upload")
+        return selected ? "lemonchiffon" : "ivory";
+
+    // default
+    return selected ? "lemonchiffon" : "ivory";
+}
+
+
 function getResolutionIndex(pixelDensity) {
 
     // images for different device densities are determined by the device's pixel density

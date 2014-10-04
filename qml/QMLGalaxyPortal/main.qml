@@ -1,5 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
+import Qt.labs.settings 1.0
 
 import "utils.js" as Utils
 
@@ -8,17 +9,23 @@ Rectangle {
     width: Screen.width
     height: Screen.height
 
+    // Title of any selected History item.
     property string currentHistory: ""
+
+    // Galaxy API key for the dataSource used to retrieve data for user.
+    property string dataSource: "http://10.0.0.80"
+    property string dataKey: "0f303101f8a957e35106c049f7ac38f9"
+
+    Settings {
+        property alias dataKey: screen.dataKey
+        property alias dataSource: screen.dataSource
+    }
 
     // loader to spawn pages on top of list (e.g. for settings)
     Loader {  z: 1; id: mainLoader }
 
-    // Galaxy API key for the dataSource used to retrieve data for user
-    // local instance
-    property string dataKey: "0f303101f8a957e35106c049f7ac38f9"
-    property string dataSource: "http://10.0.0.80"
-    // test galaxy
 /*
+    // test galaxy values
     property string dataKey: "48878f3f037cdc0c1be3157296e2c964"
     property string dataSource: "https://test.galaxyproject.org"
 */
@@ -60,13 +67,15 @@ Rectangle {
     }*/
 
     Column {
-        TopToolbar {
+        ActionBar {
             id: mainActionbar
             width: screen.width
             height: Screen.pixelDensity * 9
-            settingsButton.visible: screen.state === "" ? true : false
+            // Settings button always visible.
+            settingsButton.visible: true // screen.state === "" ? true : false
+            // Back button only visible when possible to navigate back.
             backButton.visible: screen.state === "" ? false : true
-            toolbarTitle.text: screen.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
+            actionBarTitle.text: screen.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
         }
         Row {
             id: screenlayout
@@ -83,11 +92,6 @@ Rectangle {
                     height: screen.height
                     model: jsonHistoryJobsModel.model
                     delegate: JobDelegate {}
-
-                    /*add: Transition {
-                        NumberAnimation { property: "hm"; from: 0.0; to: 1.0; duration: 300.0; easing.type: Easing.OutQuad }
-                        PropertyAction { property: "appear"; value: 250.0 }
-                    }*/
             }
 
         }
@@ -117,7 +121,5 @@ Rectangle {
         }
     }
     //]
-
-
 }
 

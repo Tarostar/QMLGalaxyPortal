@@ -1,46 +1,33 @@
 import QtQuick 2.3
+import QtQuick.Window 2.2
 
 Rectangle {
-    id: editBox
-    property alias text: textLabel.text
-    signal editRequest(variant e)
+    property alias text: input.text
+    property alias echo: input.echoMode
 
-    color: "darkgray"
-    border.width: 0
+    // Signal that editing is done
+    signal editDone (string text)
 
-    function setFocus() {
-        state = "focused"
-    }
+    width: screen.width
+    height: Screen.pixelDensity * 9
+    color: "white"
 
-    function unsetFocus() {
-        state = ""
-    }
-
-    MouseArea {
-        anchors.fill: parent
-        onClicked: {
-            editBox.setFocus()
-            editBox.editRequest(editBox)
+    // Edit box separator (lighter at the top, darker at the bottom).
+    Rectangle { color: "white"; width: parent.width; height: 1 }
+    Rectangle { color: "#cdcdc1"; width: parent.width; height: 1; anchors.bottom: parent.bottom }
+    TextInput {
+        id: input
+        color: "black"
+        selectionColor: "green"
+        selectByMouse: true
+        font.pixelSize: 16
+        width: parent.width-16
+        anchors.centerIn: parent
+        focus: true
+        onEditingFinished: {
+            // edit field lost focus, or return/enter was pressed so send signal
+            editDone(text);
         }
     }
-
-    Text {
-        id: textLabel
-        anchors { fill: parent; leftMargin: 5; rightMargin: 5 }
-        verticalAlignment: Text.AlignVCenter
-        clip: true
-        color: "dimgray"
-    }
-
-    states: State {
-        name: "focused"
-        PropertyChanges { target: editBox; color: "dimgray" }
-        PropertyChanges { target: textLabel; color: "white" }
-    }
-
-    transitions: Transition {
-        to: "focused"
-        reversible: true
-        PropertyAnimation { property: "color"; duration: 200 }
-    }
 }
+

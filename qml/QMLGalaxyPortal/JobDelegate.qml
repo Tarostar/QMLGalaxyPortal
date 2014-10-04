@@ -1,14 +1,16 @@
 import QtQuick 2.0
 import QtQuick.Window 2.2
 
+import "utils.js" as Utils
+
 Item {
     id: jobItem
 
     property real hm: 1.0
     property real appear: 1.0
     property real startRotation: 1.0
-    property color itemColor: model.state === "ok" ? "ivory" : model.state === "error" ? "red" : "yellow"
-    property color itemSelectColor: model.state === "ok" ? "lemonchiffon" : model.state === "error" ? "tomato" : "gold"
+    property color itemColor: Utils.itemColour(model.state, false)
+    property color itemSelectColor: Utils.itemColour(model.state, true)
 
     onAppearChanged: {
         jobItem.startRotation = 0.5

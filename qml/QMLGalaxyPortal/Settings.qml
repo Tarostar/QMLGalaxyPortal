@@ -5,49 +5,42 @@ Rectangle {
     id: settings
     width: screen.width
     height: screen.height
-    color:"red"
+    color:"ivory"
 
-    /*Rectangle {
-        anchors.left: parent.left
-        anchors.top: parent.top
-        width: parent.width
-        height: 30 //Screen.pixelDensity * 9
-
-        color: "burlywood"
-    }*/
-    TopToolbar {
-        id: settingsToolbar
+    // Action bar
+    ActionBar {
+        id: settingsActionBar
         width: screen.width
         height: Screen.pixelDensity * 9
         settingsButton.visible: false
         backButton.visible: true
+        backState: screen.state
     }
-    /*Text {
-        text:"First page loaded"
-    }*/
-
-    /*Button {
+    // Text input for Galaxy URL for API access.
+    EditBox {
+        id: galaxyUrl
+        anchors.top: settingsActionBar.bottom
+        anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        height: 100
-        width: 50
-        anchors.rightMargin: 10
-        image: "qrc:/resources/resources/icons/mdpi/ic_action_settings.png"
-        pressedImage: "qrc:/resources/resources/icons/mdpi/ic_action_settings_pressed.png"
-        onClicked: {
-            mainLoader.source = "";
+        anchors.margins: 8
+        text: dataSource
+        onEditDone: {
+            // edit field lost focus, or return/enter was pressed so update current app URL
+            dataSource = galaxyUrl.text
         }
-    }*/
-
-    /*Button{id:buttonPage1
-     //Position the button in page1Container rectangle
-            anchors.bottom:page1Container.bottom;
-            anchors.right: page1Container.right
-            MouseArea {
-                    anchors.fill: parent
-                    onClicked: {page1.source="Page2.qml";
-                    buttonPage1.z=-1 //Hide button
-                    }
-            }
-     }*/
+    }
+    // Text input for Galaxy key for API access (masked).
+    EditBox {
+        id: galaxyKey
+        anchors.top: galaxyUrl.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.margins: 8
+        text: dataKey
+        echo: TextInput.PasswordEchoOnEdit
+        onEditDone: {
+            // edit field lost focus, or return/enter was pressed so update current app URL
+            dataKey = galaxyKey.text
+        }
+    }
 }
