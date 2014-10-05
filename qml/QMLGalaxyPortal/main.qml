@@ -11,14 +11,20 @@ Rectangle {
 
     // Title of any selected History item.
     property string currentHistory: ""
+    property string currentHistoryID: ""
+    property string currentJobID: ""
 
     // Galaxy API key for the dataSource used to retrieve data for user.
     property string dataSource: "http://10.0.0.80"
     property string dataKey: "0f303101f8a957e35106c049f7ac38f9"
+    property string passcode: ""
+    property bool passcodeEnabled: false
 
     Settings {
         property alias dataKey: screen.dataKey
         property alias dataSource: screen.dataSource
+        property alias passcode: screen.passcode
+        property alias passcodeEnabled : screen.passcodeEnabled
     }
 
     // loader to spawn pages on top of list (e.g. for settings)
@@ -30,7 +36,6 @@ Rectangle {
     property string dataSource: "https://test.galaxyproject.org"
 */
     // https://usegalaxy.org (218afad6146272c7c771688e10fb9884)
-
 
     // Properties to manage different device resolutions and screen sizes (handled in utils.js).
     property var res: ["mdpi","hdpi","xhdpi", "xxhdpi"]

@@ -58,6 +58,21 @@ Rectangle {
         }
     }
 
+    // Details button.
+    /*Button {
+        id: details
+        anchors.right: settings.left
+        anchors.verticalCenter: parent.verticalCenter
+        height: image.sourceSize.height
+        width: image.sourceSize.width
+        anchors.rightMargin: 10
+        imageSource: iconRoot + "ic_action_view_as_list.png"
+        pressedImageSource: iconRoot + "ic_action_view_as_list_pressed.png"
+        onClicked: {
+            mainLoader.source = "Details.qml";
+        }
+    }*/
+
     // Settings button.
     Button {
         id: settings

@@ -1,0 +1,14 @@
+200 = 0.1
+2000 = 0.01
+
+2000 / 200
+
+if (width <= 200)
+  factor: 0.1
+else
+  factor: 0.1 / (width / 200)
+
+samsung s2 => 8.5867
+PC: 4.28669
+
+E/libEGL  ( 1004): called unimplemented OpenGL ES API

@@ -13,6 +13,7 @@ Rectangle {
     color: "white"
 
     // Edit box separator (lighter at the top, darker at the bottom).
+    Rectangle { color: "#cdcdc1"; width: parent.width; height: 1; anchors.bottom: parent.top }
     Rectangle { color: "white"; width: parent.width; height: 1 }
     Rectangle { color: "#cdcdc1"; width: parent.width; height: 1; anchors.bottom: parent.bottom }
     TextInput {

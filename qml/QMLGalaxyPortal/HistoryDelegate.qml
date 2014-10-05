@@ -56,6 +56,7 @@ Rectangle {
         onClicked: {
             // set current history name
             screen.currentHistory = itemtitle.text;
+            screen.currentHistoryID = model.id;
 
             // Set json history jobs model source to get jobs for the clicked history.
             jsonHistoryJobsModel.source = dataSource + "/api/histories/" + model.id + "/contents?key=" + dataKey;
