@@ -1,4 +1,4 @@
-import QtQuick 2.3
+import QtQuick 2.0
 import QtQuick.Window 2.2
 import "utils.js" as Utils
 import "jsonpath.js" as JSONPath
@@ -7,12 +7,14 @@ Rectangle {
     id: details
     width: screen.width
     height: screen.height
-    color: "ivory"
+    color: stateColour
+
+    // Array of all the fields displayed.
+    property var detailFields: []
+    property color stateColour: "ivory"
 
     property string source: dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey;
     property string json: ""
-
-    property string jsonDetails: ""
 
     onSourceChanged: {
         var xhr = new XMLHttpRequest;
@@ -24,23 +26,42 @@ Rectangle {
         xhr.send();
     }
 
+    // Update JSON data when source changes.
     onJsonChanged: {updateJSONStrings(JSON.parse(json))}
 
     function updateJSONStrings(jsonData) {
-        detailsActionBar.actionBarTitle.text = jsonData.name;
+        // Add list item for each field in field array which exists in the json data (otherwise ignored).
+        detailFields.forEach(function(field) {
+            if (jsonData[field])
+                detailListModel.append({"fieldName": field, "fieldData": jsonData[field].toString()});
+        });
 
-        misc_blurb.text = jsonData.misc_blurb;
-        file_ext.text = jsonData.file_ext;
-        file_size.text = jsonData.file_size;
-        peek.text = jsonData.peek;
-        update_time.text = jsonData.update_time;
-        data_type.text = jsonData.data_type;
-        genome_build.text = jsonData.genome_build;
-        metadata_data_lines.text = jsonData.metadata_data_lines;
-        history_content_type.text = jsonData.history_content_type;
-        // name.text = jsonData.name;
-        details.color = Utils.itemColour(jsonData.state, false);
+        // Set action bar title to job name - if exists
+        if (jsonData["name"])
+            detailsActionBar.actionBarTitle.text = jsonData["name"];
+
+        // Set item colour based on item state - if exists.
+        if (jsonData["state"])
+            stateColour = Utils.itemColour(jsonData["state"], false);
     }
+
+    // Init default field array at startup.
+    Component.onCompleted:{ initFieldArray(); }
+
+    function initFieldArray() {
+        detailFields.push("update_time");
+        detailFields.push("misc_blurb");
+        detailFields.push("data_type");
+        detailFields.push("genome_build");
+        detailFields.push("metadata_data_lines");
+        detailFields.push("history_content_type");
+        detailFields.push("file_ext");
+        detailFields.push("file_size");
+        detailFields.push("peek");
+    }
+
+    // Model that holds detail items to be displayed.
+    ListModel { id: detailListModel }
 
     // Action bar
     ActionBar {
@@ -51,208 +72,42 @@ Rectangle {
         backButton.visible: true
         backState: screen.state
     }
-    /*Text {
-        id: nameTitle
-        anchors.left: parent.left
+    ListView {
+        id: detailList
         anchors.top: detailsActionBar.bottom
         anchors.topMargin: 5
-        elide: Text.ElideMiddle
-        text: "Name:"
-        font.pixelSize: 15
-        font.bold: true
-    }
-    Text {
-        id: name
-        anchors.left: nameTitle.right
-        anchors.top: detailsActionBar.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 15
-    }*/
-    Text {
-        id: update_timeTitle
-        anchors.left: parent.left
-        anchors.top: detailsActionBar.bottom
-        anchors.topMargin: 5
-        elide: Text.ElideMiddle
-        text: "Update Time:"
-        font.pixelSize: 12
-        font.bold: true
-    }
-    Text {
-        id: update_time
-        anchors.left: update_timeTitle.right
-        anchors.top: detailsActionBar.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 12
-    }
-    Text {
-        id: misc_blurbTitle
-        anchors.left: parent.left
-        anchors.top: update_time.bottom
-        anchors.topMargin: 5
-        elide: Text.ElideMiddle
-        text: "Misc:"
-        font.pixelSize: 12
-        font.bold: true
-    }
-    Text {
-        id: misc_blurb
-        anchors.left: misc_blurbTitle.right
-        anchors.top: update_time.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 12
-    }
-    Text {
-        id: data_typeTitle
-        anchors.left: parent.left
-        anchors.top: misc_blurb.bottom
-        anchors.topMargin: 5
-        elide: Text.ElideMiddle
-        text: "Data Type:"
-        font.pixelSize: 12
-        font.bold: true
-    }
-    Text {
-        id: data_type
-        anchors.left: data_typeTitle.right
-        anchors.top: misc_blurb.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 12
-    }
-    Text {
-        id: genome_buildTitle
-        anchors.left: parent.left
-        anchors.top: data_type.bottom
-        anchors.topMargin: 5
-        elide: Text.ElideMiddle
-        text: "Genome Build:"
-        font.pixelSize: 12
-        font.bold: true
-    }
-    Text {
-        id: genome_build
-        anchors.left: genome_buildTitle.right
-        anchors.top: data_type.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 12
-    }
-    Text {
-        id: file_extTitle
-        anchors.left: parent.left
-        anchors.top: genome_build.bottom
-        anchors.topMargin: 5
-        elide: Text.ElideMiddle
-        text: "File Extention:"
-        font.pixelSize: 12
-        font.bold: true
-    }
-    Text {
-        id: file_ext
-        anchors.left: file_extTitle.right
-        anchors.top: genome_build.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 12
-    }
-    Text {
-        id: file_sizeTitle
-        anchors.left: file_ext.right
-        anchors.top: genome_build.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 10
-        elide: Text.ElideMiddle
-        text: "File Size:"
-        font.pixelSize: 12
-        font.bold: true
-    }
-    Text {
-        id: file_size
-        anchors.left: file_sizeTitle.right
-        anchors.top: genome_build.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 12
-    }
-    Text {
-        id: metadata_data_linesTitle
-        anchors.left: parent.left
-        anchors.top: file_size.bottom
-        anchors.topMargin: 5
-        elide: Text.ElideMiddle
-        text: "Metadata Lines:"
-        font.pixelSize: 12
-        font.bold: true
-    }
-    Text {
-        id: metadata_data_lines
-        anchors.left: metadata_data_linesTitle.right
-        anchors.top: file_size.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 12
-    }
-    Text {
-        id: history_content_typeTitle
-        anchors.left: parent.left
-        anchors.top: metadata_data_lines.bottom
-        anchors.topMargin: 5
-        elide: Text.ElideMiddle
-        text: "History Content Type:"
-        font.pixelSize: 12
-        font.bold: true
-    }
-    Text {
-        id: history_content_type
-        anchors.left: history_content_typeTitle.right
-        anchors.top: metadata_data_lines.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 12
-    }
-    Text {
-        id: peekTitle
-        anchors.left: parent.left
-        anchors.top: history_content_type.bottom
-        anchors.topMargin: 10
-        anchors.bottomMargin: 5
-        elide: Text.ElideMiddle
-        text: "Peek:"
-        font.pixelSize: 15
-        font.bold: true
-    }
-    Text {
-        id: peek
-        anchors.left: parent.left
-        anchors.top: peekTitle.bottom
-        anchors.topMargin: 5
-        anchors.leftMargin: 5
-        elide: Text.ElideMiddle
-        text: ""
-        font.pixelSize: 12
-        textFormat: Text.RichText
-    }
+        width: screen.width
+        height: screen.height
+        model: detailListModel
+        delegate: Rectangle {
+            id: historyItem
+            color: stateColour
+            width: parent.width
+            // Set height to height of text, plus a bit of margin.
+            height: textTitle.height > textData.height ? textTitle.height + 2 : textData.height + 5
 
+            Text {
+                id: textTitle
+                anchors.left: parent.left
+                anchors.leftMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                elide: Text.ElideMiddle
+                text: model.fieldName + ":"
+                font.pixelSize: 12
+                font.bold: true
+            }
+            Text {
+                id: textData
+                anchors.left: textTitle.right
+                anchors.leftMargin: 10
+                anchors.verticalCenter: parent.verticalCenter
+                elide: Text.ElideMiddle
+                text: model.fieldData
+                wrapMode: Text.WordWrap
+                font.pixelSize: 12
+                textFormat: Text.RichText
+            }
+        }
+
+    }
 }

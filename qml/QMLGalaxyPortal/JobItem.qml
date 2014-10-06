@@ -6,7 +6,9 @@ Rectangle {
     color: "ivory"
 
     property bool front: true
-    property alias jobItemText: jobItemText.text
+    property alias itemText: jobItemText.text
+    property alias fontSize: jobItemText.font.pixelSize
+    property alias textHeight: jobItemText.height
     property string imagePath: "qrc:/resources/resources/icons/" + res[resIndex] + "/"
 
     // Item separator (lighter at the top, darker at the bottom).
@@ -23,6 +25,7 @@ Rectangle {
         elide: Text.ElideMiddle
         text: model.name
         font.pixelSize: 15
+        wrapMode: Text.WordWrap
     }
     Rectangle {
         id: jobItemDetails
@@ -63,13 +66,14 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         onEntered: {jobItem.color = itemSelectColor }
-        onPressed: {jobItem.color = itemSelectcolor }
+        onPressed: {jobItem.color = itemSelectColor }
         onExited: {jobItem.color = itemColor }
         onReleased: {jobItem.color = itemColor }
         onPressAndHold: {jobItem.color = itemColor }
         onClicked: {
             if (front)
             {
+                screen.currentJobID = model.id;
                 flipBar.flipUp()
                 flipBar.flipped = true
             }

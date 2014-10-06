@@ -56,21 +56,6 @@ Rectangle {
         query: "$.*"
     }
 
-    /*EditBox {
-        width: screen.width
-        height: Screen.pixelDensity * 9;
-        text: "hello"
-    }
-
-    property alias text: input.text
-
-    TextInput {
-        id: input
-        anchors.fill: parent
-        anchors.margins: 8
-        font.pixelSize: 20
-    }*/
-
     Column {
         ActionBar {
             id: mainActionbar
@@ -104,20 +89,12 @@ Rectangle {
     transitions: Transition {
         NumberAnimation {
             target: screenlayout
-            easing: Easing.OutCubic
+            easing.type: Easing.OutCubic
             property: "x"
             duration: 500.0
         }
     }
-    states: /*[
-        State {
-            name: "test"
-            PropertyChanges {
-                target: menu
-                opacity: 0
-                visible: false
-            }
-        },*/
+    states:
         State {
         name: "historyItems"
         PropertyChanges {
@@ -125,6 +102,5 @@ Rectangle {
             x: -screen.width
         }
     }
-    //]
 }
 
