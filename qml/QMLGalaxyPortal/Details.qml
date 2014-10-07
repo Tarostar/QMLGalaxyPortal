@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Window 2.2
 import "utils.js" as Utils
-import "jsonpath.js" as JSONPath
 
 Rectangle {
     id: details

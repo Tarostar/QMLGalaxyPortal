@@ -48,7 +48,7 @@ Item {
             currentText = "<b>Status</b>:" + model.state + " <b>Content</b>: " + model.history_content_type + " <b>Type</b>: " + model.type;
         }
 
-        return currentText;//currentJobID + " !=== " + model.id;
+        return currentText;
     }
 
     width: parent.width

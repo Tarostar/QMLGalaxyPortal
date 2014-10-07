@@ -6,7 +6,7 @@ import "utils.js" as Utils
 
 Rectangle {
     id: screen
-    width: 400//Screen.width
+    width: Screen.width
     height: Screen.height
 
     // Title of any selected History item.
@@ -80,16 +80,20 @@ Rectangle {
             ListView {
                 id: historyListView
                 width: screen.width
-                height: screen.height
+                height: screen.height - mainActionbar.height
                 model: jsonHistoriesModel.model
                 delegate: HistoryDelegate {}
+                clip: true
+                boundsBehavior: Flickable.StopAtBounds
             }
             ListView {
-                    id: jobListItems
-                    width: screen.width
-                    height: screen.height
-                    model: jsonHistoryJobsModel.model
-                    delegate: JobDelegate {}
+                id: jobListItems
+                width: screen.width
+                height: screen.height - mainActionbar.height
+                model: jsonHistoryJobsModel.model
+                delegate: JobDelegate {}
+                clip: true
+                boundsBehavior: Flickable.StopAtBounds
             }
 
         }
