@@ -6,7 +6,7 @@ import "utils.js" as Utils
 
 Rectangle {
     id: screen
-    width: Screen.width
+    width: 400//Screen.width
     height: Screen.height
 
     // Title of any selected History item.
@@ -47,13 +47,21 @@ Rectangle {
     JSONListModel {
         id: jsonHistoriesModel
         source: dataSource + "/api/histories?key=" + dataKey
-        query: "$.*"
+        clearOnEmptyData: false
+        pollInterval: 5000
     }
 
     // Model for the list of jobs in a selected history (source set when history selected).
     JSONListModel {
         id: jsonHistoryJobsModel
-        query: "$.*"
+        clearOnEmptyData: false
+        pollInterval: 5000
+    }
+
+    JSONDataset {
+        id: jsonHistoryJobContent
+        source: dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey;
+        pollInterval: 1000
     }
 
     Column {

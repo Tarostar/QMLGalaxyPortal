@@ -25,21 +25,33 @@ Item {
         ScriptAction { script: flipBar.flipDown(startRotation); }
     }
 
-    JSONDatasetListModel {
-        id: jsonDatasetListModel
-        source: dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + model.id + "?key=" + dataKey;
-    }
-
     function datasetText() {
-        if (jsonDatasetListModel.displayText)
-            return "<b>Status</b>: " + model.state + jsonDatasetListModel.displayText;
+        // note this may generate a false error: "QML Text: Binding loop detected for property "style"
+        // This is a known Qt bug in v 5.3 QTBUG-36849: False binding loops in QtQuick Controls: https://bugreports.qt-project.org/browse/QTBUG-36849
 
-        // No display text, just show basic information.
-        return "<b>Status</b>:" + model.state + " <b>Content</b>: " + model.history_content_type + " <b>Type</b>: " + model.type;
+        if (currentJobID !== model.id)
+        {
+            // This is not the current job item, so just return current text.
+            return currentText;
+        }
+
+        // Current job.
+
+        if (jsonHistoryJobContent.text)
+        {
+            // Set current text to display from JSON data.
+            currentText = "<b>Status</b>: " + model.state + jsonHistoryJobContent.text;
+        }
+        else
+        {
+            // No display text, just show basic information.
+            currentText = "<b>Status</b>:" + model.state + " <b>Content</b>: " + model.history_content_type + " <b>Type</b>: " + model.type;
+        }
+
+        return currentText;//currentJobID + " !=== " + model.id;
     }
 
     width: parent.width
-    //height: Screen.pixelDensity * 9 * hm
 
     // When flipped to show backside the item should be sized to text content.
     height: flipBar.flipped ? Screen.pixelDensity * 9 * hm > (backItem.textHeight + 10) * hm ? Screen.pixelDensity * 9 * hm : (backItem.textHeight + 10) * hm : Screen.pixelDensity * 9 * hm

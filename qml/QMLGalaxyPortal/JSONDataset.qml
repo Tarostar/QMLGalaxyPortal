@@ -1,22 +1,45 @@
 import QtQuick 2.0
 
 Item {
-    // Model that holds items to be displayed.
-    /*property ListModel model : ListModel { id: jsonModel }
-    property alias count: jsonModel.count*/
+    id: datasetItem
+
+    // URL to connect to.
+    property string source: ""
+
+    // JSON data returned by poll.
+    property string json: ""
 
     // Text to display as result of JSON.
-    property string displayText: ""
+    property string text: ""
 
     // Array of all the fields displayed.
     property var detailFields: []
 
-    property string source: ""
-    property string json: ""
-
+    // Name of job item for content.
     property string name: ""
 
+    // Poll frequencey - if zero then does not poll and only retrieves data when source changes.
+    property int pollInterval: 0
+
+    // Poll for data when source changes.
     onSourceChanged: {
+        poll()
+
+        // Kick timer if enabled.
+        if (pollInterval > 0)
+            timer.start();
+    }
+
+    // Timer triggers periodic poll to retrieve any changes server side.
+    Timer {
+        id: timer
+        interval: pollInterval
+        repeat: true
+        onTriggered: { poll(); }
+    }
+
+    // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
+    function poll() {
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
         xhr.onreadystatechange = function() {
@@ -27,19 +50,19 @@ Item {
     }
 
     // Update JSON data when source changes.
-    onJsonChanged: {updateJSONStrings(JSON.parse(json))}
+    onJsonChanged: updateJSONText(JSON.parse(json))
 
-    function updateJSONStrings(jsonData) {
-        displayText = "";
+    function updateJSONText(jsonData) {
+        datasetItem.text = "";
         // Compose string for each field in field array which exists in the json data (otherwise ignored).
         detailFields.forEach(function(field) {
             if (jsonData[field])
-                displayText += " <b>" + field + "</b>: " + jsonData[field].toString();
+                datasetItem.text += " <b>" + field + "</b>: " + jsonData[field].toString();
         });
 
         // Set name property to job name - if exists
         if (jsonData["name"])
-            name = jsonData["name"];
+            datasetItem.name = jsonData["name"];
     }
 
     // Init default field array at startup.

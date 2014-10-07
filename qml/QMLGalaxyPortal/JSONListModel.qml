@@ -1,25 +1,56 @@
-/* JSONListModel - a QML ListModel with JSON and JSONPath support
+/* JSONListModel - QML ListModel with JSON
  *
+ * Based on:
  * Copyright (c) 2012 Romain Pokrzywka (KDAB) (romain@kdab.com)
  * Licensed under the MIT licence (http://opensource.org/licenses/mit-license.php)
  *
- * Discovered at http://qt-project.org/wiki/JSONListModel
- * Downloaded from https://github.com/kromain/qml-utils
+ * This version has been extended and modified by Claus Bornich:
+ * - JSONPath JavaScript regular expression parsing removed (not needed).
+ * - Optional: Added Timer for periodic updates of the model.
+ * - Optional: updateJSONModel can only clear model when there is data.
+ * - Added comments and refactored code to remove redundant variables and improve formatting.
  *
  */
 
 import QtQuick 2.0
-import "jsonpath.js" as JSONPath
 
 Item {
+    // URL to connect to.
     property string source: ""
+
+    // JSON data returned by poll.
     property string json: ""
-    property string query: ""
+
+    // Poll frequencey - if zero then does not poll and only retrieves data when source changes.
+    property int pollInterval: 0
+
+    // Clear model when "json" string is empty.
+    // Setting this to false prevents list from being reset if polls occasionally return no data.
+    property bool clearOnEmptyData: true
 
     property ListModel model : ListModel { id: jsonModel }
     property alias count: jsonModel.count
 
+    // Poll for data when source changes.
     onSourceChanged: {
+        poll()
+
+        // Kick timer if enabled.
+        if (pollInterval > 0)
+            timer.start();
+
+    }
+
+    // Timer triggers periodic poll to retrieve any changes server side.
+    Timer {
+        id: timer
+        interval: pollInterval
+        repeat: true
+        onTriggered: { poll(); }
+    }
+
+    // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
+    function poll() {
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
         xhr.onreadystatechange = function() {
@@ -29,27 +60,20 @@ Item {
         xhr.send();
     }
 
-    onJsonChanged: updateJSONModel()
-    onQueryChanged: updateJSONModel()
+    // JSON data has changed - update model.
+    onJsonChanged: updateJSONModel();
 
+    // If we have json data - update the model.
     function updateJSONModel() {
-        jsonModel.clear();
+        if (json !== "" || clearOnEmptyData)
+            jsonModel.clear();
 
-        if ( json === "" )
+        if (json === "")
             return;
 
-        var objectArray = parseJSONString(json, query);
-        for ( var key in objectArray ) {
-            var jo = objectArray[key];
-            jsonModel.insert(0, jo );
+        var objectArray = JSON.parse(json);
+        for ( var object in objectArray ) {
+            jsonModel.insert(0, objectArray[object]);
         }
-    }
-
-    function parseJSONString(jsonString, jsonPathQuery) {
-        var objectArray = JSON.parse(jsonString);
-        if ( jsonPathQuery !== "" )
-            objectArray = JSONPath.jsonPath(objectArray, jsonPathQuery);
-
-        return objectArray;
     }
 }

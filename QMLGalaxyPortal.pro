@@ -21,7 +21,8 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 OTHER_FILES += \
     android/AndroidManifest.xml \
     images/QMLGalaxyPortal80.png \
-    qml/QMLGalaxyPortal/ActionBar.qml
+    qml/QMLGalaxyPortal/ActionBar.qml \
+    qml/QMLGalaxyPortal/JSONDataset.qml
 
 RESOURCES += \
     resources.qrc

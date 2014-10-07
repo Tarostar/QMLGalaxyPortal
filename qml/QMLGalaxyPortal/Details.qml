@@ -16,7 +16,24 @@ Rectangle {
     property string source: dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey;
     property string json: ""
 
+    // Poll for data when source changes.
     onSourceChanged: {
+        // Timer will trigger immediately on start and then again at every "interval".
+        timer.start();
+    }
+
+    // Timer triggers periodic poll to retrieve any changes server side.
+    Timer {
+        id: timer
+        interval: 5000
+        repeat: true
+        running: true
+        triggeredOnStart: true
+        onTriggered: { poll(); }
+    }
+
+    // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
+    function poll() {
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
         xhr.onreadystatechange = function() {

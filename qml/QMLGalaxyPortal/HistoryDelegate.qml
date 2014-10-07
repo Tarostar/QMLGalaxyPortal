@@ -8,7 +8,7 @@ Rectangle {
     // pixelDensity: the number of physical pixels per millimeter.
     height: Screen.pixelDensity * 9;
     //source: "../../Images/" + res[resIndex] + "/item_" + devwidth[widthIndex] + ".png"
-    color: "ivory" // "lightsteelblue"
+    color: "ivory"
 
     // Item separator (lighter at the top, darker at the bottom).
     Rectangle { color: "white"; width: parent.width; height: 1 }
@@ -37,8 +37,6 @@ Rectangle {
         fillMode: Image.PreserveAspectFit
         // TODO: scale image to resolution
         source: "qrc:/resources/resources/icons/biotech-64.png"
-        //source: imagesource
-        //onSourceChanged: print(imagesource)
     }
 
     // Items in the history list are clickable.
@@ -53,7 +51,9 @@ Rectangle {
         onReleased: {historyItem.color = "ivory" }
         onPressAndHold: {historyItem.color = "ivory" }
 
-        onClicked: {
+        onClicked: {            
+            //jsonHistoryJobsModel.model.clear();
+
             // set current history name
             screen.currentHistory = itemtitle.text;
             screen.currentHistoryID = model.id;
