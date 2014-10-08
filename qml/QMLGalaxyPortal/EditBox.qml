@@ -21,7 +21,7 @@ Rectangle {
         color: "black"
         selectionColor: "green"
         selectByMouse: true
-        font.pixelSize: 16
+        font.pointSize: 16
         width: parent.width-16
         anchors.centerIn: parent
         focus: true

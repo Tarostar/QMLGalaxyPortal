@@ -73,7 +73,7 @@ Item {
 
         var objectArray = JSON.parse(json);
         for ( var object in objectArray ) {
-            jsonModel.insert(0, objectArray[object]);
+            jsonModel.append(objectArray[object]);
         }
     }
 }

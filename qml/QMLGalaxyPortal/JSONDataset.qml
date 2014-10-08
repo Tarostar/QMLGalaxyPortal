@@ -12,8 +12,10 @@ Item {
     // Text to display as result of JSON.
     property string text: ""
 
+    property string textMe: "test"
+
     // Array of all the fields displayed.
-    property var detailFields: []
+    property var fields: []
 
     // Name of job item for content.
     property string name: ""
@@ -40,6 +42,9 @@ Item {
 
     // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
     function poll() {
+        // update field list before polling
+        updateFieldArray();
+
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
         xhr.onreadystatechange = function() {
@@ -49,13 +54,13 @@ Item {
         xhr.send();
     }
 
-    // Update JSON data when source changes.
+    // Update JSON data when source or fields changes.
     onJsonChanged: updateJSONText(JSON.parse(json))
 
     function updateJSONText(jsonData) {
         datasetItem.text = "";
         // Compose string for each field in field array which exists in the json data (otherwise ignored).
-        detailFields.forEach(function(field) {
+        fields.forEach(function(field) {
             if (jsonData[field])
                 datasetItem.text += " <b>" + field + "</b>: " + jsonData[field].toString();
         });
@@ -66,17 +71,27 @@ Item {
     }
 
     // Init default field array at startup.
-    Component.onCompleted:{ initFieldArray(); }
+    Component.onCompleted:{ updateFieldArray(); }
 
-    function initFieldArray() {
-        detailFields.push("misc_blurb");
-        detailFields.push("data_type");
-        detailFields.push("genome_build");
-        detailFields.push("update_time");
-        /*detailFields.push("metadata_data_lines");
-        detailFields.push("history_content_type");
-        detailFields.push("file_ext");
-        detailFields.push("file_size");*/
+    function updateFieldArray() {
+        if (screen.fieldList.length < 1) {
+            // Default fields initialised.
+            fields.push("misc_blurb");
+            fields.push("data_type");
+            fields.push("genome_build");
+            fields.push("update_time");
+            /*fields.push("metadata_data_lines");
+            fields.push("history_content_type");
+            fields.push("file_ext");
+            fields.push("file_size");*/
+
+            // Set field list to contain the default list
+            screen.fieldList = fields.join();
+        }
+        else {
+            // Init field array from fieldList.
+            fields = screen.fieldList.split(',');
+        }
     }
 
 }

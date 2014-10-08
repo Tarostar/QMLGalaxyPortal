@@ -7,7 +7,7 @@ Rectangle {
 
     property bool front: true
     property alias itemText: jobItemText.text
-    property alias fontSize: jobItemText.font.pixelSize
+    property alias fontSize: jobItemText.font.pointSize
     property alias textHeight: jobItemText.height
     property string imagePath: "qrc:/resources/resources/icons/" + res[resIndex] + "/"
 
@@ -24,7 +24,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle
         text: model.name
-        font.pixelSize: 15
+        font.pointSize: 14
         wrapMode: Text.WordWrap
     }
     Rectangle {

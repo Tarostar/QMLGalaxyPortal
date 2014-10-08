@@ -109,7 +109,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 elide: Text.ElideMiddle
                 text: model.fieldName + ":"
-                font.pixelSize: 12
+                font.pointSize: 12
                 font.bold: true
             }
             Text {
@@ -120,7 +120,7 @@ Rectangle {
                 elide: Text.ElideMiddle
                 text: model.fieldData
                 wrapMode: Text.WordWrap
-                font.pixelSize: 12
+                font.pointSize: 12
                 textFormat: Text.RichText
             }
         }

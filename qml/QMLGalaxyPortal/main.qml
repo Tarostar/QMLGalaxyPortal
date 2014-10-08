@@ -9,10 +9,13 @@ Rectangle {
     width: Screen.width
     height: Screen.height
 
-    // Title of any selected History item.
+    // Title and ID of any selected history and job item.
     property string currentHistory: ""
     property string currentHistoryID: ""
     property string currentJobID: ""
+
+    // String of fields displayed on the flipped job items to store between sessions
+    property string fieldList: ""
 
     // Galaxy API key for the dataSource used to retrieve data for user.
     property string dataSource: "http://10.0.0.80"
@@ -25,6 +28,8 @@ Rectangle {
         property alias dataSource: screen.dataSource
         property alias passcode: screen.passcode
         property alias passcodeEnabled : screen.passcodeEnabled
+
+        property alias fieldList : screen.fieldList
     }
 
     // loader to spawn pages on top of list (e.g. for settings)

@@ -24,7 +24,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle
         text: model.name
-        font.pixelSize: 15
+        font.pointSize: 15
     }
     // Icon for item.
     Image {
@@ -32,8 +32,8 @@ Rectangle {
         anchors.right: itemtitle.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.rightMargin: 5
-        height: parent.height / 2
-        width: parent.height / 2
+        height: sourceSize.height / 2
+        width: sourceSize.width / 2
         fillMode: Image.PreserveAspectFit
         // TODO: scale image to resolution
         source: "qrc:/resources/resources/icons/biotech-64.png"

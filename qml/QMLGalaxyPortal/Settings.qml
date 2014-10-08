@@ -1,12 +1,42 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
+import QtQuick.Controls.Styles 1.2
 
 Rectangle {
     id: settings
     width: screen.width
     height: screen.height
     color:"ivory"
+
+    function findField(fieldName) {
+        var fields = [];
+        fields = screen.fieldList.split(',');
+
+        fields.forEach(function(field) {
+            if (field === fieldName)
+                return true;
+        });
+
+        return false;
+    }
+
+    function addField(fieldName) {
+        if (screen.fieldList.length === 0)
+            screen.fieldList = fieldName;
+        else
+            screen.fieldList += "," + fieldName;
+    }
+
+    function removeField(fieldName) {
+        var fields = [];
+        fields = screen.fieldList.split(',');
+        var index = fields.indexOf(fieldName);
+        if (index >= 0)
+            fields.splice(index, 1);
+
+        screen.fieldList = fields.join();
+    }
 
     // Action bar
     ActionBar {
@@ -25,7 +55,7 @@ Rectangle {
         anchors.topMargin: 5
         elide: Text.ElideMiddle
         text: "Galaxy URL"
-        font.pixelSize: 15
+        font.pointSize: 15
         font.bold: true
     }
     EditBox {
@@ -48,7 +78,7 @@ Rectangle {
         anchors.topMargin: 5
         elide: Text.ElideMiddle
         text: "API Key"
-        font.pixelSize: 15
+        font.pointSize: 15
         font.bold: true
     }
     Text {
@@ -58,7 +88,7 @@ Rectangle {
         anchors.topMargin: 1
         elide: Text.ElideMiddle
         text: "(Generate 'API Keys' in User menu)"
-        font.pixelSize: 12
+        font.pointSize: 12
     }
     EditBox {
         id: galaxyKey
@@ -93,7 +123,7 @@ Rectangle {
         anchors.topMargin: 5
         elide: Text.ElideMiddle
         text: "Passcode"
-        font.pixelSize: 15
+        font.pointSize: 15
         font.bold: true
     }
     EditBox {
@@ -107,6 +137,44 @@ Rectangle {
         onEditDone: {
             // edit field lost focus, or return/enter was pressed so update current app URL
             passcode = passcodeField.text;
+        }
+    }
+    // Config settings for fields.
+    Text {
+        id: fieldConfigTitle
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: passcodeField.bottom
+        anchors.topMargin: 5
+        elide: Text.ElideMiddle
+        text: "Job Fields"
+        font.pointSize: 15
+        font.bold: true
+    }
+    Row {
+        id: fieldConfig
+        anchors.top: fieldConfigTitle.bottom
+        /*ComboBox {
+            id: firstField
+            width: parent.width
+            model: [ "empty", "update_time", "misc_blurb", "data_type", "genome_build", "metadata_data_lines", "history_content_type", "file_ext", "file_size" ]
+        }*/
+        Item {
+            CheckBox {
+                id: update_time
+                anchors.left: parent.left
+                anchors.margins: 5
+                text: qsTr("Update Time")
+                checked: findField("update_time")
+                onClicked: {
+                    if (update_time.checked) {
+                        removeField("update_time");
+                    }
+                    else {
+                        addField("update_time");
+                    }
+
+                }
+            }
         }
     }
 }

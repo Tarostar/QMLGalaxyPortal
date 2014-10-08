@@ -39,7 +39,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle
         text: "Galaxy Portal"
-        font.pixelSize: 15
+        font.pointSize: 15
     }
 
     // Back button.
