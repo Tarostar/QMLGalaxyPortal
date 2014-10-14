@@ -43,6 +43,33 @@ Rectangle {
         }
     }
 
+    function handleOverlap(item) {
+        var fields = [update_time, misc_blurb]
+
+        for (var i = 0; i < fields.length; ++i)
+        {
+          var field = fields[i];
+
+          if (item !== field)
+          {
+              if (item.x + item.width > field.x &&
+                      item.x < field.x + field.width)
+              {
+                  if (item.x > field.x) {
+                      item.x = field.x + field.width;
+                  } else {
+                      item.x = field.x - item.width;
+                  }
+
+                  // Hadnled one, now do it recursively to handle all fields.
+                  handleOverlap(item);
+                  return;
+              }
+          }
+        }
+    }
+
+
     // Action bar
     ActionBar {
         id: settingsActionBar
@@ -155,14 +182,129 @@ Rectangle {
         font.pointSize: 15
         font.bold: true
     }
-    Column {
+    Rectangle {
+        id: container
+        anchors.top: fieldConfigTitle.bottom
+        anchors.topMargin: 5
+        width: settings.width
+        height: Screen.pixelDensity * 9
+
+        // TODO: these rectangles should be a file so they can be re-used
+        DraggableCheckbox {
+            id: update_time
+            fieldName: qsTr("Update Time")
+            fieldID: "update_time"
+            onDropItem: handleOverlap(update_time)
+        }
+        DraggableCheckbox {
+            id: misc_blurb
+            fieldName: qsTr("Misc Blurb")
+            fieldID: "misc_blurb"
+            onDropItem: handleOverlap(misc_blurb);
+        }
+
+        /*Rectangle {
+            id: update_time
+            width: 100
+            height: Screen.pixelDensity * 9
+            border.color: "black"
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#cdb79e" }
+                GradientStop { position: 0.5; color: "#ffebcd" }
+                GradientStop { position: 1.0; color: "#cdb79e" }
+            }
+            border.width: 1
+            // First declare the main mouse area so that the checkbox click mouse area will be on top of it.
+            MouseArea {
+                hoverEnabled: true
+                anchors.fill: parent
+                drag.target: update_time
+                drag.axis: Drag.XAxis
+                drag.minimumX: 0
+                drag.maximumX: container.width - update_time.width
+                onReleased: {
+                    update_time.z = 0;
+                    handleOverlap(update_time);
+                }
+                onPressed: {
+                    update_time.color = "red";
+                    update_time.z = 1;
+                }
+            }
+            CheckBox {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Update Time")
+                checked: findField("update_time")
+                onClicked: {
+                    toggleField("update_time");
+                }
+            }
+        }
+        Rectangle {
+            id: misc_blurb
+            width: 100
+            height: Screen.pixelDensity * 9
+            gradient: Gradient {
+                GradientStop { position: 0.0; color: "#cdb79e" }
+                GradientStop { position: 0.5; color: "#ffebcd" }
+                GradientStop { position: 1.0; color: "#cdb79e" }
+            }
+            border.color: "black"
+            border.width: 1
+            MouseArea {
+                hoverEnabled: true
+                anchors.fill: parent
+                drag.target: misc_blurb
+                drag.axis: Drag.XAxis
+                drag.minimumX: 0
+                drag.maximumX: container.width - misc_blurb.width
+                onReleased: {
+                    update_time.z = 0;
+                    handleOverlap(misc_blurb);
+                }
+                onPressed: {
+                    update_time.color = "red";
+                    update_time.z = 1;
+                }
+            }
+            CheckBox {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: qsTr("Misc Blurb")
+                checked: findField("misc_blurb")
+                onClicked: {
+                    toggleField("misc_blurb");
+                }
+            }
+        }*/
+    }
+
+   /* Column {
         id: fieldConfig
         anchors.top: fieldConfigTitle.bottom
-        /*ComboBox {
-            id: firstField
-            width: parent.width
-            model: [ "empty", "update_time", "misc_blurb", "data_type", "genome_build", "metadata_data_lines", "history_content_type", "file_ext", "file_size" ]
-        }*/
+
+        Rectangle {
+             id: container
+             width: settings.width
+             height: Screen.pixelDensity * 9
+
+             Rectangle {
+                 id: rect
+                 width: 50; height: 50
+                 color: "red"
+                 opacity: (600.0 - rect.x) / 600
+
+                 MouseArea {
+                     anchors.fill: parent
+                     drag.target: rect
+                     drag.axis: Drag.XAxis
+                     drag.minimumX: 0
+                     drag.maximumX: container.width - rect.width
+                 }
+             }
+         }
+
         CheckBox {
             id: update_time
             anchors.left: parent.left
@@ -211,5 +353,5 @@ Rectangle {
                 toggleField("genome_build");
             }
         }
-    }
+    }*/
 }
