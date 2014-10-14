@@ -10,32 +10,37 @@ Rectangle {
     color:"ivory"
 
     function findField(fieldName) {
-        var fields = [];
-        fields = screen.fieldList.split(',');
-
-        fields.forEach(function(field) {
-            if (field === fieldName)
-                return true;
-        });
+        if (screen.fieldList.indexOf(fieldName) >= 0) {
+            return true;
+        }
 
         return false;
     }
 
-    function addField(fieldName) {
-        if (screen.fieldList.length === 0)
-            screen.fieldList = fieldName;
-        else
-            screen.fieldList += "," + fieldName;
-    }
+    function toggleField(fieldName) {
+        if (findField(fieldName)) {
+            // remove
+            if (screen.fieldList.indexOf(fieldName) === 0) {
+                // first entry
+                screen.fieldList = screen.fieldList.replace(fieldName, "");
+            } else {
+                // not first entry, so remove comma
+                screen.fieldList = screen.fieldList.replace("," + fieldName, "");
+            }
 
-    function removeField(fieldName) {
-        var fields = [];
-        fields = screen.fieldList.split(',');
-        var index = fields.indexOf(fieldName);
-        if (index >= 0)
-            fields.splice(index, 1);
+            if (screen.fieldList[0] === ",") {
+                // remove any comma at start of string
+                screen.fieldList = screen.fieldList.substring(1);
+            }
 
-        screen.fieldList = fields.join();
+        } else {
+            // add
+            if (screen.fieldList.length === 0) {
+                screen.fieldList = fieldName;
+            } else {
+                screen.fieldList += "," + fieldName;
+            }
+        }
     }
 
     // Action bar
@@ -150,7 +155,7 @@ Rectangle {
         font.pointSize: 15
         font.bold: true
     }
-    Row {
+    Column {
         id: fieldConfig
         anchors.top: fieldConfigTitle.bottom
         /*ComboBox {
@@ -158,22 +163,52 @@ Rectangle {
             width: parent.width
             model: [ "empty", "update_time", "misc_blurb", "data_type", "genome_build", "metadata_data_lines", "history_content_type", "file_ext", "file_size" ]
         }*/
-        Item {
-            CheckBox {
-                id: update_time
-                anchors.left: parent.left
-                anchors.margins: 5
-                text: qsTr("Update Time")
-                checked: findField("update_time")
-                onClicked: {
-                    if (update_time.checked) {
-                        removeField("update_time");
-                    }
-                    else {
-                        addField("update_time");
-                    }
-
-                }
+        CheckBox {
+            id: update_time
+            anchors.left: parent.left
+            anchors.margins: 5
+            width: settings.width
+            height: Screen.pixelDensity * 9
+            text: qsTr("Update Time")
+            checked: findField("update_time")
+            onClicked: {
+                toggleField("update_time");
+            }
+        }
+        CheckBox {
+            id: misc_blurb
+            anchors.left: parent.left
+            anchors.margins: 5
+            width: settings.width
+            height: Screen.pixelDensity * 9
+            text: qsTr("Misc Blurb")
+            checked: findField("misc_blurb")
+            onClicked: {
+                toggleField("misc_blurb");
+            }
+        }
+        CheckBox {
+            id: data_type
+            anchors.left: parent.left
+            anchors.margins: 5
+            width: settings.width
+            height: Screen.pixelDensity * 9
+            text: qsTr("Data Type")
+            checked: findField("data_type")
+            onClicked: {
+                toggleField("data_type");
+            }
+        }
+        CheckBox {
+            id: genome_build
+            anchors.left: parent.left
+            anchors.margins: 5
+            width: settings.width
+            height: Screen.pixelDensity * 9
+            text: qsTr("Genome Build")
+            checked: findField("genome_build")
+            onClicked: {
+                toggleField("genome_build");
             }
         }
     }
