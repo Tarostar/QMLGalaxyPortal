@@ -119,7 +119,7 @@ Rectangle {
         anchors.top: galaxyKeyTitle.bottom
         anchors.topMargin: 1
         elide: Text.ElideMiddle
-        text: "(Generate 'API Keys' in User menu)"
+        text: "(Generate 'API Keys' in the Galaxy User menu)"
         font.pointSize: 12
     }
     EditBox {
@@ -131,7 +131,6 @@ Rectangle {
         text: dataKey
         echo: TextInput.PasswordEchoOnEdit
         onEditDone: {
-            // edit field lost focus, or return/enter was pressed so update current app URL
             dataKey = galaxyKey.text;
         }
     }
@@ -167,7 +166,6 @@ Rectangle {
         anchors.margins: 8
         text: passcode
         onEditDone: {
-            // edit field lost focus, or return/enter was pressed so update current app URL
             passcode = passcodeField.text;
         }
     }
@@ -182,9 +180,31 @@ Rectangle {
         font.pointSize: 15
         font.bold: true
     }
+    CheckBox {
+        id: advanced_fields
+        anchors.top: fieldConfigTitle.bottom
+        anchors.left: parent.left
+        anchors.margins: 10
+        height: Screen.pixelDensity * 9
+        text: qsTr("Enable Advanced Fields")
+        checked: screen.advancedFields
+        onClicked: {
+            screen.advancedFields = !screen.advancedFields;
+
+            /*if (screen.advancedFields) {
+                // Hide advanced field config.
+                container.visible = true;
+            } else {
+                // Show advanced field config.
+                container.visible = false;
+            }*/
+
+        }
+    }
     Rectangle {
         id: container
-        anchors.top: fieldConfigTitle.bottom
+        visible: screen.advancedFields
+        anchors.top: advanced_fields.bottom
         anchors.topMargin: 5
         width: settings.width
         height: Screen.pixelDensity * 9
@@ -202,82 +222,6 @@ Rectangle {
             fieldID: "misc_blurb"
             onDropItem: handleOverlap(misc_blurb);
         }
-
-        /*Rectangle {
-            id: update_time
-            width: 100
-            height: Screen.pixelDensity * 9
-            border.color: "black"
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "#cdb79e" }
-                GradientStop { position: 0.5; color: "#ffebcd" }
-                GradientStop { position: 1.0; color: "#cdb79e" }
-            }
-            border.width: 1
-            // First declare the main mouse area so that the checkbox click mouse area will be on top of it.
-            MouseArea {
-                hoverEnabled: true
-                anchors.fill: parent
-                drag.target: update_time
-                drag.axis: Drag.XAxis
-                drag.minimumX: 0
-                drag.maximumX: container.width - update_time.width
-                onReleased: {
-                    update_time.z = 0;
-                    handleOverlap(update_time);
-                }
-                onPressed: {
-                    update_time.color = "red";
-                    update_time.z = 1;
-                }
-            }
-            CheckBox {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Update Time")
-                checked: findField("update_time")
-                onClicked: {
-                    toggleField("update_time");
-                }
-            }
-        }
-        Rectangle {
-            id: misc_blurb
-            width: 100
-            height: Screen.pixelDensity * 9
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "#cdb79e" }
-                GradientStop { position: 0.5; color: "#ffebcd" }
-                GradientStop { position: 1.0; color: "#cdb79e" }
-            }
-            border.color: "black"
-            border.width: 1
-            MouseArea {
-                hoverEnabled: true
-                anchors.fill: parent
-                drag.target: misc_blurb
-                drag.axis: Drag.XAxis
-                drag.minimumX: 0
-                drag.maximumX: container.width - misc_blurb.width
-                onReleased: {
-                    update_time.z = 0;
-                    handleOverlap(misc_blurb);
-                }
-                onPressed: {
-                    update_time.color = "red";
-                    update_time.z = 1;
-                }
-            }
-            CheckBox {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Misc Blurb")
-                checked: findField("misc_blurb")
-                onClicked: {
-                    toggleField("misc_blurb");
-                }
-            }
-        }*/
     }
 
    /* Column {

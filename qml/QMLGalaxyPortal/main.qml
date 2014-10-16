@@ -16,6 +16,7 @@ Rectangle {
 
     // String of fields displayed on the flipped job items to store between sessions
     property string fieldList: ""
+    property bool advancedFields: true;
 
     // Galaxy API key for the dataSource used to retrieve data for user.
     property string dataSource: "http://10.0.0.80"
@@ -30,6 +31,7 @@ Rectangle {
         property alias passcodeEnabled : screen.passcodeEnabled
 
         property alias fieldList : screen.fieldList
+        property alias advancedFields : screen.advancedFields
     }
 
     // loader to spawn pages on top of list (e.g. for settings)
@@ -66,8 +68,11 @@ Rectangle {
     JSONDataset {
         id: jsonHistoryJobContent
         source: dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey;
-        pollInterval: 1000
+        pollInterval: 5000
     }
+
+    // Open passcode challenge dialog on startup.
+    Component.onCompleted: Qt.createComponent("PasscodeChallenge.qml").createObject(screen, {"x": 50, "y": 50})
 
     Column {
         ActionBar {

@@ -37,7 +37,7 @@ Item {
 
         // Current job.
 
-        if (jsonHistoryJobContent.text)
+        if (advancedFields && jsonHistoryJobContent.text)
         {
             // Set current text to display from JSON data.
             currentText = "<b>Status</b>: " + model.state + jsonHistoryJobContent.text;

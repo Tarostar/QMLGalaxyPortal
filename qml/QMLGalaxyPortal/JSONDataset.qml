@@ -25,6 +25,9 @@ Item {
 
     // Poll for data when source changes.
     onSourceChanged: {
+        // Remove JSON data from previous poll
+        json = "";
+
         poll()
 
         // Kick timer if enabled.
@@ -55,7 +58,7 @@ Item {
     }
 
     // Update JSON data when source or fields changes.
-    onJsonChanged: updateJSONText(JSON.parse(json))
+    onJsonChanged: if (json.length > 0) updateJSONText(JSON.parse(json))
 
     function updateJSONText(jsonData) {
         datasetItem.text = "";
