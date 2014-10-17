@@ -15,7 +15,7 @@ Item {
     property string textMe: "test"
 
     // Array of all the fields displayed.
-    property var fields: []
+    property variant fields
 
     // Name of job item for content.
     property string name: ""
@@ -77,24 +77,28 @@ Item {
     Component.onCompleted:{ updateFieldArray(); }
 
     function updateFieldArray() {
+        var fieldArray = [];
+
         if (screen.fieldList.length < 1) {
             // Default fields initialised.
-            fields.push("misc_blurb");
-            fields.push("data_type");
-            fields.push("genome_build");
-            fields.push("update_time");
-            /*fields.push("metadata_data_lines");
-            fields.push("history_content_type");
-            fields.push("file_ext");
-            fields.push("file_size");*/
+            fieldArray.push("misc_blurb");
+            fieldArray.push("data_type");
+            fieldArray.push("genome_build");
+            fieldArray.push("update_time");
+            /*datasetItem.fields.push("metadata_data_lines");
+            datasetItem.fields.push("history_content_type");
+            datasetItem.fields.push("file_ext");
+            datasetItem.fields.push("file_size");*/
 
             // Set field list to contain the default list
-            screen.fieldList = fields.join();
+            screen.fieldList = fieldArray.join();
         }
         else {
             // Init field array from fieldList.
-            fields = screen.fieldList.split(',');
+            fieldArray = screen.fieldList.split(',');
         }
+
+        datasetItem.fields = fieldArray;
     }
 
 }

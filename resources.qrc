@@ -42,5 +42,9 @@
         <file>resources/icons/xxhdpi/ic_action_next_item.png</file>
         <file>resources/icons/xxhdpi/ic_action_next_item_pressed.png</file>
         <file>resources/images/red_button_300_96.png</file>
+        <file>resources/images/red_button_100_32.png</file>
+        <file>resources/images/red_button_100_32_pressed.png</file>
+        <file>resources/images/green_button_100_32.png</file>
+        <file>resources/images/green_button_100_32_pressed.png</file>
     </qresource>
 </RCC>

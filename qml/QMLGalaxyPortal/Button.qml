@@ -19,7 +19,6 @@ Item {
         source: mouseArea.pressed ? button.pressedImageSource : button.imageSource
         Text {
             id: information
-            anchors.fill: parent
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             elide: Text.ElideMiddle

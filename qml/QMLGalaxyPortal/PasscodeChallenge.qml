@@ -1,64 +1,74 @@
 import QtQuick 2.3
-import QtQuick.Controls 1.2
-import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.2
 
-Dialog {
+Rectangle {
     id: passcodeChallenge
-    visible: true
 
-    width: 400//Screen.width
-    height: 400//Screen.height
+    signal done()
 
-    title: "Passcode"
-    standardButtons: StandardButton.Ok | StandardButton.Abort
+    property bool showBypassOption: false
 
-    onAccepted: {
-
-        if (screen.passcode === passcode.text)
-        {
-            passcodeChallenge.close();
-        }
-    }
-
-    onRejected: {
-        screen.dataKey = "";
-        screen.passcode = "";
-        passcodeChallenge.close();
-    }
     Text {
-        id: information
+        id: title
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.margins: 10
         elide: Text.ElideMiddle
-        text: "Aborting will bypass passcode, but your API Key will be reset."
+        text: "Passcode"
         font.pointSize: 12
-        wrapMode: Text.WordWrap
+        font.bold: true
     }
     EditBox {
         id: passcode
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: information.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: title.bottom
         anchors.margins: 5
         height: Screen.pixelDensity * 9
         echo: TextInput.PasswordEchoOnEdit
     }
     Button {
-        id: bypass
-        anchors.left: parent.left
-        anchors.verticalCenter: parent.verticalCenter
+        id: login
+        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: passcode.bottom
+        anchors.margins: 5
         height: image.sourceSize.height
         width: image.sourceSize.width
-        anchors.rightMargin: 10
-       // imageSource: "qrc:/resources/resources/images/red_button_300_96.png"
-       // pressedImageSource: "qrc:/resources/resources/images/red_button_300_96.png"
-       // title: "Bypass"
+        imageSource: "qrc:/resources/resources/images/green_button_100_32.png"
+        pressedImageSource: "qrc:/resources/resources/images/green_button_100_32_pressed.png"
+        title: "Login"
         onClicked: {
-
+            if (screen.passcode === passcode.text) {
+                passcodeChallenge.done();
+            } else {
+                showBypassOption = true;
+            }
+        }
+    }
+    Text {
+        id: information
+        visible: showBypassOption
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: login.bottom
+        anchors.margins: 10
+        elide: Text.ElideMiddle
+        text: "You can bypass the passcode, but you will have to enter your API key and passcode again."
+        font.pointSize: 12
+        wrapMode: Text.WordWrap
+    }
+    Button {
+        id: bypass
+        visible: showBypassOption
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: information.bottom
+        anchors.margins: 5
+        height: image.sourceSize.height
+        width: image.sourceSize.width
+        imageSource: "qrc:/resources/resources/images/red_button_100_32.png"
+        pressedImageSource: "qrc:/resources/resources/images/red_button_100_32_pressed.png"
+        title: "Bypass"
+        onClicked: {
+            screen.dataKey = "";
+            screen.passcode = "";
+            passcodeChallenge.done();
         }
     }
 }

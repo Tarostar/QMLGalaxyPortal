@@ -165,6 +165,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.margins: 8
         text: passcode
+        echo: TextInput.PasswordEchoOnEdit
         onEditDone: {
             passcode = passcodeField.text;
         }

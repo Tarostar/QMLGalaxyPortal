@@ -67,14 +67,22 @@ Rectangle {
 
     JSONDataset {
         id: jsonHistoryJobContent
-        source: dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey;
+        source: screen.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey : "";
         pollInterval: 5000
     }
 
-    // Open passcode challenge dialog on startup.
-    Component.onCompleted: Qt.createComponent("PasscodeChallenge.qml").createObject(screen, {"x": 50, "y": 50})
+    PasscodeChallenge {
+        id: challengeDialog
+        visible: passcodeEnabled
+        anchors.fill: parent
+        onDone: {
+          challengeDialog.visible = false;
+        }
+    }
 
     Column {
+        visible: !challengeDialog.visible
+        anchors.fill: parent
         ActionBar {
             id: mainActionbar
             width: screen.width
