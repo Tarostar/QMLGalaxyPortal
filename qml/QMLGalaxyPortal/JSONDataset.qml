@@ -64,8 +64,12 @@ Item {
         datasetItem.text = "";
         // Compose string for each field in field array which exists in the json data (otherwise ignored).
         fields.forEach(function(field) {
-            if (jsonData[field])
-                datasetItem.text += " <b>" + field + "</b>: " + jsonData[field].toString();
+            if (typeof jsonData[field] === "boolean" || typeof jsonData[field] === "number" ||
+                    typeof jsonData[field] === "string" || typeof jsonData[field] === "symbol") {
+                if (jsonData[field].toString().length > 0) {
+                    datasetItem.text += " <b>" + field + "</b>: " + jsonData[field].toString();
+                }
+            }
         });
 
         // Set name property to job name - if exists

@@ -8,8 +8,6 @@ Rectangle {
     height: screen.height
     color: stateColour
 
-    // Array of all the fields displayed.
-    property var detailFields: []
     property color stateColour: "ivory"
     property color stateColourAlt: "lemonchiffon"
 
@@ -72,21 +70,6 @@ Rectangle {
             stateColour = Utils.itemColour(jsonData["state"], false);
             stateColourAlt = Utils.itemColour(jsonData["state"], true);
         }
-    }
-
-    // Init default field array at startup.
-    Component.onCompleted:{ initFieldArray(); }
-
-    function initFieldArray() {
-        detailFields.push("update_time");
-        detailFields.push("misc_blurb");
-        detailFields.push("data_type");
-        detailFields.push("genome_build");
-        detailFields.push("metadata_data_lines");
-        detailFields.push("history_content_type");
-        detailFields.push("file_ext");
-        detailFields.push("file_size");
-        detailFields.push("peek");
     }
 
     // Model that holds detail items to be displayed.

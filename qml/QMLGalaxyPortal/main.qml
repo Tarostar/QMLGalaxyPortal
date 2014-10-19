@@ -15,7 +15,7 @@ Rectangle {
     property string currentJobID: ""
 
     // String of fields displayed on the flipped job items to store between sessions
-    property string fieldList: ""
+    property string fieldList: "update_time,data_type,misc_blurb"
     property bool advancedFields: true;
 
     // Galaxy API key for the dataSource used to retrieve data for user.
@@ -91,7 +91,7 @@ Rectangle {
             settingsButton.visible: true // screen.state === "" ? true : false
             // Back button only visible when possible to navigate back.
             backButton.visible: screen.state === "" ? false : true
-            actionBarTitle.text: screen.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
+            actionBarTitle.text: screen.screen.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
         }
         Row {
             id: screenlayout
