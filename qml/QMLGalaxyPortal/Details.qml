@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 import QtQuick.Window 2.2
 import "utils.js" as Utils
 
@@ -11,6 +11,7 @@ Rectangle {
     // Array of all the fields displayed.
     property var detailFields: []
     property color stateColour: "ivory"
+    property color stateColourAlt: "lemonchiffon"
 
     property string source: dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey;
     property string json: ""
@@ -45,62 +46,21 @@ Rectangle {
     // Update JSON data when source changes.
     onJsonChanged: {updateJSONStrings(json)}
 
-    function count(str, ch) {
-        // Count instances.
-        var count = 0;
-        for (var i = 0; i < str.length; ++i) {
-            if (str.charAt(i) === ch)
-                count++;
-        }
-        return count;
-    }
-
     function updateJSONStrings(jsonData) {
-        // Add list item for each field in field array which exists in the json data (otherwise ignored).
-        /*detailFields.forEach(function(field) {
-            if (jsonData[field])
-                detailListModel.append({"fieldName": field, "fieldData": jsonData[field].toString()});
-        });*/
-
+        // Take JSON string and convert to JavaScript object.
         var jsonObject = JSON.parse(jsonData)
 
-        var arr = [];
-        for (var x in jsonObject) {
-            arr.push(x);
-            detailListModel.append({"fieldName": x.toString() , "fieldData": jsonObject[x] ? jsonObject[x].toString() : "-"});
-        }
-
-        for (var i = 0; i < arr.length; i++)
-        {
-            //detailListModel.append({"fieldName": arr[i].toString() , "fieldData": arr[arr[i]].toString()});
-
-            /*var data = arr[i];
-            for (var key in data) {
-              if (data.hasOwnProperty(key)) {
-                detailListModel.append({"fieldName": arr[i].toString() , "fieldData": jsonData[key].toString()});
-              }
-            }*/
-        }
-
-        // Create an array of the json data (without the curly brackets at the start/end).
-        /*var data = jsonData.substring(1, jsonData.length - 1);
-        data = data.split(",");
-
-        // Skip complicated nested structures in the JSON data.
-        var nestedBrackets = 0;
-
-        // Add data to list, but skip nested structures in the JSON data.
-        while (data.length > 0) {
-            var line = data.shift();
-            if (line.indexOf("[") !== -1 || line.indexOf("{") !== -1 ||
-                line.indexOf("]") !== -1 || line.indexOf("}") !== -1) {
-                nestedBrackets += count(line, "[") + count(line, "{");
-                nestedBrackets -= count(line, "]");
-                nestedBrackets -= count(line, "}");
-            } else if (nestedBrackets <= 0){
-                detailListModel.append({"fieldName": "-" , "fieldData": line.toString()});
+        // For every key in the JSON object insert a field in the list to be shown.
+        for (var key in jsonObject) {
+            // Only accept recognised types (i.e. objects and undefined are not inserted into the list).
+            if (typeof jsonObject[key] === "boolean" || typeof jsonObject[key] === "number" ||
+                    typeof jsonObject[key] === "string" || typeof jsonObject[key] === "symbol") {
+                if (jsonObject[key].toString().length > 0) {
+                    // Only non-empty strings are actually inserted.
+                    detailListModel.append({"fieldName": key.toString() , "fieldData": jsonObject[key].toString()});
+                }
             }
-        }*/
+        }
 
         // Set action bar title to job name - if exists
         if (jsonData["name"])
@@ -108,7 +68,10 @@ Rectangle {
 
         // Set item colour based on item state - if exists.
         if (jsonData["state"])
+        {
             stateColour = Utils.itemColour(jsonData["state"], false);
+            stateColourAlt = Utils.itemColour(jsonData["state"], true);
+        }
     }
 
     // Init default field array at startup.
@@ -143,11 +106,14 @@ Rectangle {
         anchors.top: detailsActionBar.bottom
         anchors.topMargin: 5
         width: screen.width
-        height: screen.height
+        height: screen.height - detailsActionBar.height
+        clip: true
+        boundsBehavior: Flickable.StopAtBounds
         model: detailListModel
         delegate: Rectangle {
             id: historyItem
-            color: stateColour
+            // Alternating colour.
+            color: index%2 == 0 ? stateColour : stateColourAlt
             width: parent.width
             // Set height to height of text, plus a bit of margin.
             height: textTitle.height > textData.height ? textTitle.height + 2 : textData.height + 5
@@ -155,9 +121,9 @@ Rectangle {
             Text {
                 id: textTitle
                 anchors.left: parent.left
-                anchors.leftMargin: 10
                 anchors.verticalCenter: parent.verticalCenter
-                elide: Text.ElideMiddle
+                anchors.leftMargin: 10
+                width: Math.max(160, paintedWidth)
                 text: model.fieldName + ":"
                 font.pointSize: 12
                 font.bold: true
@@ -169,9 +135,17 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 elide: Text.ElideMiddle
                 text: model.fieldData
-                wrapMode: Text.WordWrap
                 font.pointSize: 12
                 textFormat: Text.RichText
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    mainLoader.source = "DetailZoom.qml";
+                    mainLoader.item.color = historyItem.color;
+                    mainLoader.item.title = model.fieldName;
+                    mainLoader.item.itemData = model.fieldData;
+                }
             }
         }
 
