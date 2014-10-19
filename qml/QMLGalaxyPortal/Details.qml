@@ -43,14 +43,64 @@ Rectangle {
     }
 
     // Update JSON data when source changes.
-    onJsonChanged: {updateJSONStrings(JSON.parse(json))}
+    onJsonChanged: {updateJSONStrings(json)}
+
+    function count(str, ch) {
+        // Count instances.
+        var count = 0;
+        for (var i = 0; i < str.length; ++i) {
+            if (str.charAt(i) === ch)
+                count++;
+        }
+        return count;
+    }
 
     function updateJSONStrings(jsonData) {
         // Add list item for each field in field array which exists in the json data (otherwise ignored).
-        detailFields.forEach(function(field) {
+        /*detailFields.forEach(function(field) {
             if (jsonData[field])
                 detailListModel.append({"fieldName": field, "fieldData": jsonData[field].toString()});
-        });
+        });*/
+
+        var jsonObject = JSON.parse(jsonData)
+
+        var arr = [];
+        for (var x in jsonObject) {
+            arr.push(x);
+            detailListModel.append({"fieldName": x.toString() , "fieldData": jsonObject[x] ? jsonObject[x].toString() : "-"});
+        }
+
+        for (var i = 0; i < arr.length; i++)
+        {
+            //detailListModel.append({"fieldName": arr[i].toString() , "fieldData": arr[arr[i]].toString()});
+
+            /*var data = arr[i];
+            for (var key in data) {
+              if (data.hasOwnProperty(key)) {
+                detailListModel.append({"fieldName": arr[i].toString() , "fieldData": jsonData[key].toString()});
+              }
+            }*/
+        }
+
+        // Create an array of the json data (without the curly brackets at the start/end).
+        /*var data = jsonData.substring(1, jsonData.length - 1);
+        data = data.split(",");
+
+        // Skip complicated nested structures in the JSON data.
+        var nestedBrackets = 0;
+
+        // Add data to list, but skip nested structures in the JSON data.
+        while (data.length > 0) {
+            var line = data.shift();
+            if (line.indexOf("[") !== -1 || line.indexOf("{") !== -1 ||
+                line.indexOf("]") !== -1 || line.indexOf("}") !== -1) {
+                nestedBrackets += count(line, "[") + count(line, "{");
+                nestedBrackets -= count(line, "]");
+                nestedBrackets -= count(line, "}");
+            } else if (nestedBrackets <= 0){
+                detailListModel.append({"fieldName": "-" , "fieldData": line.toString()});
+            }
+        }*/
 
         // Set action bar title to job name - if exists
         if (jsonData["name"])
