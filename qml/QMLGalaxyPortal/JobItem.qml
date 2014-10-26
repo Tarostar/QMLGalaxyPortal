@@ -9,7 +9,6 @@ Rectangle {
     property alias itemText: jobItemText.text
     property alias fontSize: jobItemText.font.pointSize
     property alias textHeight: jobItemText.height
-    property string imagePath: "qrc:/resources/resources/icons/" + res[resIndex] + "/"
 
     // Item separator (lighter at the top, darker at the bottom).
     Rectangle { color: "white"; width: parent.width; height: 1 }
@@ -41,7 +40,7 @@ Rectangle {
             height: sourceSize.height
             width: sourceSize.width
             fillMode: Image.PreserveAspectFit
-            source: mouseArea.pressed ? imagePath + "ic_action_next_item_pressed.png" : imagePath + "ic_action_next_item.png"
+            source: mouseArea.pressed ? imagePath + "ic_action_search_pressed.png" : imagePath + "ic_action_search.png"
             MouseArea {
                 id: mouseArea
                 hoverEnabled: true

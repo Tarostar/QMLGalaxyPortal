@@ -61,14 +61,14 @@ Rectangle {
         }
 
         // Set action bar title to job name - if exists
-        if (jsonData["name"])
-            detailsActionBar.actionBarTitle.text = jsonData["name"];
+        if (jsonObject["name"])
+            detailsActionBar.actionBarTitle = jsonObject["name"];
 
         // Set item colour based on item state - if exists.
-        if (jsonData["state"])
+        if (jsonObject["state"])
         {
-            stateColour = Utils.itemColour(jsonData["state"], false);
-            stateColourAlt = Utils.itemColour(jsonData["state"], true);
+            stateColour = Utils.itemColour(jsonObject["state"], false);
+            stateColourAlt = Utils.itemColour(jsonObject["state"], true);
         }
     }
 
@@ -128,6 +128,7 @@ Rectangle {
                     mainLoader.item.color = historyItem.color;
                     mainLoader.item.title = model.fieldName;
                     mainLoader.item.itemData = model.fieldData;
+                    mainLoader.item.actionBarTitle = detailsActionBar.actionBarTitle;
                 }
             }
         }

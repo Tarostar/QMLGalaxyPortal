@@ -6,6 +6,7 @@ Rectangle {
     width: screen.width
     height: screen.height
 
+    property alias actionBarTitle: detailZoomActionBar.actionBarTitle
     property alias title: textTitle.text
     property alias itemData: textData.text
 

@@ -8,7 +8,6 @@
         <file alias="main_image">resources/images/QMLGalaxyPortal80.png</file>
         <file>resources/icons/btn.png</file>
         <file>resources/icons/btn_highlighted.png</file>
-        <file>resources/icons/search.png</file>
         <file>resources/icons/xxhdpi/ic_action_settings.png</file>
         <file>resources/icons/xxhdpi/ic_action_settings_pressed.png</file>
         <file>resources/icons/mdpi/ic_action_settings.png</file>
@@ -46,5 +45,13 @@
         <file>resources/images/red_button_100_32_pressed.png</file>
         <file>resources/images/green_button_100_32.png</file>
         <file>resources/images/green_button_100_32_pressed.png</file>
+        <file>resources/icons/mdpi/ic_action_search.png</file>
+        <file>resources/icons/mdpi/ic_action_search_pressed.png</file>
+        <file>resources/icons/hdpi/ic_action_search.png</file>
+        <file>resources/icons/hdpi/ic_action_search_pressed.png</file>
+        <file>resources/icons/xhdpi/ic_action_search.png</file>
+        <file>resources/icons/xhdpi/ic_action_search_pressed.png</file>
+        <file>resources/icons/xxhdpi/ic_action_search.png</file>
+        <file>resources/icons/xxhdpi/ic_action_search_pressed.png</file>
     </qresource>
 </RCC>

@@ -6,7 +6,7 @@ Rectangle {
     color: "burlywood"
 
     // Expose action bar properties so they can be changed.
-    property alias actionBarTitle: title
+    property alias actionBarTitle: title.text
 
     // Buttons - primarily so they can be shown or hidden.
     property alias settingsButton: settings
@@ -55,6 +55,13 @@ Rectangle {
         onClicked: {
             mainLoader.source = backSource;
             screen.state = backState
+            if (screen.state === "")
+            {
+                // Reset trackers when returning to main screen.
+                screen.currentHistory = "";
+                screen.currentHistoryID = "";
+                screen.currentJobID = "";
+            }
         }
     }
 

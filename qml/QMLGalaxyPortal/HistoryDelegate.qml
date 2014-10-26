@@ -35,14 +35,14 @@ Rectangle {
         height: sourceSize.height / 2
         width: sourceSize.width / 2
         fillMode: Image.PreserveAspectFit
-        // TODO: scale image to resolution
-        source: "qrc:/resources/resources/icons/biotech-64.png"
+        source: mouseArea.pressed ? imagePath + "ic_action_next_item_pressed.png" : imagePath + "ic_action_next_item.png"
     }
 
     // Items in the history list are clickable.
     MouseArea {
         // Give user visual feedback of active item through colour shift when hovering over item.
         // Will also result in colour change when item selected through touch giving user feedback.
+        id: mouseArea
         hoverEnabled: true
         anchors.fill: parent
         onEntered: {historyItem.color = "lemonchiffon" }
@@ -51,15 +51,10 @@ Rectangle {
         onReleased: {historyItem.color = "ivory" }
         onPressAndHold: {historyItem.color = "ivory" }
 
-        onClicked: {            
-            //jsonHistoryJobsModel.model.clear();
-
+        onClicked: {
             // set current history name
             screen.currentHistory = itemtitle.text;
             screen.currentHistoryID = model.id;
-
-            // Set json history jobs model source to get jobs for the clicked history.
-            jsonHistoryJobsModel.source = dataSource + "/api/histories/" + model.id + "/contents?key=" + dataKey;
 
             // Trigger the state change to show the jobs list view.
             screen.state = "historyItems";

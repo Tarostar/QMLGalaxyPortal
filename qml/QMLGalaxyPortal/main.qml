@@ -24,14 +24,24 @@ Rectangle {
     property string passcode: ""
     property bool passcodeEnabled: false
 
+    // Save settings.
     Settings {
+        // Galaxy API settings.
         property alias dataKey: screen.dataKey
         property alias dataSource: screen.dataSource
+
+        // Passcode settings.
         property alias passcode: screen.passcode
         property alias passcodeEnabled : screen.passcodeEnabled
 
+        // Job item flip fields.
         property alias fieldList : screen.fieldList
         property alias advancedFields : screen.advancedFields
+
+        // Currently viewed history and job.
+        property alias currentHistory : screen.currentHistory
+        property alias currentHistoryID : screen.currentHistoryID
+        property alias currentJobID : screen.currentJobID
     }
 
     // loader to spawn pages on top of list (e.g. for settings)
@@ -49,6 +59,7 @@ Rectangle {
     property var devwidth: ["320", "480", "600", "1024", "1280", "1920", "2560"]
     readonly property int resIndex: Utils.getResolutionIndex(Screen.pixelDensity)
     readonly property int widthIndex: Utils.getScreenWidthIndex(Screen.width)
+    property string imagePath: "qrc:/resources/resources/icons/" + res[resIndex] + "/"
 
     // Model for the list of histories (main list).
     JSONListModel {
@@ -63,6 +74,7 @@ Rectangle {
         id: jsonHistoryJobsModel
         clearOnEmptyData: false
         pollInterval: 5000
+        source: screen.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + screen.currentHistoryID + "/contents?key=" + dataKey : "";
     }
 
     JSONDataset {
@@ -80,6 +92,14 @@ Rectangle {
         }
     }
 
+    // Init view at startup.
+    Component.onCompleted:{
+        if (screen.currentHistoryID.length > 0) {
+            screen.state = "historyItems";
+            //jsonHistoryJobsModel.source = screen.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + screen.currentHistoryID + "/contents?key=" + dataKey : "";
+        }
+    }
+
     Column {
         visible: !challengeDialog.visible
         anchors.fill: parent
@@ -91,7 +111,7 @@ Rectangle {
             settingsButton.visible: true // screen.state === "" ? true : false
             // Back button only visible when possible to navigate back.
             backButton.visible: screen.state === "" ? false : true
-            actionBarTitle.text: screen.screen.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
+            actionBarTitle: screen.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
         }
         Row {
             id: screenlayout
