@@ -9,8 +9,8 @@ Rectangle {
     property alias actionBarTitle: title.text
 
     // Buttons - primarily so they can be shown or hidden.
-    property alias settingsButton: settings
-    property alias backButton: back
+    property alias settingsButton: actionSettings
+    property alias backButton: actionBack
 
     // Destination for back button.
     property string backSource: ""
@@ -34,7 +34,7 @@ Rectangle {
     // Title shown in Action Bar (can be overriden using actionBarTitle alias for custom headings).
     Text {
         id: title
-        anchors.left: back.right
+        anchors.left: actionBack.right
         anchors.leftMargin: 5
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle
@@ -44,7 +44,7 @@ Rectangle {
 
     // Back button.
     Button {
-        id: back
+        id: actionBack
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
@@ -82,7 +82,7 @@ Rectangle {
 
     // Settings button.
     Button {
-        id: settings
+        id: actionSettings
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height

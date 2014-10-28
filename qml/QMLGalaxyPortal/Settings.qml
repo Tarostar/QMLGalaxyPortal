@@ -9,7 +9,7 @@ Rectangle {
     height: screen.height
     color:"ivory"
 
-    property string availableFields: "none,update_time,accessible,api_type,data_type,deleted,file_ext,file_size,genome_build,hda_ldda,hid,history_content_type,history_id,id,metadata_chromCol,metadata_columns,metadata_data_lines,metadata_dbkey,metadata_endCol,metadata_nameCol,metadata_startCol,metadata_strandCol,misc_blurb,model_class,name,purged,uuid,visible"
+    property string availableFields : "none,update_time,accessible,api_type,data_type,deleted,file_ext,file_size,genome_build,hda_ldda,hid,history_content_type,history_id,id,metadata_chromCol,metadata_columns,metadata_data_lines,metadata_dbkey,metadata_endCol,metadata_nameCol,metadata_startCol,metadata_strandCol,misc_blurb,model_class,name,purged,uuid,visible"
 
     function findField(fieldName) {
         if (screen.fieldList.indexOf(fieldName) >= 0) {
@@ -93,7 +93,7 @@ Rectangle {
     // Action bar
     ActionBar {
         id: settingsActionBar
-        width: screen.width
+        width: settings.width
         height: Screen.pixelDensity * 9
         settingsButton.visible: false
         backButton.visible: true
@@ -102,8 +102,8 @@ Rectangle {
     // Text input for Galaxy URL for API access.
     Flickable {
         anchors.top: settingsActionBar.bottom
-        width: parent.width
-        height: parent.height - settingsActionBar.height
+        width: screen.width
+        height: screen.height - settingsActionBar.height
         contentWidth: contentItem.childrenRect.width
         contentHeight: contentItem.childrenRect.height
         clip: true
@@ -113,7 +113,8 @@ Rectangle {
             id: galaxyUrlTitle
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
-            anchors.topMargin: 5
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             elide: Text.ElideMiddle
             text: "Galaxy URL"
             font.pointSize: 15
@@ -124,7 +125,8 @@ Rectangle {
             anchors.top: galaxyUrlTitle.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: 8
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             text: dataSource
             onEditDone: {
                 // edit field lost focus, or return/enter was pressed so update current app URL
@@ -136,7 +138,8 @@ Rectangle {
             id: galaxyKeyTitle
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: galaxyUrl.bottom
-            anchors.topMargin: 5
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             elide: Text.ElideMiddle
             text: "API Key"
             font.pointSize: 15
@@ -146,7 +149,8 @@ Rectangle {
             id: galaxyKeyTitleDescription
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: galaxyKeyTitle.bottom
-            anchors.topMargin: 1
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             elide: Text.ElideMiddle
             text: "(Generate 'API Keys' in the Galaxy User menu)"
             font.pointSize: 12
@@ -156,19 +160,160 @@ Rectangle {
             anchors.top: galaxyKeyTitleDescription.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: 8
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             text: dataKey
             echo: TextInput.PasswordEchoOnEdit
             onEditDone: {
                 dataKey = galaxyKey.text;
             }
         }
-        CheckBox {
-            id: passcodeEnabledField
+
+        /*CheckBox {
+            id: periodicPollsField
             anchors.top: galaxyKey.bottom
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.margins: 8
+            text: qsTr("Enable Periodic Polls")
+            checked: periodicPolls
+            onClicked: {
+                periodicPollsField.checked ? periodicPolls = 5000 : periodicPolls = 0;
+            }
+        }*/
+        Text {
+            id: pollFrequencyTitle
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: galaxyKey.bottom
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            elide: Text.ElideMiddle
+            text: "Poll server every " + pollFrequencyField.value + " minutes (0 no polling)."
+            font.pointSize: 12
+        }
+        Slider {
+            id: pollFrequencyField
+            anchors.top: pollFrequencyTitle.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            value: periodicPolls / 60000
+            stepSize: 1
+            minimumValue: 0
+            maximumValue: 60
+            onValueChanged: {
+                // Set poll interval in ms (from minutes) - remember zero is no polling.
+                screen.periodicPolls = pollFrequencyField.value * 60000;
+            }
+        }
+
+        // Config settings for fields.
+        Text {
+            id: fieldConfigTitle
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: pollFrequencyField.bottom
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            elide: Text.ElideMiddle
+            text: "Job Fields"
+            font.pointSize: 15
+            font.bold: true
+        }
+        CheckBox {
+            id: advanced_fields
+            anchors.top: fieldConfigTitle.bottom
+            anchors.left: parent.left
+            anchors.leftMargin: Screen.pixelDensity
+            anchors.rightMargin: Screen.pixelDensity
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            width: settings.width - Screen.pixelDensity
+            height: Screen.pixelDensity * 9
+            text: qsTr("Enable Advanced Fields")
+            checked: screen.advancedFields
+            onClicked: {
+                screen.advancedFields = !screen.advancedFields;
+            }
+        }
+        ComboBox {
+            id: firstField
+            anchors.top: advanced_fields.bottom
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: Screen.pixelDensity * 9
+            currentIndex: getCurrentSelection(0)
+            model: availableFields.split(",")
+            onCurrentIndexChanged: {
+                setFields();
+            }
+        }
+        ComboBox {
+            id: secondField
+            anchors.top: firstField.bottom
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: Screen.pixelDensity * 9
+            currentIndex: getCurrentSelection(1)
+            model: availableFields.split(",")
+            onCurrentIndexChanged: {
+                setFields();
+            }
+        }
+        ComboBox {
+            id: thirdField
+            anchors.top: secondField.bottom
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: Screen.pixelDensity * 9
+            currentIndex: getCurrentSelection(2)
+            model: availableFields.split(",")
+            onCurrentIndexChanged: {
+                setFields();
+            }
+        }
+        ComboBox {
+            id: fourthField
+            anchors.top: thirdField.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            height: Screen.pixelDensity * 9
+            currentIndex: getCurrentSelection(3)
+            model: availableFields.split(",")
+            onCurrentIndexChanged: {
+                setFields();
+            }
+        }
+        ComboBox {
+            id: fifthField
+            anchors.top: fourthField.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            height: Screen.pixelDensity * 9
+            currentIndex: getCurrentSelection(4)
+            model: availableFields.split(",")
+            onCurrentIndexChanged: {
+                setFields();
+            }
+        }
+
+        // Passcode.
+        CheckBox {
+            id: passcodeEnabledField
+            anchors.top: fifthField.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             text: qsTr("Enable Passcode")
             checked: passcodeEnabled
             onClicked: {
@@ -180,7 +325,8 @@ Rectangle {
             visible: passcodeEnabledField.checked ? true : false
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: passcodeEnabledField.bottom
-            anchors.topMargin: 5
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             elide: Text.ElideMiddle
             text: "Passcode"
             font.pointSize: 15
@@ -192,127 +338,13 @@ Rectangle {
             anchors.top: passcodeTitle.bottom
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: 8
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             text: passcode
             echo: TextInput.PasswordEchoOnEdit
             onEditDone: {
                 passcode = passcodeField.text;
             }
         }
-        // Config settings for fields.
-        Text {
-            id: fieldConfigTitle
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: passcodeField.bottom
-            anchors.topMargin: 5
-            elide: Text.ElideMiddle
-            text: "Job Fields"
-            font.pointSize: 15
-            font.bold: true
-        }
-        CheckBox {
-            id: advanced_fields
-            anchors.top: fieldConfigTitle.bottom
-            anchors.left: parent.left
-            anchors.margins: 10
-            height: Screen.pixelDensity * 9
-            text: qsTr("Enable Advanced Fields")
-            checked: screen.advancedFields
-            onClicked: {
-                screen.advancedFields = !screen.advancedFields;
-
-                /*if (screen.advancedFields) {
-                    // Hide advanced field config.
-                    container.visible = true;
-                } else {
-                    // Show advanced field config.
-                    container.visible = false;
-                }*/
-
-            }
-        }
-        ComboBox {
-            id: firstField
-            anchors.top: advanced_fields.bottom
-            anchors.topMargin: 5
-            width: settings.width
-            height: Screen.pixelDensity * 9
-            currentIndex: getCurrentSelection(0)
-            model: availableFields.split(",")
-            onCurrentIndexChanged: {
-                setFields();
-            }
-        }
-        ComboBox {
-            id: secondField
-            anchors.top: firstField.bottom
-            anchors.topMargin: 5
-            width: settings.width
-            height: Screen.pixelDensity * 9
-            currentIndex: getCurrentSelection(1)
-            model: availableFields.split(",")
-            onCurrentIndexChanged: {
-                setFields();
-            }
-        }
-        ComboBox {
-            id: thirdField
-            anchors.top: secondField.bottom
-            anchors.topMargin: 5
-            width: settings.width
-            height: Screen.pixelDensity * 9
-            currentIndex: getCurrentSelection(2)
-            model: availableFields.split(",")
-            onCurrentIndexChanged: {
-                setFields();
-            }
-        }
-        ComboBox {
-            id: fourthField
-            anchors.top: thirdField.bottom
-            anchors.topMargin: 5
-            width: settings.width
-            height: Screen.pixelDensity * 9
-            currentIndex: getCurrentSelection(3)
-            model: availableFields.split(",")
-            onCurrentIndexChanged: {
-                setFields();
-            }
-        }
-        ComboBox {
-            id: fifthField
-            anchors.top: fourthField.bottom
-            anchors.topMargin: 5
-            width: settings.width
-            height: Screen.pixelDensity * 9
-            currentIndex: getCurrentSelection(4)
-            model: availableFields.split(",")
-            onCurrentIndexChanged: {
-                setFields();
-            }
-        }
     }
-
-    /*Rectangle {
-        id: container
-        visible: screen.advancedFields
-        anchors.top: advanced_fields.bottom
-        anchors.topMargin: 5
-        width: settings.width
-        height: Screen.pixelDensity * 9
-
-        // TODO: these rectangles should be a file so they can be re-used
-        DraggableCheckbox {
-            id: update_time
-            fieldName: qsTr("Update Time")
-            fieldID: "update_time"
-            onDropItem: handleOverlap(update_time)
-        }
-        DraggableCheckbox {
-            id: misc_blurb
-            fieldName: qsTr("Misc Blurb")
-            fieldID: "misc_blurb"
-            onDropItem: handleOverlap(misc_blurb);
-        }
-    }*/
 }

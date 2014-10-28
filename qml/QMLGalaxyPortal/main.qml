@@ -24,6 +24,9 @@ Rectangle {
     property string passcode: ""
     property bool passcodeEnabled: false
 
+    // Frequency of periodic polls (zero means no polling).
+    property int periodicPolls: 0
+
     // Save settings.
     Settings {
         // Galaxy API settings.
@@ -42,6 +45,9 @@ Rectangle {
         property alias currentHistory : screen.currentHistory
         property alias currentHistoryID : screen.currentHistoryID
         property alias currentJobID : screen.currentJobID
+
+        // Polling frequency.
+        property alias periodicPolls : screen.periodicPolls
     }
 
     // loader to spawn pages on top of list (e.g. for settings)
@@ -66,21 +72,21 @@ Rectangle {
         id: jsonHistoriesModel
         source: dataSource + "/api/histories?key=" + dataKey
         clearOnEmptyData: false
-        pollInterval: 5000
+        pollInterval: screen.periodicPolls
     }
 
     // Model for the list of jobs in a selected history (source set when history selected).
     JSONListModel {
         id: jsonHistoryJobsModel
         clearOnEmptyData: false
-        pollInterval: 5000
+        pollInterval: screen.periodicPolls
         source: screen.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + screen.currentHistoryID + "/contents?key=" + dataKey : "";
     }
 
     JSONDataset {
         id: jsonHistoryJobContent
         source: screen.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey : "";
-        pollInterval: 5000
+        pollInterval: screen.periodicPolls
     }
 
     PasscodeChallenge {
