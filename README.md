@@ -19,3 +19,5 @@ Developed at the Biomedicial Informatics research group at the Department of Inf
 
 ![](http://i955.photobucket.com/albums/ae34/Bornich/Screenshot_2014-10-28-13-23-41_zps07f0c2c8.png)
 
+![](http://i955.photobucket.com/albums/ae34/Bornich/Screenshot_2014-10-28-14-18-52_zps418f1dcd.png)
+
