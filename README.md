@@ -11,7 +11,7 @@ Use the magnifier glass to zoom in and retrieve additional details and take a pe
 
 # Development
 
-Developed at the Biomedicial Informatics research group at the Department of Informatics, University of Oslo. The app was developed in Qt using the QML language and JavaScript for cross-platform deployment the app is completely free and open source. It can be found on Github as QMLGalaxyPortal.
+Developed at the Biomedicial Informatics research group at the Department of Informatics, University of Oslo. The app was developed in Qt using the QML language and JavaScript for cross-platform deployment the app is completely free and open source.
 
 # Screenshots (on Android phone)
 
