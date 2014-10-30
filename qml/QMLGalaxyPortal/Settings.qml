@@ -163,7 +163,6 @@ Rectangle {
             anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
             anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             text: dataKey
-            echo: TextInput.PasswordEchoOnEdit
             onEditDone: {
                 dataKey = galaxyKey.text;
             }
