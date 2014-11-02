@@ -80,7 +80,6 @@ Rectangle {
         id: detailsActionBar
         width: screen.width
         height: Screen.pixelDensity * 9
-        settingsButton.visible: false
         backButton.visible: true
         backState: screen.state
     }

@@ -14,10 +14,14 @@ Rectangle {
         id: detailZoomActionBar
         width: parent.width
         height: Screen.pixelDensity * 9
-        settingsButton.visible: false
         backButton.visible: true
+        copyButton.visible: true
         backState: screen.state
         backSource: "Details.qml";
+        onCopy: {
+            textDataRaw.selectAll();
+            textDataRaw.copy();
+        }
     }
     Flickable {
         anchors.top: detailZoomActionBar.bottom
@@ -45,6 +49,16 @@ Rectangle {
             text: ""
             font.pointSize: 12
             textFormat: Text.RichText
+        }
+        // Hidden copy of field for copying (Text fields don't have access to clipboard copy/cut/paste)
+        EditBox {
+            id: textDataRaw
+            visible: false
+            anchors.left: parent.left
+            anchors.top: textData.bottom
+            anchors.margins: 10
+            readOnly: true
+            text: textData.text
         }
     }
 }

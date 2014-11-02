@@ -95,9 +95,21 @@ Rectangle {
         id: settingsActionBar
         width: settings.width
         height: Screen.pixelDensity * 9
-        settingsButton.visible: false
         backButton.visible: true
+        // Paste button is visible if an editbox has focus.
+        pasteButton.visible: galaxyUrl.hasActiveFocus || galaxyKey.hasActiveFocus || passcodeField.hasActiveFocus
         backState: screen.state
+        onPaste: {
+            if (galaxyUrl.hasActiveFocus) {
+                galaxyUrl.paste();
+            }
+            else if (galaxyKey.hasActiveFocus) {
+                galaxyKey.paste();
+            }
+            else if (passcodeField.hasActiveFocus) {
+                passcodeField.paste();
+            }
+        }
     }
     // Text input for Galaxy URL for API access.
     Flickable {
@@ -127,6 +139,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
             anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            inputMethodHints: Qt.ImhUrlCharactersOnly
             text: dataSource
             onEditDone: {
                 // edit field lost focus, or return/enter was pressed so update current app URL
@@ -167,19 +180,6 @@ Rectangle {
                 dataKey = galaxyKey.text;
             }
         }
-
-        /*CheckBox {
-            id: periodicPollsField
-            anchors.top: galaxyKey.bottom
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: 8
-            text: qsTr("Enable Periodic Polls")
-            checked: periodicPolls
-            onClicked: {
-                periodicPollsField.checked ? periodicPolls = 5000 : periodicPolls = 0;
-            }
-        }*/
         Text {
             id: pollFrequencyTitle
             anchors.horizontalCenter: parent.horizontalCenter
