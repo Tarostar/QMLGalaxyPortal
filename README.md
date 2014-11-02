@@ -13,6 +13,10 @@ Use the magnifier glass to zoom in and retrieve additional details and take a pe
 
 Developed at the Biomedicial Informatics research group at the Department of Informatics, University of Oslo. The app was developed in Qt using the QML language and JavaScript for cross-platform deployment the app is completely free and open source.
 
+# Documentation
+
+See the user manual PDF in this repository: GalaxyPortalUserGuide.pdf
+
 # Screenshots (on Android phone)
 
 ![](http://i955.photobucket.com/albums/ae34/Bornich/Screenshot_2014-10-28-13-23-28_zpsbca8ea27.png)
