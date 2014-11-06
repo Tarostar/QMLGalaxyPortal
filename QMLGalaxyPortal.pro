@@ -26,3 +26,8 @@ OTHER_FILES += \
 
 RESOURCES += \
     resources.qrc
+
+macx:CONFIG += x86_64 # 64 bit intel
+#macx:CONFIG += ppc      # 32 bit PPC
+#macx:CONFIG += ppc64   # 64 bit PPC
+#macx:CONFIG += x86
