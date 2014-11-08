@@ -71,7 +71,7 @@ Rectangle {
     JSONListModel {
         id: jsonHistoriesModel
         source: dataSource + "/api/histories?key=" + dataKey
-        clearOnEmptyData: false
+        clearOnEmptyData: true
         pollInterval: screen.periodicPolls
     }
 
@@ -98,6 +98,7 @@ Rectangle {
         }
     }
 
+    // Empty list view.
     Rectangle {
         visible: (jsonHistoriesModel.count === 0 && screen.state === "")
         anchors.fill: parent
@@ -122,8 +123,18 @@ Rectangle {
             font.pointSize: 11
         }
         Text {
-            id: instructions
+            id: httpStatus
             anchors.top: url.bottom
+            anchors.margins: 10
+            horizontalAlignment: Text.AlignHCenter
+            width: parent.width
+            wrapMode: Text.WordWrap
+            text: "Connection Status: " + jsonHistoriesModel.json
+            font.pointSize: 11
+        }
+        Text {
+            id: instructions
+            anchors.top: httpStatus.bottom
             anchors.margins: 10
             horizontalAlignment: Text.AlignHCenter
             width: parent.width

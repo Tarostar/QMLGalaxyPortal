@@ -37,13 +37,13 @@ Item {
 
         // Kick timer if enabled.
         if (pollInterval > 0)
-            timer.start();
+            pollTimer.start();
 
     }
 
     // Timer triggers periodic poll to retrieve any changes server side.
     Timer {
-        id: timer
+        id: pollTimer
         interval: pollInterval
         repeat: true
         onTriggered: { poll(); }
@@ -53,11 +53,37 @@ Item {
     function poll() {
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
+        xhr.setRequestHeader("Content-type", "application/json");
+        // Potentially expand to support other languages than english.
+        xhr.setRequestHeader('Accept-Language', 'en');
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE)
-                json = xhr.responseText;
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                httpTimeout.running = false;
+                if (xhr.status === 200) {
+                    json = xhr.responseText;
+                }
+                else
+                {
+                    jsonModel.clear();
+                    json = xhr.statusText;
+                }
+            }
         }
+
+        httpTimeout.running = true;
         xhr.send();
+    }
+
+    // Timeout handling since Qt XMLHttpRequest does not support "timeout".
+    Timer {
+        id: httpTimeout
+        interval: 10000 // 10 seconds interval, should eventually be user configurable.
+        repeat: false
+        running: false
+        onTriggered: {
+            jsonModel.clear();
+            json = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
+        }
     }
 
     // JSON data has changed - update model.

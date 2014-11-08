@@ -50,11 +50,33 @@ Item {
 
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.setRequestHeader('Accept-Language', 'en');
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE)
-                json = xhr.responseText;
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                httpTimeout.running = false;
+                if (xhr.status === 200) {
+                    json = xhr.responseText;
+                } else {
+                    json = "";
+                    // Report error.
+                    datasetItem.text = xhr.statusText;
+                }
+            }
         }
+        httpTimeout.running = true;
         xhr.send();
+    }
+
+    // Timeout handling since Qt XMLHttpRequest does not support "timeout".
+    Timer {
+        id: httpTimeout
+        interval: 10000 // 10 seconds interval, should eventually be user configurable.
+        repeat: false
+        running: false
+        onTriggered: {
+            datasetItem.text = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
+        }
     }
 
     // Update JSON data when source or fields changes.

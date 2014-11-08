@@ -23,7 +23,7 @@ Rectangle {
     // Timer triggers periodic poll to retrieve any changes server side.
     Timer {
         id: timer
-        interval: 5000
+        interval: screen.periodicPolls
         repeat: true
         running: true
         triggeredOnStart: true
@@ -34,11 +34,37 @@ Rectangle {
     function poll() {
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
+        xhr.setRequestHeader("Content-type", "application/json");
+        xhr.setRequestHeader('Accept-Language', 'en');
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE)
-                json = xhr.responseText;
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                httpTimeout.running = false;
+                if (xhr.status === 200) {
+                    json = xhr.responseText;
+                } else {
+                    // TODO: report error.
+                    detailListModel.clear();
+                    detailListModel.append({"fieldName": "Error" , "fieldData": xhr.statusText});
+                    json = "";
+                }
+            }
         }
+
+        httpTimeout.running = true;
         xhr.send();
+    }
+
+    // Timeout handling since Qt XMLHttpRequest does not support "timeout".
+    Timer {
+        id: httpTimeout
+        interval: 10000 // 10 seconds interval, should eventually be user configurable.
+        repeat: false
+        running: false
+        onTriggered: {
+            detailListModel.clear();
+            detailListModel.append({"fieldName": "Timeout" , "fieldData": "after " + httpTimeout.interval / 1000 + " seconds."});
+            json = "";
+        }
     }
 
     // Update JSON data when source changes.

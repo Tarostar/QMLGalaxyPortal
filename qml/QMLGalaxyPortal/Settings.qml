@@ -180,6 +180,8 @@ Rectangle {
                 dataKey = galaxyKey.text;
             }
         }
+
+
         Text {
             id: pollFrequencyTitle
             anchors.horizontalCenter: parent.horizontalCenter
