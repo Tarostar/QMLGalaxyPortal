@@ -25,7 +25,7 @@ Rectangle {
         height: Screen.pixelDensity * 9
         echo: TextInput.PasswordEchoOnEdit
     }
-    Button {
+    ImageButton {
         id: login
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: passcode.bottom
@@ -54,7 +54,7 @@ Rectangle {
         font.pointSize: 12
         wrapMode: Text.WordWrap
     }
-    Button {
+    ImageButton {
         id: bypass
         visible: showBypassOption
         anchors.horizontalCenter: parent.horizontalCenter

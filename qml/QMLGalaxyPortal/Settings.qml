@@ -1,7 +1,6 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
-import QtQuick.Controls.Styles 1.2
 
 Rectangle {
     id: settings
@@ -180,12 +179,88 @@ Rectangle {
                 dataKey = galaxyKey.text;
             }
         }
+        CheckBox {
+            id: enableBaseAuth
+            anchors.top: galaxyKey.bottom
+            anchors.left: parent.left
+            anchors.leftMargin: Screen.pixelDensity
+            anchors.rightMargin: Screen.pixelDensity
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            width: settings.width - Screen.pixelDensity
+            height: Screen.pixelDensity * 9
+            text: qsTr("Use username login")
+            checked: false
+        }
+        Text {
+            id: baseAuth
+            visible: enableBaseAuth.checked ? true : false
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: enableBaseAuth.bottom
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            elide: Text.ElideMiddle
+            text: "Retrieve API Key with login"
+            font.pointSize: 12
+        }
+        EditBox {
+            id: baseAuthUsername
+            visible: enableBaseAuth.checked ? true : false
+            anchors.top: baseAuth.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+        }
+        EditBox {
+            id: baseAuthPassword
+            visible: enableBaseAuth.checked ? true : false
+            anchors.top: baseAuthUsername.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            echo: TextInput.PasswordEchoOnEdit
+        }
+        ImageButton {
+            id: executeBaseAuth
+            visible: enableBaseAuth.checked ? true : false
+            anchors.left: parent.left
+            anchors.top: baseAuthPassword.bottom
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            height: image.sourceSize.height
+            width: image.sourceSize.width
+            imageSource: "qrc:/resources/resources/images/green_button_100_32.png"
+            pressedImageSource: "qrc:/resources/resources/images/green_button_100_32_pressed.png"
+            title: "Login"
+            onClicked: {
+                // Retrieve API Key.
+                var authorizationHeader = "Basic "+Qt.btoa(baseAuthUsername.text+":"+baseAuthPassword.text);
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", screen.dataSource + "/api/authenticate/baseauth");
+                xhr.setRequestHeader("Authorization", authorizationHeader);
+                xhr.setRequestHeader('Accept-Language', 'en');
+                xhr.onreadystatechange = function() {
+                  if (xhr.readyState === XMLHttpRequest.DONE) {
+                      // TODO: timeout
+                      if (xhr.status === 200) {
+                          var jsonObject = JSON.parse(xhr.responseText);
+                          dataKey = jsonObject["api_key"].toString()
 
-
+                      }
+                      else
+                      {
+                          galaxyKey.text = "Error: " + xhr.statusText;
+                      }
+                  }
+                }
+                xhr.send();
+            }
+        }
         Text {
             id: pollFrequencyTitle
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: galaxyKey.bottom
+            anchors.top: enableBaseAuth.checked ? executeBaseAuth.bottom : enableBaseAuth.bottom
             anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
             anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             elide: Text.ElideMiddle

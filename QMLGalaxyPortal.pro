@@ -22,7 +22,8 @@ OTHER_FILES += \
     android/AndroidManifest.xml \
     images/QMLGalaxyPortal80.png \
     qml/QMLGalaxyPortal/ActionBar.qml \
-    qml/QMLGalaxyPortal/JSONDataset.qml
+    qml/QMLGalaxyPortal/JSONDataset.qml \
+    qml/QMLGalaxyPortal/ImageButton.qml
 
 RESOURCES += \
     resources.qrc

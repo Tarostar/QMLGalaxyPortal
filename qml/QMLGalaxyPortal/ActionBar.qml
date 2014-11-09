@@ -38,7 +38,7 @@ Rectangle {
     }
 
     // Back button.
-    Button {
+    ImageButton {
         id: actionBack
         visible: false
         anchors.left: parent.left
@@ -62,7 +62,7 @@ Rectangle {
     }
 
     // Copy button.
-    Button {
+    ImageButton {
         id: actionCopy
         visible: false
         anchors.right: actionPaste.visible ? actionPaste.left : actionSettings.visible ? actionSettings.left : parent.right
@@ -78,7 +78,7 @@ Rectangle {
     }
 
     // Paste button.
-    Button {
+    ImageButton {
         id: actionPaste
         visible: false
         anchors.right: parent.right
@@ -94,7 +94,7 @@ Rectangle {
     }
 
     // Settings button.
-    Button {
+    ImageButton {
         id: actionSettings
         visible: false
         anchors.right: parent.right

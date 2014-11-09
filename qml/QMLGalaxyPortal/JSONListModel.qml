@@ -21,6 +21,9 @@ Item {
     // JSON data returned by poll.
     property string json: ""
 
+    // Set if XMLHttpRequest returns error or times out.
+    property string error: "-"
+
     // Poll frequencey - if zero then does not poll and only retrieves data when source changes.
     property int pollInterval: 0
 
@@ -51,6 +54,7 @@ Item {
 
     // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
     function poll() {
+
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
         xhr.setRequestHeader("Content-type", "application/json");
@@ -61,15 +65,20 @@ Item {
                 httpTimeout.running = false;
                 if (xhr.status === 200) {
                     json = xhr.responseText;
-                }
-                else
-                {
+                } else {
+                    json = "";
                     jsonModel.clear();
-                    json = xhr.statusText;
+                }
+            } else if (xhr.readyState === XMLHttpRequest.LOADING) {
+                // Need to set errors and status during load due to QTBUG-21706
+                var jsonObject = JSON.parse(xhr.responseText);
+                if (xhr.status === 200) {
+                    error = "[" + xhr.status + "]";
+                } else {
+                    error = jsonObject["err_msg"] + " [" + xhr.status + "]";
                 }
             }
         }
-
         httpTimeout.running = true;
         xhr.send();
     }
@@ -81,8 +90,9 @@ Item {
         repeat: false
         running: false
         onTriggered: {
+            json = "";
             jsonModel.clear();
-            json = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
+            error = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
         }
     }
 

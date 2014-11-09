@@ -43,9 +43,9 @@ Rectangle {
                     json = xhr.responseText;
                 } else {
                     // TODO: report error.
+                    json = "";
                     detailListModel.clear();
                     detailListModel.append({"fieldName": "Error" , "fieldData": xhr.statusText});
-                    json = "";
                 }
             }
         }
