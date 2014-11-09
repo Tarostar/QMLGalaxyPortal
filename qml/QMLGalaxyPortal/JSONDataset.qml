@@ -45,6 +45,8 @@ Item {
 
     // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
     function poll() {
+        json = "";
+
         // update field list before polling
         updateFieldArray();
 
@@ -58,7 +60,6 @@ Item {
                 if (xhr.status === 200) {
                     json = xhr.responseText;
                 } else {
-                    json = "";
                     // Report error.
                     datasetItem.text = xhr.statusText;
                 }
@@ -71,7 +72,7 @@ Item {
     // Timeout handling since Qt XMLHttpRequest does not support "timeout".
     Timer {
         id: httpTimeout
-        interval: 10000 // 10 seconds interval, should eventually be user configurable.
+        interval: 5000 // 5 seconds interval, should eventually be user configurable.
         repeat: false
         running: false
         onTriggered: {

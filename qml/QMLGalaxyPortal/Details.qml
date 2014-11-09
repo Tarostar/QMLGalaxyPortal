@@ -32,6 +32,7 @@ Rectangle {
 
     // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
     function poll() {
+        json = "";
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
         xhr.setRequestHeader("Content-type", "application/json");
@@ -43,7 +44,6 @@ Rectangle {
                     json = xhr.responseText;
                 } else {
                     // TODO: report error.
-                    json = "";
                     detailListModel.clear();
                     detailListModel.append({"fieldName": "Error" , "fieldData": xhr.statusText});
                 }
@@ -57,13 +57,12 @@ Rectangle {
     // Timeout handling since Qt XMLHttpRequest does not support "timeout".
     Timer {
         id: httpTimeout
-        interval: 10000 // 10 seconds interval, should eventually be user configurable.
+        interval: 5000 // 5 seconds interval, should eventually be user configurable.
         repeat: false
         running: false
         onTriggered: {
             detailListModel.clear();
             detailListModel.append({"fieldName": "Timeout" , "fieldData": "after " + httpTimeout.interval / 1000 + " seconds."});
-            json = "";
         }
     }
 

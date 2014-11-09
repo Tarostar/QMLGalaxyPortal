@@ -235,6 +235,7 @@ Rectangle {
             title: "Login"
             onClicked: {
                 // Retrieve API Key.
+                dataKey = "retrieving API...";
                 var authorizationHeader = "Basic "+Qt.btoa(baseAuthUsername.text+":"+baseAuthPassword.text);
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", screen.dataSource + "/api/authenticate/baseauth");
@@ -245,12 +246,12 @@ Rectangle {
                       // TODO: timeout
                       if (xhr.status === 200) {
                           var jsonObject = JSON.parse(xhr.responseText);
-                          dataKey = jsonObject["api_key"].toString()
+                          dataKey = jsonObject["api_key"].toString();
 
                       }
                       else
                       {
-                          galaxyKey.text = "Error: " + xhr.statusText;
+                          dataKey = "Error - check URL, username and password";
                       }
                   }
                 }

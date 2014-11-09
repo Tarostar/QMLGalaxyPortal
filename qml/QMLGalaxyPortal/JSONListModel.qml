@@ -22,7 +22,7 @@ Item {
     property string json: ""
 
     // Set if XMLHttpRequest returns error or times out.
-    property string error: "-"
+    property string error: "loading..."
 
     // Poll frequencey - if zero then does not poll and only retrieves data when source changes.
     property int pollInterval: 0
@@ -54,7 +54,8 @@ Item {
 
     // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
     function poll() {
-
+        json = "";
+        error = "loading...";
         var xhr = new XMLHttpRequest;
         xhr.open("GET", source);
         xhr.setRequestHeader("Content-type", "application/json");
@@ -64,17 +65,13 @@ Item {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 httpTimeout.running = false;
                 if (xhr.status === 200) {
+                    error = "";
                     json = xhr.responseText;
-                } else {
-                    json = "";
-                    jsonModel.clear();
                 }
             } else if (xhr.readyState === XMLHttpRequest.LOADING) {
                 // Need to set errors and status during load due to QTBUG-21706
-                var jsonObject = JSON.parse(xhr.responseText);
-                if (xhr.status === 200) {
-                    error = "[" + xhr.status + "]";
-                } else {
+                if (xhr.status !== 200) {
+                    var jsonObject = JSON.parse(xhr.responseText);
                     error = jsonObject["err_msg"] + " [" + xhr.status + "]";
                 }
             }
@@ -86,12 +83,10 @@ Item {
     // Timeout handling since Qt XMLHttpRequest does not support "timeout".
     Timer {
         id: httpTimeout
-        interval: 10000 // 10 seconds interval, should eventually be user configurable.
+        interval: 5000 // 5 seconds interval, should eventually be user configurable.
         repeat: false
         running: false
         onTriggered: {
-            json = "";
-            jsonModel.clear();
             error = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
         }
     }
