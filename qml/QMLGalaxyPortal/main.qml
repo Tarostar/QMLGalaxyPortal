@@ -19,8 +19,8 @@ Rectangle {
     property bool advancedFields: true;
 
     // Galaxy API key for the dataSource used to retrieve data for user.
-    property string dataSource: "http://10.0.0.80"
-    property string dataKey: "0f303101f8a957e35106c049f7ac38f9"
+    property string dataSource: "https://usegalaxy.org"
+    property string dataKey: ""
     property string passcode: ""
     property bool passcodeEnabled: false
 
@@ -52,13 +52,6 @@ Rectangle {
 
     // loader to spawn pages on top of list (e.g. for settings)
     Loader {  z: 1; id: mainLoader }
-
-/*
-    // test galaxy values
-    property string dataKey: "48878f3f037cdc0c1be3157296e2c964"
-    property string dataSource: "https://test.galaxyproject.org"
-*/
-    // https://usegalaxy.org (218afad6146272c7c771688e10fb9884)
 
     // Properties to manage different device resolutions and screen sizes (handled in utils.js).
     property var res: ["mdpi","hdpi","xhdpi", "xxhdpi"]
