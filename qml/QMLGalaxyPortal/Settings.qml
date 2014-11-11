@@ -188,33 +188,44 @@ Rectangle {
             anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
             width: settings.width - Screen.pixelDensity
             height: Screen.pixelDensity * 9
-            text: qsTr("Use username login")
+            text: qsTr("Retrieve API Key with login")
             checked: false
         }
         Text {
-            id: baseAuth
+            id: baseAuthUsernameTitle
             visible: enableBaseAuth.checked ? true : false
-            anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: enableBaseAuth.bottom
+            anchors.left: parent.left
             anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
             anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             elide: Text.ElideMiddle
-            text: "Retrieve API Key with login"
+            text: "Username"
             font.pointSize: 12
         }
         EditBox {
             id: baseAuthUsername
             visible: enableBaseAuth.checked ? true : false
-            anchors.top: baseAuth.bottom
+            anchors.top: baseAuthUsernameTitle.bottom
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
             anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         }
+        Text {
+            id: baseAuthPasswordTitle
+            visible: enableBaseAuth.checked ? true : false
+            anchors.top: baseAuthUsername.bottom
+            anchors.left: parent.left
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            elide: Text.ElideMiddle
+            text: "Password"
+            font.pointSize: 12
+        }
         EditBox {
             id: baseAuthPassword
             visible: enableBaseAuth.checked ? true : false
-            anchors.top: baseAuthUsername.bottom
+            anchors.top: baseAuthPasswordTitle.bottom
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
