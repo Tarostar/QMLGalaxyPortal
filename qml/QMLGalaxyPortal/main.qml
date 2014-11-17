@@ -92,7 +92,9 @@ Rectangle {
     }
 
     // Empty list view.
-    Welcome {}
+    Welcome {
+        visible: (!challengeDialog.visible && jsonHistoriesModel.count === 0 && screen.state === "")
+    }
 
     // Init view at startup.
     Component.onCompleted:{

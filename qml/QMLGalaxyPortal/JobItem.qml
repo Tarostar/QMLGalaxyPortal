@@ -10,9 +10,11 @@ Rectangle {
     property alias fontSize: jobItemText.font.pointSize
     property alias textHeight: jobItemText.height
 
-    // Item separator (lighter at the top, darker at the bottom).
-    Rectangle { color: "white"; width: parent.width; height: 1 }
-    Rectangle { color: "#cdcdc1"; width: parent.width; height: 1; anchors.bottom: parent.bottom }
+    Separator {
+        id: separator
+        anchors.bottom: parent.bottom
+        width: parent.width
+    }
 
     Text {
         id: jobItemText

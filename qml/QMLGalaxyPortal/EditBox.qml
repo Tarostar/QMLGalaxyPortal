@@ -29,10 +29,8 @@ Rectangle {
     height: Screen.pixelDensity * 9
     color: "white"
 
-    // Edit box separator (lighter at the top, darker at the bottom).
-    Rectangle { color: "#cdcdc1"; width: parent.width; height: 1; anchors.bottom: parent.top }
-    Rectangle { color: "white"; width: parent.width; height: 1 }
-    Rectangle { color: "#cdcdc1"; width: parent.width; height: 1; anchors.bottom: parent.bottom }
+    Rectangle { color: "#cdcdc1"; width: parent.width; height: 1; anchors.top: parent.top }
+
     TextInput {
         id: input
         color: "black"
@@ -65,5 +63,7 @@ Rectangle {
             }
         }*/
     }
+
+    Rectangle { color: "#cdcdc1"; width: parent.width; height: 1; anchors.bottom: parent.bottom }
 }
 

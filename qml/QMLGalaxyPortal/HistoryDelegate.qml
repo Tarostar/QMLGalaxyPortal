@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 import QtQuick.Window 2.2
 
 Rectangle {
@@ -10,9 +10,11 @@ Rectangle {
     //source: "../../Images/" + res[resIndex] + "/item_" + devwidth[widthIndex] + ".png"
     color: "ivory"
 
-    // Item separator (lighter at the top, darker at the bottom).
-    Rectangle { color: "white"; width: parent.width; height: 1 }
-    Rectangle { color: "#cdcdc1"; width: parent.width; height: 1; anchors.bottom: parent.bottom }
+    Separator {
+        id: separator
+        anchors.bottom: parent.bottom
+        width: parent.width
+    }
 
     // Item title.
     Text {

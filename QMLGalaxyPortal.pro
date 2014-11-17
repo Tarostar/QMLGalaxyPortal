@@ -23,7 +23,8 @@ OTHER_FILES += \
     images/QMLGalaxyPortal80.png \
     qml/QMLGalaxyPortal/ActionBar.qml \
     qml/QMLGalaxyPortal/JSONDataset.qml \
-    qml/QMLGalaxyPortal/ImageButton.qml
+    qml/QMLGalaxyPortal/ImageButton.qml \
+    qml/QMLGalaxyPortal/PollFrequencySettings.qml
 
 RESOURCES += \
     resources.qrc

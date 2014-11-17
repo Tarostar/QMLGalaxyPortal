@@ -1,7 +1,6 @@
 import QtQuick 2.3
 
 Rectangle {
-    visible: (jsonHistoriesModel.count === 0 && screen.state === "")
     anchors.fill: parent
     Text {
         id: welcome
