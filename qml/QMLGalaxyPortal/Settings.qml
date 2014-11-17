@@ -15,7 +15,7 @@ Rectangle {
         height: Screen.pixelDensity * 9
         backButton.visible: true
         // Paste button is visible if an editbox has focus.
-        pasteButton.visible: galaxyUrl.hasActiveFocus || galaxyKey.hasActiveFocus || passcodeField.hasActiveFocus
+        pasteButton.visible: galaxyUrl.hasActiveFocus || galaxyKeySettings.editFocus || galaxyKeyBaseAuth.editFocus || passcodeSettings.editFocus
         backState: screen.state
         actionBarTitle: qsTr("Galaxy Portal Settings")
         onPaste: {
@@ -95,6 +95,7 @@ Rectangle {
             color: settings.color
         }
         PasscodeSettings {
+            id: passcodeSettings
             anchors.top: fieldSettings.bottom
             anchors.left: parent.left
             anchors.right: parent.right

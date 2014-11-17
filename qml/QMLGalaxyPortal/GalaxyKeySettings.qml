@@ -7,6 +7,7 @@ Rectangle {
     height: childrenRect.height + Screen.pixelDensity * 2
 
     property alias baseAuth: enableBaseAuth.checked
+    property alias editFocus: galaxyKey.hasActiveFocus
 
     Separator {
         id: separator

@@ -6,6 +6,8 @@ Rectangle {
     // Set rect to size of all children (+ margin).
     height: childrenRect.height + Screen.pixelDensity * 2
 
+    property bool editFocus: baseAuthUsername.hasActiveFocus || baseAuthPassword.hasActiveFocus
+
     Text {
         id: baseAuthUsernameTitle
         anchors.top: parent.top

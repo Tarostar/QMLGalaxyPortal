@@ -6,6 +6,8 @@ Rectangle {
     // Set rect to size of all children (+ margin).
     height: childrenRect.height + Screen.pixelDensity * 2
 
+    property alias editFocus: passcodeField.hasActiveFocus
+
     Separator {
         id: separator
         anchors.top: parent.top
