@@ -8,7 +8,7 @@ Rectangle {
         anchors.margins: 10
         horizontalAlignment: Text.AlignHCenter
         width: parent.width
-        text: "Welcome"
+        text: qsTr("Welcome")
         font.pointSize: 12
         font.bold: true
     }
@@ -19,7 +19,7 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         width: parent.width
         wrapMode: Text.WordWrap
-        text: "Current Galaxy URL: " + dataSource
+        text: qsTr("Current Galaxy URL: ") + dataSource
         font.pointSize: 11
     }
     Text {
@@ -41,7 +41,7 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         width: parent.width
         wrapMode: Text.WordWrap
-        text: "Select the cog wheel on the right in the top action bar to configure."
+        text: qsTr("Select the cog wheel on the right in the top action bar to configure.")
         font.pointSize: 11
     }
     Text {
@@ -52,7 +52,7 @@ Rectangle {
         width: parent.width
         textFormat: Text.RichText
         wrapMode: Text.WordWrap
-        text: "Download user guide:"
+        text: qsTr("Download user guide:")
         font.pointSize: 11
     }
     Text {

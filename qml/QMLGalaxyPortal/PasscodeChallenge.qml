@@ -13,7 +13,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.margins: 10
         elide: Text.ElideMiddle
-        text: "Passcode"
+        text: qsTr("Passcode")
         font.pointSize: 12
         font.bold: true
     }
@@ -50,7 +50,7 @@ Rectangle {
         anchors.top: login.bottom
         anchors.margins: 10
         elide: Text.ElideMiddle
-        text: "You can bypass the passcode, but you will have to enter your API key and passcode again."
+        text: qsTr("You can bypass the passcode, but you will have to enter your API key and passcode again.")
         font.pointSize: 12
         wrapMode: Text.WordWrap
     }

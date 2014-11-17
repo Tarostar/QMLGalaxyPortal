@@ -17,6 +17,7 @@ Rectangle {
         // Paste button is visible if an editbox has focus.
         pasteButton.visible: galaxyUrl.hasActiveFocus || galaxyKey.hasActiveFocus || passcodeField.hasActiveFocus
         backState: screen.state
+        actionBarTitle: qsTr("Galaxy Portal Settings")
         onPaste: {
             if (galaxyUrl.hasActiveFocus) {
                 galaxyUrl.paste();

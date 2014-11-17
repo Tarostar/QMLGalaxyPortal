@@ -59,24 +59,34 @@ Rectangle {
             dataKey = "retrieving API...";
             var authorizationHeader = "Basic "+Qt.btoa(baseAuthUsername.text+":"+baseAuthPassword.text);
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", screen.dataSource + "/api/authenticate/baseauth");
+            xhr.open("GET", galaxyUrl.text + "/api/authenticate/baseauth");
             xhr.setRequestHeader("Authorization", authorizationHeader);
             xhr.setRequestHeader('Accept-Language', 'en');
             xhr.onreadystatechange = function() {
               if (xhr.readyState === XMLHttpRequest.DONE) {
-                  // TODO: timeout
+                  httpTimeout.running = false;
                   if (xhr.status === 200) {
                       var jsonObject = JSON.parse(xhr.responseText);
                       dataKey = jsonObject["api_key"].toString();
 
-                  }
-                  else
-                  {
+                  } else {
                       dataKey = "Error - check URL, username and password";
                   }
               }
             }
+            httpTimeout.running = true;
             xhr.send();
+        }
+
+        // Timeout handling since Qt XMLHttpRequest does not support "timeout".
+        Timer {
+            id: httpTimeout
+            interval: 5000 // 5 seconds interval, should eventually be user configurable.
+            repeat: false
+            running: false
+            onTriggered: {
+                dataKey = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
+            }
         }
     }
 }

@@ -42,7 +42,7 @@ Rectangle {
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
-        text: "Flipped History Fields"
+        text: qsTr("Flipped History Fields")
         font.pointSize: 15
         font.bold: true
     }
@@ -53,7 +53,7 @@ Rectangle {
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
-        text: "Fields shown for history items when flipped."
+        text: qsTr("Fields shown for history items when flipped.")
         font.pointSize: 12
     }
     CheckBox {

@@ -33,7 +33,7 @@ Rectangle {
         anchors.right: actionCopy.visible ? actionCopy.left : actionPaste.visible ? actionPaste.left : actionSettings.visible ? actionSettings.left : parent.right
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle
-        text: "Galaxy Portal"
+        text: qsTr("Galaxy Portal")
         font.pointSize: 15
     }
 
