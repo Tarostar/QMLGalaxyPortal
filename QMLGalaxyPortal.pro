@@ -3,6 +3,8 @@ folder_01.source = qml/QMLGalaxyPortal
 folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
+QT += qml quick
+
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
 
