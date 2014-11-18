@@ -86,7 +86,6 @@ Rectangle {
             anchors.top: galaxyKeySettings.baseAuth ? galaxyKeyBaseAuth.bottom : galaxyKeySettings.bottom
             color: settings.color
         }
-        // Config settings for fields.
         FieldSettings {
             id: fieldSettings
             anchors.left: parent.left
@@ -94,9 +93,17 @@ Rectangle {
             anchors.top: pollFrequencySettings.bottom
             color: settings.color
         }
+        AdvancedFieldsSettings {
+            id: advancedFields
+            visible: fieldSettings.advancedFields ? true : false
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: fieldSettings.bottom
+            color: settings.color
+        }
         PasscodeSettings {
             id: passcodeSettings
-            anchors.top: fieldSettings.bottom
+            anchors.top: fieldSettings.advancedFields ? advancedFields.bottom : fieldSettings.bottom
             anchors.left: parent.left
             anchors.right: parent.right
             color: settings.color
