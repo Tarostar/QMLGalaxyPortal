@@ -8,6 +8,10 @@ Rectangle {
 
     property alias editFocus: passcodeField.hasActiveFocus
 
+    function pasteKey(){
+        passcodeField.paste();
+    }
+
     Separator {
         id: separator
         anchors.top: parent.top

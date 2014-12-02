@@ -8,6 +8,14 @@ Rectangle {
 
     property bool editFocus: baseAuthUsername.hasActiveFocus || baseAuthPassword.hasActiveFocus
 
+    function pasteKey(){
+        if (baseAuthUsername.hasActiveFocus) {
+            baseAuthUsername.paste();
+        } else {
+            baseAuthPassword.paste();
+        }
+    }
+
     Text {
         id: baseAuthUsernameTitle
         anchors.top: parent.top

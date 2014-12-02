@@ -9,6 +9,10 @@ Rectangle {
     property alias baseAuth: enableBaseAuth.checked
     property alias editFocus: galaxyKey.hasActiveFocus
 
+    function pasteKey(){
+        galaxyKey.paste();
+    }
+
     Separator {
         id: separator
         anchors.top: parent.top

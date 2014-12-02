@@ -1,1 +1,7 @@
 *.user
+release
+debug
+*.sdf
+*.sln
+*.vcxproj
+*.vcxproj.filters

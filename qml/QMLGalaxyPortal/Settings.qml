@@ -21,12 +21,12 @@ Rectangle {
         onPaste: {
             if (galaxyUrl.hasActiveFocus) {
                 galaxyUrl.paste();
-            }
-            else if (galaxyKey.hasActiveFocus) {
-                galaxyKey.paste();
-            }
-            else if (passcodeField.hasActiveFocus) {
-                passcodeField.paste();
+            } else if (galaxyKeySettings.editFocus) {
+                galaxyKeySettings.pasteKey();
+            } else if (galaxyKeyBaseAuth.editFocus) {
+                galaxyKeyBaseAuth.pasteKey();
+            } else if (passcodeSettings.editFocus) {
+                passcodeSettings.pasteKey();
             }
         }
     }
