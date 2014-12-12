@@ -54,7 +54,7 @@ Rectangle {
                 onPressAndHold: {jobItemDetails.color = "lemonchiffon" }
                 onClicked: {
                     screen.currentJobID = model.id;
-                    mainLoader.source = "Details.qml";
+                    mainLoader.source = "DetailView.qml";
                 }
             }
         }

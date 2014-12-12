@@ -10,6 +10,7 @@ Rectangle {
 
     // Buttons - primarily so they can be shown or hidden.
     property alias settingsButton: actionSettings
+    property alias webViewButton: actionWebView
     property alias backButton: actionBack
     property alias pasteButton: actionPaste
     property alias copyButton: actionCopy
@@ -65,7 +66,7 @@ Rectangle {
     ImageButton {
         id: actionCopy
         visible: false
-        anchors.right: actionPaste.visible ? actionPaste.left : actionSettings.visible ? actionSettings.left : parent.right
+        anchors.right: actionPaste.visible ? actionPaste.left : actionWebView.left
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
         width: image.sourceSize.width
@@ -81,7 +82,7 @@ Rectangle {
     ImageButton {
         id: actionPaste
         visible: false
-        anchors.right: parent.right
+        anchors.right: actionWebView.left
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
         width: image.sourceSize.width
@@ -93,10 +94,26 @@ Rectangle {
         }
     }
 
+    // WebView button
+    ImageButton {
+        id: actionWebView
+        visible: true
+        anchors.right: actionSettings.left
+        anchors.verticalCenter: parent.verticalCenter
+        height: image.sourceSize.height
+        width: image.sourceSize.width
+        anchors.rightMargin: 10
+        imageSource: iconRoot + "ic_action_web_site.png"
+        pressedImageSource: iconRoot + "ic_action_web_site_pressed.png"
+        onClicked: {
+            mainLoader.source = "WebView.qml";
+        }
+    }
+
     // Settings button.
     ImageButton {
         id: actionSettings
-        visible: false
+        visible: true
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height

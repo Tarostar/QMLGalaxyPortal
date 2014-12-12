@@ -11,7 +11,7 @@ Rectangle {
     // Action bar
     ActionBar {
         id: settingsActionBar
-        width: settings.width
+        width: parent.width
         height: Screen.pixelDensity * 9
         backButton.visible: true
         // Paste button is visible if an editbox has focus.

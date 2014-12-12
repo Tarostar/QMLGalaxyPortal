@@ -148,7 +148,7 @@ Rectangle {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    mainLoader.source = "DetailZoom.qml";
+                    mainLoader.source = "DetailZoomView.qml";
                     mainLoader.item.color = historyItem.color;
                     mainLoader.item.title = model.fieldName;
                     mainLoader.item.itemData = model.fieldData;

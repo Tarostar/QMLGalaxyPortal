@@ -17,7 +17,7 @@ Rectangle {
         backButton.visible: true
         copyButton.visible: true
         backState: screen.state
-        backSource: "Details.qml";
+        backSource: "DetailView.qml";
         onCopy: {
             textDataRaw.selectAll();
             textDataRaw.copy();

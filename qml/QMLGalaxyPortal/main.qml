@@ -6,8 +6,8 @@ import "utils.js" as Utils
 
 Rectangle {
     id: screen
-    width: Screen.width
-    height: Screen.height
+    width: 400//Screen.width
+    height: 600//Screen.height
 
     // Title and ID of any selected history and job item.
     property string currentHistory: ""
@@ -63,7 +63,7 @@ Rectangle {
     // Model for the list of histories (main list).
     JSONListModel {
         id: jsonHistoriesModel
-        source: dataSource + "/api/histories?key=" + dataKey
+        source: dataKey.length > 0 ? dataSource.length > 0 ? dataSource + "/api/histories?key=" + dataKey : "" : ""
         clearOnEmptyData: true
         pollInterval: screen.periodicPolls
     }
@@ -110,8 +110,6 @@ Rectangle {
             id: mainActionbar
             width: screen.width
             height: Screen.pixelDensity * 9
-            // Settings button always visible.
-            settingsButton.visible: true // screen.state === "" ? true : false
             // Back button only visible when possible to navigate back.
             backButton.visible: screen.state === "" ? false : true
             actionBarTitle: screen.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"

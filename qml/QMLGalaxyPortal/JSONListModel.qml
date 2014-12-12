@@ -36,12 +36,13 @@ Item {
 
     // Poll for data when source changes.
     onSourceChanged: {
-        poll()
+        if (source.length > 0) {
+            poll()
+        }
 
         // Kick timer if enabled.
         if (pollInterval > 0)
             pollTimer.start();
-
     }
 
     // Timer triggers periodic poll to retrieve any changes server side.

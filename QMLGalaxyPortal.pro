@@ -3,6 +3,11 @@ folder_01.source = qml/QMLGalaxyPortal
 folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
+qtHaveModule(webengine) {
+        QT += webengine
+        DEFINES += QT_WEBVIEW_WEBENGINE_BACKEND
+}
+
 QT += qml quick
 
 # Additional import path used to resolve QML modules in Creator's code model
@@ -26,7 +31,9 @@ OTHER_FILES += \
     qml/QMLGalaxyPortal/ActionBar.qml \
     qml/QMLGalaxyPortal/JSONDataset.qml \
     qml/QMLGalaxyPortal/ImageButton.qml \
-    qml/QMLGalaxyPortal/PollFrequencySettings.qml
+    qml/QMLGalaxyPortal/PollFrequencySettings.qml \
+    qml/QMLGalaxyPortal/DetailView.qml \
+    qml/QMLGalaxyPortal/DetailZoomView.qml
 
 RESOURCES += \
     resources.qrc
