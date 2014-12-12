@@ -11,7 +11,7 @@ Use the magnifier glass to zoom in and retrieve additional details and take a pe
 
 # Development
 
-Developed at the Biomedicial Informatics research group at the Department of Informatics, University of Oslo. The app was developed in Qt using the QML language and JavaScript for cross-platform deployment the app is completely free and open source.
+Developed at the Biomedicial Informatics research group at the Department of Informatics, University of Oslo. The app was developed in Qt using the QML language and JavaScript for cross-platform deployment. The app is completely free and open source.
 
 # Documentation
 
@@ -25,7 +25,7 @@ Binaries in various formats will generally be available in the [Releases](https:
 
 * Windows binaries are provided as a zip file. Simply unzip and run QMLGalaxyPortal.exe
 * Linux binaries are packed as a tar.gz and can be run by executing GalaxyPortal.sh (e.g. ./GalaxyPortal.sh which sets up a temporary LD_LIBRARY_PATH to load the correct libraries and modules. If you already have Qt 5.3 or later installed you can optionally just run QMLGalaxyPortal directly which will then link to the installed libraries and modules.
-* Android apk is included, but will also be available on Google Play (currently in testing, contact for inite).
+* Android apk is included, but will also be available on Google Play (currently in testing, contact for invite).
 * iOS app (iPhone/iPad) is currently in closed testing, and a separate closed-source version based on a commercially licensed Qt version is planned for release through the Apple App Store.
 
 A Mac and Windows Phone version is currently not planned, but may be added in future.
