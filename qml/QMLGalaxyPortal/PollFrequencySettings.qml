@@ -1,6 +1,7 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
+import QtQuick.Controls.Styles 1.3
 
 Rectangle {
     // Set rect to size of all children (+ margin).
@@ -32,7 +33,7 @@ Rectangle {
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
-        text: qsTr("Poll server every ") + pollFrequencyField.value + qsTr(" minutes (0 no polling).")
+        text: pollFrequencyField.value === 0 ? qsTr("No update polling") : qsTr("Poll server every ") + pollFrequencyField.value + qsTr(" minutes.")
         font.pointSize: 12
     }
     Slider {
@@ -46,6 +47,24 @@ Rectangle {
         stepSize: 1
         minimumValue: 0
         maximumValue: 60
+        style: SliderStyle {
+            groove: Rectangle {
+                implicitHeight: 4
+                color: "white"
+                border.color: "gray"
+                border.width: 1
+                radius: 2
+            }
+            handle: Rectangle {
+                anchors.centerIn: parent
+                color: control.pressed ? "lightgray" : "white"
+                border.color: "gray"
+                border.width: 1
+                implicitWidth: 18
+                implicitHeight: 18
+                radius: 12
+            }
+        }
         onValueChanged: {
             // Set poll interval in ms (from minutes) - remember zero is no polling.
             screen.periodicPolls = pollFrequencyField.value * 60000;
