@@ -1,8 +1,9 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.1
-import QtWebView 1.0
+//import QtWebView 1.0
 import QtQuick.Layouts 1.1
+import QtWebEngine 1.0
 
 Rectangle {
     width: screen.width
@@ -30,7 +31,7 @@ Rectangle {
         interactive: true
         boundsBehavior: Flickable.StopAtBounds*/
 
-        WebView {
+        /*WebView {
         //Rectangle {
             anchors.top: webViewActionBar.bottom
             anchors.left: parent.left
@@ -38,6 +39,12 @@ Rectangle {
             height: parent.height
             //color: "green"
             url: screen.dataSource
+        }*/
+
+        WebEngineView {
+            id: webview
+            url: "http://www.qt-project.org"
+            anchors.fill: parent
         }
     /*}
 

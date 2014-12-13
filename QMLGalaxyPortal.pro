@@ -33,7 +33,8 @@ OTHER_FILES += \
     qml/QMLGalaxyPortal/ImageButton.qml \
     qml/QMLGalaxyPortal/PollFrequencySettings.qml \
     qml/QMLGalaxyPortal/DetailView.qml \
-    qml/QMLGalaxyPortal/DetailZoomView.qml
+    qml/QMLGalaxyPortal/DetailZoomView.qml \
+    qml/QMLGalaxyPortal/InstanceListSettings.qml
 
 RESOURCES += \
     resources.qrc

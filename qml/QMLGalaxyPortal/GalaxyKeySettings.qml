@@ -6,7 +6,6 @@ Rectangle {
     // Set rect to size of all children (+ margin).
     height: childrenRect.height + Screen.pixelDensity * 2
 
-    property alias baseAuth: enableBaseAuth.checked
     property alias editFocus: galaxyKey.hasActiveFocus
 
     function pasteKey(){
@@ -53,14 +52,5 @@ Rectangle {
         onEditDone: {
             dataKey = galaxyKey.text;
         }
-    }
-    CheckBox {
-        id: enableBaseAuth
-        anchors.top: galaxyKey.bottom
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
-        height: Screen.pixelDensity * 9
-        text: qsTr("Retrieve API Key with login")
-        checked: false
     }
 }

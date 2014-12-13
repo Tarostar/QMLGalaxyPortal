@@ -6,8 +6,8 @@ import "utils.js" as Utils
 
 Rectangle {
     id: screen
-    width: 400//Screen.width
-    height: 600//Screen.height
+    width: Screen.width
+    height: Screen.height
 
     // Title and ID of any selected history and job item.
     property string currentHistory: ""
@@ -17,6 +17,10 @@ Rectangle {
     // String of fields displayed on the flipped job items to store between sessions
     property string fieldList: "update_time,data_type,misc_blurb"
     property bool advancedFields: true;
+
+    // Instance list to store between sessions
+    property string instanceList: ""
+    property string instanceListKeys: ""
 
     // Galaxy API key for the dataSource used to retrieve data for user.
     property string dataSource: "https://usegalaxy.org"
@@ -48,6 +52,10 @@ Rectangle {
 
         // Polling frequency.
         property alias periodicPolls : screen.periodicPolls
+
+        // Instance List
+        property alias instanceList : screen.instanceList
+        property alias instanceListKeys : screen.instanceListKeys
     }
 
     // loader to spawn pages on top of list (e.g. for settings)

@@ -20,9 +20,11 @@ Rectangle {
         id: jobItemText
         anchors.left: parent.left
         anchors.right: jobItemDetails.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
         anchors.leftMargin: 20
         anchors.rightMargin: 5
-        anchors.verticalCenter: parent.verticalCenter
+        verticalAlignment: contentHeight > parent.height ? Text.AlignTop : Text.AlignVCenter
         elide: Text.ElideMiddle
         text: model.name
         font.pointSize: 14

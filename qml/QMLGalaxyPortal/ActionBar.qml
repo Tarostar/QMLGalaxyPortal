@@ -66,7 +66,7 @@ Rectangle {
     ImageButton {
         id: actionCopy
         visible: false
-        anchors.right: actionPaste.visible ? actionPaste.left : actionWebView.left
+        anchors.right: actionPaste.visible ? actionPaste.left : actionSettings.left
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
         width: image.sourceSize.width
@@ -82,7 +82,7 @@ Rectangle {
     ImageButton {
         id: actionPaste
         visible: false
-        anchors.right: actionWebView.left
+        anchors.right: actionSettings.left
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
         width: image.sourceSize.width
@@ -95,9 +95,10 @@ Rectangle {
     }
 
     // WebView button
+    // TODO: enable when Qt WebView works better with scrollable and Qt WebEngine is better supported for cross platform.
     ImageButton {
         id: actionWebView
-        visible: true
+        visible: false
         anchors.right: actionSettings.left
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height

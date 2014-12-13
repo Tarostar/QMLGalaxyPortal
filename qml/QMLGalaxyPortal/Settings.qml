@@ -71,19 +71,35 @@ Rectangle {
             anchors.top: galaxyUrl.bottom
             color: settings.color
         }
+        CheckBox {
+            id: enableBaseAuth
+            anchors.top: galaxyKeySettings.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: Screen.pixelDensity * 9
+            text: qsTr("Retrieve API Key with login")
+            checked: false
+        }
         GalaxyKeyBaseAuth {
             id: galaxyKeyBaseAuth
-            visible: galaxyKeySettings.baseAuth ? true : false
+            visible: enableBaseAuth.checked ? true : false
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: galaxyKeySettings.bottom
+            anchors.top: enableBaseAuth.bottom
+            color: settings.color
+        }
+        InstanceListSettings {
+            id: instanceList
+            visible: !enableBaseAuth.checked
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: enableBaseAuth.checked ? galaxyKeyBaseAuth.bottom : enableBaseAuth.bottom
             color: settings.color
         }
         PollFrequencySettings {
             id: pollFrequencySettings
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: galaxyKeySettings.baseAuth ? galaxyKeyBaseAuth.bottom : galaxyKeySettings.bottom
+            anchors.top: instanceList.bottom
             color: settings.color
         }
         FieldSettings {

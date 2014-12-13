@@ -77,5 +77,13 @@
         <file>resources/icons/xhdpi/ic_action_web_site_pressed.png</file>
         <file>resources/icons/xxhdpi/ic_action_web_site.png</file>
         <file>resources/icons/xxhdpi/ic_action_web_site_pressed.png</file>
+        <file>resources/icons/mdpi/ic_action_discard.png</file>
+        <file>resources/icons/mdpi/ic_action_discard_pressed.png</file>
+        <file>resources/icons/hdpi/ic_action_discard.png</file>
+        <file>resources/icons/hdpi/ic_action_discard_pressed.png</file>
+        <file>resources/icons/xhdpi/ic_action_discard.png</file>
+        <file>resources/icons/xhdpi/ic_action_discard_pressed.png</file>
+        <file>resources/icons/xxhdpi/ic_action_discard.png</file>
+        <file>resources/icons/xxhdpi/ic_action_discard_pressed.png</file>
     </qresource>
 </RCC>

@@ -20,7 +20,6 @@ Rectangle {
         id: baseAuthUsernameTitle
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("Username")
@@ -78,7 +77,7 @@ Rectangle {
                   if (xhr.status === 200) {
                       var jsonObject = JSON.parse(xhr.responseText);
                       dataKey = jsonObject["api_key"].toString();
-
+                      enableBaseAuth.checked = false;
                   } else {
                       dataKey = "Error - check URL, username and password";
                   }
