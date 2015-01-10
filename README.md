@@ -3,11 +3,17 @@ QMLGalaxyPortal
 
 A quick and easy way to check the status of biomedical research on Galaxy and review your history.
 
+![](http://i955.photobucket.com/albums/ae34/Bornich/FeatureGraphic_zpsff509d03.png)
+
 # Features
 
 Browse your histories in a friendly format for small screen touch devices. Quickly see if a job is still running, has errors, is completed or a number of other possible statuses from colour coding, or by clicking on an item to flip it over and view status and other content data (data retrieved can be customised in the app settings).
 
 Use the magnifier glass to zoom in and retrieve additional details and take a peek at the results, and zoom in even further to take a closer look at any data field.
+
+## Colour Coding Chart
+
+![](http://i955.photobucket.com/albums/ae34/Bornich/StatesColourCoding_zps01d0782c.png)
 
 # Development
 
@@ -30,6 +36,24 @@ Binaries in various formats will generally be available in the [Releases](https:
 
 A Mac and Windows Phone version is currently not planned, but may be added in future.
 
+# Screenshots (on Android phone)
+
+![](http://i955.photobucket.com/albums/ae34/Bornich/Screenshot_2014-10-28-13-23-28_zpsbca8ea27.png)
+
+![](http://i955.photobucket.com/albums/ae34/Bornich/Screenshot_2014-10-28-13-23-41_zps07f0c2c8.png)
+
+## Colour Coded Status
+
+![](http://i955.photobucket.com/albums/ae34/Bornich/HistoryItems_JobQueued_short_zps4f99b0b5.png)
+
+## Peek at your data
+
+![](http://i955.photobucket.com/albums/ae34/Bornich/peek_zps21288ea7.png)
+
+## Keep login details for multiple Galaxy instances
+
+![](http://i955.photobucket.com/albums/ae34/Bornich/Screenshot_2015-01-10-11-15-02_zpse28af239.png)
+
 # Build Instructions
 
 ## Windows
@@ -47,12 +71,4 @@ An Android apk can be compiled on any platform where the Android SDK is supporte
 ## OSX (Mac) and iOS (iPhone/iPad)
 
 As the iOS version is a separate non-GPL version and there is no release for Mac, full instructions are not included here. However, in either case Qt will need to be installed on a Mac together with XCode. Instructions are freely available online from the Qt website on how to use qmake to create a project that can be opened in XCode.
-
-# Screenshots (on Android phone)
-
-![](http://i955.photobucket.com/albums/ae34/Bornich/Screenshot_2014-10-28-13-23-28_zpsbca8ea27.png)
-
-![](http://i955.photobucket.com/albums/ae34/Bornich/Screenshot_2014-10-28-13-23-41_zps07f0c2c8.png)
-
-![](http://i955.photobucket.com/albums/ae34/Bornich/Screenshot_2014-10-28-14-18-52_zps418f1dcd.png)
 
