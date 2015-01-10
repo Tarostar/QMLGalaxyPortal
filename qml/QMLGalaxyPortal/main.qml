@@ -25,6 +25,7 @@ Rectangle {
     // Galaxy API key for the dataSource used to retrieve data for user.
     property string dataSource: "https://usegalaxy.org"
     property string dataKey: ""
+    property string username: ""
     property string passcode: ""
     property bool passcodeEnabled: false
 
@@ -36,6 +37,7 @@ Rectangle {
         // Galaxy API settings.
         property alias dataKey: screen.dataKey
         property alias dataSource: screen.dataSource
+        property alias username: screen.username
 
         // Passcode settings.
         property alias passcode: screen.passcode

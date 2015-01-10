@@ -3,10 +3,10 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 
 Rectangle {
-    // Set rect to size of all children (+ margin).
-    height: childrenRect.height + Screen.pixelDensity * 2
+    // Set rect to size of all children (+ margin) - minus API Key field if not shown.
+    height: showAPIKey.checked ? childrenRect.height + Screen.pixelDensity * 2 : childrenRect.height + Screen.pixelDensity * 2 - galaxyAPIKey.height
 
-    property alias editFocus: galaxyKey.hasActiveFocus
+    property alias editFocus: galaxyAPIKey.hasActiveFocus
 
     function pasteKey(){
         galaxyKey.paste();
@@ -21,36 +21,43 @@ Rectangle {
     }
 
     Text {
-        id: galaxyKeyTitle
+        id: galaxyLogin
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: separator.bottom
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
-        text: qsTr("API Key")
+        text: qsTr("Login")
         font.pointSize: 15
         font.bold: true
     }
-    Text {
-        id: galaxyKeyTitleDescription
+    GalaxyKeyBaseAuth {
+        id: galaxyKeyBaseAuth
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: galaxyLogin.bottom
+        color: settings.color
+    }
+    CheckBox {
+        id: showAPIKey
+        anchors.top: galaxyKeyBaseAuth.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: galaxyKeyTitle.bottom
-        anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
-        anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
-        elide: Text.ElideMiddle
-        text: qsTr("(Generate 'API Keys' in the Galaxy User menu)")
-        font.pointSize: 12
+        height: Screen.pixelDensity * 9
+        text: qsTr("Show API Key")
+        checked: false
     }
     EditBox {
-        id: galaxyKey
-        anchors.top: galaxyKeyTitleDescription.bottom
+        id: galaxyAPIKey
+        visible: showAPIKey.checked ? true : false
+        anchors.top: showAPIKey.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         text: dataKey
         onEditDone: {
-            dataKey = galaxyKey.text;
+            // Edit field lost focus, or return/enter was pressed so update current app URL.
+            dataKey = galaxyAPIKey.text;
         }
     }
 }

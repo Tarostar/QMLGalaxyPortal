@@ -2,11 +2,12 @@ import QtQuick 2.3
 import QtQuick.Window 2.2
 
 Rectangle {
-    // Set rect to size of all children (+ margin).
-    height: childrenRect.height + Screen.pixelDensity * 2
+    // Set rect to size of all children (+ margin) - or zero if buttons not shown.
+    height: screen.instanceList.length > 0 || (screen.dataKey.length > 0 && screen.dataSource.length > 0) ? childrenRect.height + Screen.pixelDensity * 2 : 0
 
     ImageButton {
         id: save
+        visible: screen.dataKey.length > 0 && screen.dataSource.length > 0
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.margins: 5

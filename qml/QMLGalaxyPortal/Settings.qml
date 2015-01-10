@@ -60,46 +60,30 @@ Rectangle {
             inputMethodHints: Qt.ImhUrlCharactersOnly
             text: dataSource
             onEditDone: {
-                // edit field lost focus, or return/enter was pressed so update current app URL
+                // Edit field lost focus, or return/enter was pressed so update current app URL.
                 dataSource = galaxyUrl.text;
             }
         }
-        GalaxyKeySettings {
-            id: galaxyKeySettings
+        InstanceListSettings {
+            id: instanceList
+            visible: true
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: galaxyUrl.bottom
             color: settings.color
         }
-        CheckBox {
-            id: enableBaseAuth
-            anchors.top: galaxyKeySettings.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: Screen.pixelDensity * 9
-            text: qsTr("Retrieve API Key with login")
-            checked: false
-        }
-        GalaxyKeyBaseAuth {
-            id: galaxyKeyBaseAuth
-            visible: enableBaseAuth.checked ? true : false
+        GalaxyKeySettings {
+            id: galaxyKeySettings
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: enableBaseAuth.bottom
-            color: settings.color
-        }
-        InstanceListSettings {
-            id: instanceList
-            visible: !enableBaseAuth.checked
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.top: enableBaseAuth.checked ? galaxyKeyBaseAuth.bottom : enableBaseAuth.bottom
+            anchors.top: instanceList.bottom
             color: settings.color
         }
         PollFrequencySettings {
             id: pollFrequencySettings
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: instanceList.bottom
+            anchors.top: galaxyKeySettings.bottom
             color: settings.color
         }
         FieldSettings {
@@ -122,6 +106,16 @@ Rectangle {
             anchors.top: fieldSettings.advancedFields ? advancedFields.bottom : fieldSettings.bottom
             anchors.left: parent.left
             anchors.right: parent.right
+            color: settings.color
+        }
+        // Line at bottom to "round-off" the settings menu and put some footer space for better scrolling experience.
+        Separator {
+            id: separator
+            anchors.bottom: passcodeSettings.bottom
+            anchors.topMargin: Screen.pixelDensity * 2;
+            anchors.bottomMargin: Screen.pixelDensity * 2
+            width: parent.width
+            margin: Screen.pixelDensity * 5
             color: settings.color
         }
     }

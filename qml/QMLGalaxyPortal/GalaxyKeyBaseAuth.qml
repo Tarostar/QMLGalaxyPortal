@@ -7,6 +7,7 @@ Rectangle {
     height: childrenRect.height + Screen.pixelDensity * 2
 
     property bool editFocus: baseAuthUsername.hasActiveFocus || baseAuthPassword.hasActiveFocus
+    property string statusMessages: ""
 
     function pasteKey(){
         if (baseAuthUsername.hasActiveFocus) {
@@ -32,6 +33,11 @@ Rectangle {
         anchors.right: parent.right
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+        text: username
+        onEditDone: {
+            // edit field lost focus, or return/enter was pressed so update current app URL.
+            username = baseAuthUsername.text;
+        }
     }
     Text {
         id: baseAuthPasswordTitle
@@ -50,7 +56,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
-        echo: TextInput.PasswordEchoOnEdit
+        echo: TextInput.Password
     }
     ImageButton {
         id: executeBaseAuth
@@ -65,7 +71,9 @@ Rectangle {
         title: qsTr("Login")
         onClicked: {
             // Retrieve API Key.
-            dataKey = "retrieving API...";
+            dataKey = "";
+            statusMessages = "retrieving API...";
+            galaxyLoginStatus.color = "black";
             var authorizationHeader = "Basic "+Qt.btoa(baseAuthUsername.text+":"+baseAuthPassword.text);
             var xhr = new XMLHttpRequest();
             xhr.open("GET", galaxyUrl.text + "/api/authenticate/baseauth");
@@ -77,9 +85,11 @@ Rectangle {
                   if (xhr.status === 200) {
                       var jsonObject = JSON.parse(xhr.responseText);
                       dataKey = jsonObject["api_key"].toString();
-                      enableBaseAuth.checked = false;
+                      statusMessages = "Login Success"
+                      galaxyLoginStatus.color = "green";
                   } else {
-                      dataKey = "Error - check URL, username and password";
+                      statusMessages = "Error - check URL, username and password";
+                      galaxyLoginStatus.color = "red";
                   }
               }
             }
@@ -94,8 +104,20 @@ Rectangle {
             repeat: false
             running: false
             onTriggered: {
-                dataKey = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
+                statusMessages = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
+                galaxyLoginStatus.color = "red";
             }
         }
+    }
+    Text {
+        id: galaxyLoginStatus
+        anchors.top: baseAuthPassword.bottom
+        anchors.left: executeBaseAuth.right
+        anchors.topMargin: Screen.pixelDensity * 2
+        anchors.leftMargin: Screen.pixelDensity * 2
+        anchors.rightMargin: Screen.pixelDensity
+        elide: Text.ElideMiddle
+        text: statusMessages
+        font.pointSize: 12
     }
 }

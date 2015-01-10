@@ -3,8 +3,8 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 
 Rectangle {
-    // Set rect to size of all children (+ margin).
-    height: childrenRect.height + Screen.pixelDensity * 2
+    // Set rect to size of all children (+ margin - bit more than usual as otherwise it cuts off bottom of passcode edit field).
+    height: childrenRect.height + Screen.pixelDensity * 8
 
     property alias editFocus: passcodeField.hasActiveFocus
 
@@ -61,7 +61,7 @@ Rectangle {
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         text: passcode
-        echo: TextInput.PasswordEchoOnEdit
+        echo: TextInput.Password
         onEditDone: {
             passcode = passcodeField.text;
         }
