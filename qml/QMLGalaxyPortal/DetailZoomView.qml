@@ -3,8 +3,8 @@ import QtQuick.Window 2.2
 
 Rectangle {
     id: detailZoom
-    width: screen.width
-    height: screen.height
+    width: main.width
+    height: main.height
 
     property alias actionBarTitle: detailZoomActionBar.actionBarTitle
     property alias title: textTitle.text
@@ -16,7 +16,7 @@ Rectangle {
         height: Screen.pixelDensity * 9
         backButton.visible: true
         copyButton.visible: true
-        backState: screen.state
+        backState: main.state
         backSource: "DetailView.qml";
         onCopy: {
             textDataRaw.selectAll();

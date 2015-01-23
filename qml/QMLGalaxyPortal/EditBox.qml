@@ -25,7 +25,7 @@ Rectangle {
         input.selectAll()
     }
 
-    width: screen.width
+    width: main.width
     height: Screen.pixelDensity * 9
     color: "white"
 

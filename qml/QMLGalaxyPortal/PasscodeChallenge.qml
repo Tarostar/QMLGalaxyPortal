@@ -36,7 +36,7 @@ Rectangle {
         pressedImageSource: "qrc:/resources/resources/images/green_button_100_32_pressed.png"
         title: "Login"
         onClicked: {
-            if (screen.passcode === passcode.text) {
+            if (main.passcode === passcode.text) {
                 passcodeChallenge.done();
             } else {
                 showBypassOption = true;
@@ -66,9 +66,9 @@ Rectangle {
         pressedImageSource: "qrc:/resources/resources/images/red_button_100_32_pressed.png"
         title: "Bypass"
         onClicked: {
-            screen.dataKey = "";
-            screen.passcode = "";
-            screen.username = "";
+            main.dataKey = "";
+            main.passcode = "";
+            main.username = "";
             passcodeChallenge.done();
         }
     }

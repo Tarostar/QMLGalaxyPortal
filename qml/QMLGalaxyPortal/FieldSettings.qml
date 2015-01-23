@@ -44,9 +44,9 @@ Rectangle {
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         height: Screen.pixelDensity * 9
         text: qsTr("Enable Advanced Fields")
-        checked: screen.advancedFields
+        checked: main.advancedFields
         onClicked: {
-            screen.advancedFields = !screen.advancedFields;
+            main.advancedFields = !main.advancedFields;
         }
     }
 }

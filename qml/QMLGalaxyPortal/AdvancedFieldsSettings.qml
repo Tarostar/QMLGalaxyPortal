@@ -9,7 +9,7 @@ Rectangle {
     property string availableFields : "none,update_time,accessible,api_type,data_type,deleted,file_ext,file_size,genome_build,hda_ldda,hid,history_content_type,history_id,id,metadata_chromCol,metadata_columns,metadata_data_lines,metadata_dbkey,metadata_endCol,metadata_nameCol,metadata_startCol,metadata_strandCol,misc_blurb,model_class,name,purged,uuid,visible"
 
     function getCurrentSelection(posIndex) {
-        var fieldArray = screen.fieldList.split(",");
+        var fieldArray = main.fieldList.split(",");
         return availableFields.split(",").indexOf(fieldArray[posIndex]);
     }
 
@@ -18,7 +18,7 @@ Rectangle {
                 thirdField.textAt(thirdField.currentIndex) && fourthField.textAt(fourthField.currentIndex) &&
                 fifthField.textAt(fifthField.currentIndex)) {
 
-            screen.fieldList = firstField.textAt(firstField.currentIndex) + "," +
+            main.fieldList = firstField.textAt(firstField.currentIndex) + "," +
                                 secondField.textAt(secondField.currentIndex) + "," +
                                 thirdField.textAt(thirdField.currentIndex) + "," +
                                 fourthField.textAt(fourthField.currentIndex) + "," +

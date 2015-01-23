@@ -4,14 +4,14 @@ import "utils.js" as Utils
 
 Rectangle {
     id: details
-    width: screen.width
-    height: screen.height
+    width: main.width
+    height: main.height
     color: stateColour
 
     property color stateColour: "ivory"
     property color stateColourAlt: "lemonchiffon"
 
-    property string source: dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey;
+    property string source: dataSource + "/api/histories/" + main.currentHistoryID + "/contents/datasets/" + main.currentJobID + "?key=" + dataKey;
     property string json: ""
 
     // Poll for data when source changes.
@@ -23,7 +23,7 @@ Rectangle {
     // Timer triggers periodic poll to retrieve any changes server side.
     Timer {
         id: timer
-        interval: screen.periodicPolls
+        interval: main.periodicPolls
         repeat: true
         running: true
         triggeredOnStart: true
@@ -103,17 +103,17 @@ Rectangle {
     // Action bar
     ActionBar {
         id: detailsActionBar
-        width: screen.width
+        width: main.width
         height: Screen.pixelDensity * 9
         backButton.visible: true
-        backState: screen.state
+        backState: main.state
     }
     ListView {
         id: detailList
         anchors.top: detailsActionBar.bottom
         anchors.topMargin: 5
-        width: screen.width
-        height: screen.height - detailsActionBar.height
+        width: main.width
+        height: main.height - detailsActionBar.height
         clip: true
         boundsBehavior: Flickable.StopAtBounds
         model: detailListModel

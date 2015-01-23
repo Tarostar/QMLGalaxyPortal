@@ -76,11 +76,11 @@ Rectangle {
 
         onClicked: {
             // Update instance.
-            screen.dataSource = model.url
-            screen.dataKey = model.key;
+            main.dataSource = model.url
+            main.dataKey = model.key;
 
-            // Reset screen state to show main history list.
-            screen.state = "";
+            // Reset main state to show main history list.
+            main.state = "";
 
             // Go back.
             mainLoader.source = "Settings.qml";

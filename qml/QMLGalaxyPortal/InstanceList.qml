@@ -3,8 +3,8 @@ import QtQuick.Window 2.2
 
 Rectangle {
     id: instanceListView
-    width: screen.width
-    height: screen.height
+    width: main.width
+    height: main.height
 
     ListModel { id: instanceModel }
 
@@ -12,8 +12,8 @@ Rectangle {
         instanceModel.clear();
 
         // Convert strings to arrays for easier manipulation.
-        var instanceArray = screen.instanceList.split(",");
-        var keyArray = screen.instanceListKeys.split(",");
+        var instanceArray = main.instanceList.split(",");
+        var keyArray = main.instanceListKeys.split(",");
 
         // Add all instances to the model to display as list.
         for (var index = 0; index < instanceArray.length; index++) {
@@ -23,8 +23,8 @@ Rectangle {
 
     function deleteInstance(index) {
         // Convert strings to arrays for easier manipulation.
-        var instanceArray = screen.instanceList.split(",");
-        var keyArray = screen.instanceListKeys.split(",");
+        var instanceArray = main.instanceList.split(",");
+        var keyArray = main.instanceListKeys.split(",");
 
         if (index < 0 || index > instanceArray.length) {
             return;
@@ -35,8 +35,8 @@ Rectangle {
         keyArray.splice(index, 1);
 
         // Convert back to strings (for storage).
-        screen.instanceList = instanceArray.join();
-        screen.instanceListKeys = keyArray.join();
+        main.instanceList = instanceArray.join();
+        main.instanceListKeys = keyArray.join();
 
         // Re-populate model.
         populateInstanceModel();
@@ -47,7 +47,7 @@ Rectangle {
         width: parent.width
         height: Screen.pixelDensity * 9
         backButton.visible: true
-        backState: screen.state
+        backState: main.state
         backSource: "Settings.qml";
         actionBarTitle: "Instances (" + instanceModel.count + ")"
     }

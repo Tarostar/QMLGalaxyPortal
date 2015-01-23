@@ -55,7 +55,7 @@ Rectangle {
                 onReleased: {jobItemDetails.color = "lemonchiffon" }
                 onPressAndHold: {jobItemDetails.color = "lemonchiffon" }
                 onClicked: {
-                    screen.currentJobID = model.id;
+                    main.currentJobID = model.id;
                     mainLoader.source = "DetailView.qml";
                 }
             }
@@ -76,7 +76,7 @@ Rectangle {
         onClicked: {
             if (front)
             {
-                screen.currentJobID = model.id;
+                main.currentJobID = model.id;
                 flipBar.flipUp()
                 flipBar.flipped = true
             }

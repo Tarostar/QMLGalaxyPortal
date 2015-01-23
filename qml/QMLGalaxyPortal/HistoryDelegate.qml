@@ -55,11 +55,11 @@ Rectangle {
 
         onClicked: {
             // set current history name
-            screen.currentHistory = itemtitle.text;
-            screen.currentHistoryID = model.id;
+            main.currentHistory = itemtitle.text;
+            main.currentHistoryID = model.id;
 
             // Trigger the state change to show the jobs list view.
-            screen.state = "historyItems";
+            main.state = "historyItems";
         }
     }
 }

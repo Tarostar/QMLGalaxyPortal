@@ -51,13 +51,13 @@ Rectangle {
         pressedImageSource: iconRoot + "ic_action_back_pressed.png"
         onClicked: {
             mainLoader.source = backSource;
-            screen.state = backState
-            if (screen.state === "")
+            main.state = backState
+            if (main.state === "")
             {
                 // Reset trackers when returning to main screen.
-                screen.currentHistory = "";
-                screen.currentHistoryID = "";
-                screen.currentJobID = "";
+                main.currentHistory = "";
+                main.currentHistoryID = "";
+                main.currentJobID = "";
             }
         }
     }

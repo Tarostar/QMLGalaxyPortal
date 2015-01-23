@@ -67,7 +67,7 @@ Rectangle {
         }
         onValueChanged: {
             // Set poll interval in ms (from minutes) - remember zero is no polling.
-            screen.periodicPolls = pollFrequencyField.value * 60000;
+            main.periodicPolls = pollFrequencyField.value * 60000;
         }
     }
 }

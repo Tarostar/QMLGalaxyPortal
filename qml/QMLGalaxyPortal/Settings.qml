@@ -4,8 +4,8 @@ import QtQuick.Controls 1.2
 
 Rectangle {
     id: settings
-    width: screen.width
-    height: screen.height
+    width: main.width
+    height: main.height
     color:"ivory"
 
     // Action bar
@@ -16,7 +16,7 @@ Rectangle {
         backButton.visible: true
         // Paste button is visible if an editbox has focus.
         pasteButton.visible: galaxyUrl.hasActiveFocus || galaxyKeySettings.editFocus || galaxyKeyBaseAuth.editFocus || passcodeSettings.editFocus
-        backState: screen.state
+        backState: main.state
         actionBarTitle: qsTr("Galaxy Portal Settings")
         onPaste: {
             if (galaxyUrl.hasActiveFocus) {
@@ -33,8 +33,8 @@ Rectangle {
     // Text input for Galaxy URL for API access.
     Flickable {
         anchors.top: settingsActionBar.bottom
-        width: screen.width
-        height: screen.height - settingsActionBar.height
+        width: main.width
+        height: main.height - settingsActionBar.height
         contentWidth: contentItem.childrenRect.width
         contentHeight: contentItem.childrenRect.height
         clip: true

@@ -3,11 +3,10 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.1
 //import QtWebView 1.0
 import QtQuick.Layouts 1.1
-import QtWebEngine 1.0
 
 Rectangle {
-    width: screen.width
-    height: screen.height
+    width: main.width
+    height: main.height
 
     ActionBar {
         id: webViewActionBar
@@ -15,8 +14,8 @@ Rectangle {
         height: Screen.pixelDensity * 9
         backButton.visible: true
         copyButton.visible: false
-        backState: screen.state
-        actionBarTitle: screen.dataSource
+        backState: main.state
+        actionBarTitle: main.dataSource
     }
 
         // TODO: resolve why doesn't work - i.e. draws over actionbar and is not flickable, at least WebView does not move content...
@@ -38,7 +37,7 @@ Rectangle {
             width: 1700
             height: parent.height
             //color: "green"
-            url: screen.dataSource
+            url: main.dataSource
         }*/
 
         WebEngineView {

@@ -3,11 +3,11 @@ import QtQuick.Window 2.2
 
 Rectangle {
     // Set rect to size of all children (+ margin) - or zero if buttons not shown.
-    height: screen.instanceList.length > 0 || (screen.dataKey.length > 0 && screen.dataSource.length > 0) ? childrenRect.height + Screen.pixelDensity * 2 : 0
+    height: main.instanceList.length > 0 || (main.dataKey.length > 0 && main.dataSource.length > 0) ? childrenRect.height + Screen.pixelDensity * 2 : 0
 
     ImageButton {
         id: save
-        visible: screen.dataKey.length > 0 && screen.dataSource.length > 0
+        visible: main.dataKey.length > 0 && main.dataSource.length > 0
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.margins: 5
@@ -18,15 +18,15 @@ Rectangle {
         title: "Save"
         onClicked: {
             focus = true;
-            if (screen.dataSource.length > 0 && screen.dataKey.length > 0) {
-                screen.instanceList.length > 0 ? screen.instanceList += "," + screen.dataSource : screen.instanceList = screen.dataSource;
-                screen.instanceListKeys.length > 0 ? screen.instanceListKeys += "," + screen.dataKey : screen.instanceListKeys = screen.dataKey;
+            if (main.dataSource.length > 0 && main.dataKey.length > 0) {
+                main.instanceList.length > 0 ? main.instanceList += "," + main.dataSource : main.instanceList = main.dataSource;
+                main.instanceListKeys.length > 0 ? main.instanceListKeys += "," + main.dataKey : main.instanceListKeys = main.dataKey;
             }
         }
     }
     ImageButton {
         id: load
-        visible: screen.instanceList.length > 0
+        visible: main.instanceList.length > 0
         anchors.left: save.right
         anchors.top: parent.top
         anchors.margins: 5

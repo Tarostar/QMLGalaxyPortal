@@ -106,7 +106,7 @@ Item {
     function updateFieldArray() {
         var fieldArray = [];
 
-        if (screen.fieldList.length < 1) {
+        if (main.fieldList.length < 1) {
             // Default fields initialised.
             fieldArray.push("misc_blurb");
             fieldArray.push("data_type");
@@ -118,11 +118,11 @@ Item {
             datasetItem.fields.push("file_size");*/
 
             // Set field list to contain the default list
-            screen.fieldList = fieldArray.join();
+            main.fieldList = fieldArray.join();
         }
         else {
             // Init field array from fieldList.
-            fieldArray = screen.fieldList.split(',');
+            fieldArray = main.fieldList.split(',');
         }
 
         datasetItem.fields = fieldArray;

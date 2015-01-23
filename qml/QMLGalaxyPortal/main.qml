@@ -5,7 +5,7 @@ import Qt.labs.settings 1.0
 import "utils.js" as Utils
 
 Rectangle {
-    id: screen
+    id: main
     width: Screen.width
     height: Screen.height
 
@@ -35,29 +35,29 @@ Rectangle {
     // Save settings.
     Settings {
         // Galaxy API settings.
-        property alias dataKey: screen.dataKey
-        property alias dataSource: screen.dataSource
-        property alias username: screen.username
+        property alias dataKey: main.dataKey
+        property alias dataSource: main.dataSource
+        property alias username: main.username
 
         // Passcode settings.
-        property alias passcode: screen.passcode
-        property alias passcodeEnabled : screen.passcodeEnabled
+        property alias passcode: main.passcode
+        property alias passcodeEnabled : main.passcodeEnabled
 
         // Job item flip fields.
-        property alias fieldList : screen.fieldList
-        property alias advancedFields : screen.advancedFields
+        property alias fieldList : main.fieldList
+        property alias advancedFields : main.advancedFields
 
         // Currently viewed history and job.
-        property alias currentHistory : screen.currentHistory
-        property alias currentHistoryID : screen.currentHistoryID
-        property alias currentJobID : screen.currentJobID
+        property alias currentHistory : main.currentHistory
+        property alias currentHistoryID : main.currentHistoryID
+        property alias currentJobID : main.currentJobID
 
         // Polling frequency.
-        property alias periodicPolls : screen.periodicPolls
+        property alias periodicPolls : main.periodicPolls
 
         // Instance List
-        property alias instanceList : screen.instanceList
-        property alias instanceListKeys : screen.instanceListKeys
+        property alias instanceList : main.instanceList
+        property alias instanceListKeys : main.instanceListKeys
     }
 
     // loader to spawn pages on top of list (e.g. for settings)
@@ -75,21 +75,21 @@ Rectangle {
         id: jsonHistoriesModel
         source: dataKey.length > 0 ? dataSource.length > 0 ? dataSource + "/api/histories?key=" + dataKey : "" : ""
         clearOnEmptyData: true
-        pollInterval: screen.periodicPolls
+        pollInterval: main.periodicPolls
     }
 
     // Model for the list of jobs in a selected history (source set when history selected).
     JSONListModel {
         id: jsonHistoryJobsModel
         clearOnEmptyData: false
-        pollInterval: screen.periodicPolls
-        source: screen.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + screen.currentHistoryID + "/contents?key=" + dataKey : "";
+        pollInterval: main.periodicPolls
+        source: main.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + main.currentHistoryID + "/contents?key=" + dataKey : "";
     }
 
     JSONDataset {
         id: jsonHistoryJobContent
-        source: screen.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + screen.currentHistoryID + "/contents/datasets/" + screen.currentJobID + "?key=" + dataKey : "";
-        pollInterval: screen.periodicPolls
+        source: main.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + main.currentHistoryID + "/contents/datasets/" + main.currentJobID + "?key=" + dataKey : "";
+        pollInterval: main.periodicPolls
     }
 
     PasscodeChallenge {
@@ -103,13 +103,13 @@ Rectangle {
 
     // Empty list view.
     Welcome {
-        visible: (!challengeDialog.visible && jsonHistoriesModel.count === 0 && screen.state === "")
+        visible: (!challengeDialog.visible && jsonHistoriesModel.count === 0 && main.state === "")
     }
 
     // Init view at startup.
     Component.onCompleted:{
-        if (screen.currentHistoryID.length > 0) {
-            screen.state = "historyItems";
+        if (main.currentHistoryID.length > 0) {
+            main.state = "historyItems";
         }
     }
 
@@ -118,18 +118,18 @@ Rectangle {
         anchors.fill: parent
         ActionBar {
             id: mainActionbar
-            width: screen.width
+            width: main.width
             height: Screen.pixelDensity * 9
             // Back button only visible when possible to navigate back.
-            backButton.visible: screen.state === "" ? false : true
-            actionBarTitle: screen.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
+            backButton.visible: main.state === "" ? false : true
+            actionBarTitle: main.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
         }
         Row {
             id: screenlayout
             ListView {
                 id: historyListView
-                width: screen.width
-                height: screen.height - mainActionbar.height
+                width: main.width
+                height: main.height - mainActionbar.height
                 model: jsonHistoriesModel.model
                 delegate: HistoryDelegate {}
                 clip: true
@@ -137,8 +137,8 @@ Rectangle {
             }
             ListView {
                 id: jobListItems
-                width: screen.width
-                height: screen.height - mainActionbar.height
+                width: main.width
+                height: main.height - mainActionbar.height
                 model: jsonHistoryJobsModel.model
                 delegate: JobDelegate {}
                 clip: true
@@ -160,7 +160,7 @@ Rectangle {
         name: "historyItems"
         PropertyChanges {
             target: screenlayout
-            x: -screen.width
+            x: -main.width
         }
     }
 }
