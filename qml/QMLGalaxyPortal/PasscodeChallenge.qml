@@ -68,6 +68,7 @@ Rectangle {
         onClicked: {
             screen.dataKey = "";
             screen.passcode = "";
+            screen.username = "";
             passcodeChallenge.done();
         }
     }
