@@ -85,5 +85,6 @@
         <file>resources/icons/xhdpi/ic_action_discard_pressed.png</file>
         <file>resources/icons/xxhdpi/ic_action_discard.png</file>
         <file>resources/icons/xxhdpi/ic_action_discard_pressed.png</file>
+        <file>resources/sounds/ping.mp3</file>
     </qresource>
 </RCC>

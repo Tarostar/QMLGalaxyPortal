@@ -1,4 +1,5 @@
 import QtQuick 2.3
+import QtMultimedia 5.4
 
 Rectangle {
     id: jobItem
@@ -61,7 +62,10 @@ Rectangle {
             }
         }
     }
-
+    Audio {
+        id: playMusic
+        source: "qrc:/resources/resources/sounds/ping.mp3"
+    }
     MouseArea {
         hoverEnabled: true
         anchors.left: parent.left
@@ -69,7 +73,8 @@ Rectangle {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         onEntered: {jobItem.color = itemSelectColor }
-        onPressed: {jobItem.color = itemSelectColor }
+        onPressed: {//playMusic.play()
+            jobItem.color = itemSelectColor }
         onExited: {jobItem.color = itemColor }
         onReleased: {jobItem.color = itemColor }
         onPressAndHold: {jobItem.color = itemColor }

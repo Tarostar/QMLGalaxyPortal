@@ -12,8 +12,6 @@ Item {
     // Text to display as result of JSON.
     property string text: ""
 
-    property string textMe: "test"
-
     // Array of all the fields displayed.
     property variant fields
 
@@ -27,8 +25,9 @@ Item {
     onSourceChanged: {
         // Remove JSON data from previous poll
         json = "";
+        datasetItem.text = "";
 
-        poll()
+        poll();
 
         // Kick timer if enabled.
         if (pollInterval > 0)
