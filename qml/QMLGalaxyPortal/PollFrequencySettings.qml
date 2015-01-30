@@ -43,7 +43,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
-        value: periodicPolls / 60000
+        value: main.periodicPolls / 60000
         stepSize: 1
         minimumValue: 0
         maximumValue: 60

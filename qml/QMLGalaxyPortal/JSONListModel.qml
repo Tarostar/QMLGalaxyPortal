@@ -27,22 +27,21 @@ Item {
     // Poll frequencey - if zero then does not poll and only retrieves data when source changes.
     property int pollInterval: 0
 
-    // Clear model when "json" string is empty.
-    // Setting this to false prevents list from being reset if polls occasionally return no data.
-    property bool clearOnEmptyData: true
-
     property ListModel model : ListModel { id: jsonModel }
     property alias count: jsonModel.count
+
+    onPollIntervalChanged: {
+        // Kick timer if enabled.
+        if (pollInterval > 0) {
+            pollTimer.start();
+        }
+    }
 
     // Poll for data when source changes.
     onSourceChanged: {
         if (source.length > 0) {
             poll()
         }
-
-        // Kick timer if enabled.
-        if (pollInterval > 0)
-            pollTimer.start();
     }
 
     // Timer triggers periodic poll to retrieve any changes server side.
@@ -97,6 +96,7 @@ Item {
 
     // If we have json data - update the model.
     function updateJSONModel() {
+
         if (json === "")
             return;
 

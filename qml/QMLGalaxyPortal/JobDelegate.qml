@@ -36,6 +36,10 @@ Item {
                 } else {
                     notificationSound.play();
                 }
+
+                // update colour
+                frontItem.color = Utils.itemColour(model.state, false);
+                backItem.color = Utils.itemColour(model.state, false);
             }
 
             currentState = model.state;
