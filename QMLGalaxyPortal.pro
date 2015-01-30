@@ -34,7 +34,8 @@ OTHER_FILES += \
     qml/QMLGalaxyPortal/PollFrequencySettings.qml \
     qml/QMLGalaxyPortal/DetailView.qml \
     qml/QMLGalaxyPortal/DetailZoomView.qml \
-    qml/QMLGalaxyPortal/InstanceListSettings.qml
+    qml/QMLGalaxyPortal/InstanceListSettings.qml \
+    qml/QMLGalaxyPortal/AudioNotifications.qml
 
 RESOURCES += \
     resources.qrc

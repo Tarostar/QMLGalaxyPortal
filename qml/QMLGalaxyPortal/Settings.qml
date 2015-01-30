@@ -86,11 +86,18 @@ Rectangle {
             anchors.top: galaxyKeySettings.bottom
             color: settings.color
         }
+        AudioNotifications {
+            id: audioNotifications
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: pollFrequencySettings.bottom
+            color: settings.color
+        }
         FieldSettings {
             id: fieldSettings
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: pollFrequencySettings.bottom
+            anchors.top: audioNotifications.bottom
             color: settings.color
         }
         AdvancedFieldsSettings {

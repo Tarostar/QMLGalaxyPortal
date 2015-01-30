@@ -30,11 +30,13 @@ Item {
         // Check if we have a current state and if it has changed.
         if (model.state !== currentState) {
             if (currentState && currentState.length > 0) {
-                // Play alert if we go from "running" state to a new state, otherwise play notification.
-                if (currentState === "running") {
-                    alertSound.play();
-                } else {
-                    notificationSound.play();
+                if (main.audioNotifications) {
+                    // Play alert if we go from "running" state to a new state, otherwise play notification.
+                    if (currentState === "running") {
+                        alertSound.play();
+                    } else {
+                        notificationSound.play();
+                    }
                 }
 
                 // update colour

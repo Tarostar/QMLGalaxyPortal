@@ -32,6 +32,8 @@ Rectangle {
     // Frequency of periodic polls (zero means no polling).
     property int periodicPolls: 0
 
+    property bool audioNotifications: true
+
     // Save settings.
     Settings {
         // Galaxy API settings.
@@ -58,6 +60,9 @@ Rectangle {
         // Instance List
         property alias instanceList : main.instanceList
         property alias instanceListKeys : main.instanceListKeys
+
+        // Audio Alerts
+        property alias audioNotifications : main.audioNotifications
     }
 
     // loader to spawn pages on top of list (e.g. for settings)
@@ -73,14 +78,14 @@ Rectangle {
     // Model for the list of histories (main list).
     JSONListModel {
         id: jsonHistoriesModel
-        pollInterval: main.periodicPolls / 60
+        pollInterval: main.periodicPolls
         source: dataKey.length > 0 ? dataSource.length > 0 ? dataSource + "/api/histories?key=" + dataKey : "" : ""
     }
 
     // Model for the list of jobs in a selected history (source set when history selected).
     JSONListModel {
         id: jsonHistoryJobsModel
-        pollInterval: main.periodicPolls / 60
+        pollInterval: main.periodicPolls
         source: main.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + main.currentHistoryID + "/contents?key=" + dataKey : "";
     }
 
