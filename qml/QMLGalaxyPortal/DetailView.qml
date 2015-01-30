@@ -14,6 +14,19 @@ Rectangle {
     property string source: dataSource + "/api/histories/" + main.currentHistoryID + "/contents/datasets/" + main.currentJobID + "?key=" + dataKey;
     property string json: ""
 
+    function onReady(request) {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            httpTimeout.running = false;
+            if (request.status === 200) {
+                json = request.responseText;
+            } else {
+                // TODO: report error.
+                detailListModel.clear();
+                detailListModel.append({"fieldName": "Error" , "fieldData": request.statusText});
+            }
+        }
+    }
+
     // Poll for data when source changes.
     onSourceChanged: {
         // Timer will trigger immediately on start and then again at every "interval".
@@ -27,31 +40,12 @@ Rectangle {
         repeat: true
         running: true
         triggeredOnStart: true
-        onTriggered: { poll(); }
+        onTriggered: { doPoll(); }
     }
 
-    // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
-    function poll() {
+    function doPoll() {
         json = "";
-        var xhr = new XMLHttpRequest;
-        xhr.open("GET", source);
-        xhr.setRequestHeader("Content-type", "application/json");
-        xhr.setRequestHeader('Accept-Language', 'en');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                httpTimeout.running = false;
-                if (xhr.status === 200) {
-                    json = xhr.responseText;
-                } else {
-                    // TODO: report error.
-                    detailListModel.clear();
-                    detailListModel.append({"fieldName": "Error" , "fieldData": xhr.statusText});
-                }
-            }
-        }
-
-        httpTimeout.running = true;
-        xhr.send();
+        Utils.poll(onReady, httpTimeout);
     }
 
     // Timeout handling since Qt XMLHttpRequest does not support "timeout".

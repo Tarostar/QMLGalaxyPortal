@@ -1,6 +1,7 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
 import Qt.labs.settings 1.0
+import QtMultimedia 5.4
 
 import "utils.js" as Utils
 
@@ -67,6 +68,15 @@ Rectangle {
 
     // loader to spawn pages on top of list (e.g. for settings)
     Loader {  z: 1; id: mainLoader }
+
+    Audio {
+        id: notificationSound
+        source: "qrc:/resources/resources/sounds/ping.mp3"
+    }
+    Audio {
+        id: alertSound
+        source: "qrc:/resources/resources/sounds/alert.mp3"
+    }
 
     // Properties to manage different device resolutions and screen sizes (handled in utils.js).
     property var res: ["mdpi","hdpi","xhdpi", "xxhdpi"]

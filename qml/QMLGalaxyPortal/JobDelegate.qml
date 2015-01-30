@@ -1,6 +1,5 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
-import QtMultimedia 5.4
 
 import "utils.js" as Utils
 
@@ -17,18 +16,9 @@ Item {
     // Tracks status for user notification when it changes.
     property string currentState: ""
 
-    Audio {
-        id: notificationSound
-        source: "qrc:/resources/resources/sounds/ping.mp3"
-    }
-    Audio {
-        id: alertSound
-        source: "qrc:/resources/resources/sounds/alert.mp3"
-    }
-
     function checkNotify() {
         // Check if we have a current state and if it has changed.
-        if (model.state !== currentState) {
+        if (model.state && model.state.length > 0 && model.state !== currentState) {
             if (currentState && currentState.length > 0) {
                 if (main.audioNotifications) {
                     // Play alert if we go from "running" state to a new state, otherwise play notification.

@@ -77,6 +77,22 @@ function getScreenWidthIndex(width) {
         return 6;
 }
 
+// Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
+function poll(onReady, timerID) {
+    var request = new XMLHttpRequest;
+    request.open("GET", source);
+    request.setRequestHeader("Content-type", "application/json");
+    // Potentially expand to support other languages than english.
+    request.setRequestHeader('Accept-Language', 'en');
+    request.onreadystatechange = function(){
+        timerID.running = false;
+        onReady(request);
+    };
+    request.send();
+    timerID.running = true;
+}
+
+
 /**
 *
 * Android Pixel Density Categories

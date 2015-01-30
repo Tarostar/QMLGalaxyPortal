@@ -1,4 +1,5 @@
 import QtQuick 2.3
+import "utils.js" as Utils
 
 Item {
     id: datasetItem
@@ -21,17 +22,33 @@ Item {
     // Poll frequencey - if zero then does not poll and only retrieves data when source changes.
     property int pollInterval: 0
 
+    function onReady(request) {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                json = request.responseText;
+            } else {
+                // Report error.
+                datasetItem.text = request.statusText;
+            }
+        }
+    }
+
+    onPollIntervalChanged: {
+        // Kick timer if enabled.
+        if (pollInterval > 0) {
+            timer.start();
+        }
+    }
+
     // Poll for data when source changes.
     onSourceChanged: {
         // Remove JSON data from previous poll
         json = "";
         datasetItem.text = "";
 
-        poll();
-
-        // Kick timer if enabled.
-        if (pollInterval > 0)
-            timer.start();
+        if (source.length > 0) {
+            doPoll()
+        }
     }
 
     // Timer triggers periodic poll to retrieve any changes server side.
@@ -39,33 +56,16 @@ Item {
         id: timer
         interval: pollInterval
         repeat: true
-        onTriggered: { poll(); }
+        onTriggered: { doPoll(); }
     }
 
-    // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
-    function poll() {
+    function doPoll() {
         json = "";
 
         // update field list before polling
         updateFieldArray();
 
-        var xhr = new XMLHttpRequest;
-        xhr.open("GET", source);
-        xhr.setRequestHeader("Content-type", "application/json");
-        xhr.setRequestHeader('Accept-Language', 'en');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                httpTimeout.running = false;
-                if (xhr.status === 200) {
-                    json = xhr.responseText;
-                } else {
-                    // Report error.
-                    datasetItem.text = xhr.statusText;
-                }
-            }
-        }
-        httpTimeout.running = true;
-        xhr.send();
+        Utils.poll(onReady, httpTimeout);
     }
 
     // Timeout handling since Qt XMLHttpRequest does not support "timeout".

@@ -13,6 +13,7 @@
  */
 
 import QtQuick 2.3
+import "utils.js" as Utils
 
 Item {
     // URL to connect to.
@@ -30,6 +31,21 @@ Item {
     property ListModel model : ListModel { id: jsonModel }
     property alias count: jsonModel.count
 
+    function onReady(request) {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                error = "";
+                json = request.responseText;
+            }
+        } else if (request.readyState === XMLHttpRequest.LOADING) {
+            // Need to set errors and status during load due to QTBUG-21706
+            if (request.status !== 200) {
+                var jsonObject = JSON.parse(request.responseText);
+                error = jsonObject["err_msg"] + " [" + request.status + "]";
+            }
+        }
+    }
+
     onPollIntervalChanged: {
         // Kick timer if enabled.
         if (pollInterval > 0) {
@@ -39,8 +55,9 @@ Item {
 
     // Poll for data when source changes.
     onSourceChanged: {
+        jsonModel.clear();
         if (source.length > 0) {
-            poll()
+            doPoll()
         }
     }
 
@@ -49,35 +66,13 @@ Item {
         id: pollTimer
         interval: pollInterval
         repeat: true
-        onTriggered: { poll(); }
+        onTriggered: { doPoll(); }
     }
 
-    // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
-    function poll() {
+    function doPoll() {
         json = "";
         error = "loading...";
-        var xhr = new XMLHttpRequest;
-        xhr.open("GET", source);
-        xhr.setRequestHeader("Content-type", "application/json");
-        // Potentially expand to support other languages than english.
-        xhr.setRequestHeader('Accept-Language', 'en');
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                httpTimeout.running = false;
-                if (xhr.status === 200) {
-                    error = "";
-                    json = xhr.responseText;
-                }
-            } else if (xhr.readyState === XMLHttpRequest.LOADING) {
-                // Need to set errors and status during load due to QTBUG-21706
-                if (xhr.status !== 200) {
-                    var jsonObject = JSON.parse(xhr.responseText);
-                    error = jsonObject["err_msg"] + " [" + xhr.status + "]";
-                }
-            }
-        }
-        httpTimeout.running = true;
-        xhr.send();
+        Utils.poll(onReady, httpTimeout);
     }
 
     // Timeout handling since Qt XMLHttpRequest does not support "timeout".
