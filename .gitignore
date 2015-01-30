@@ -5,3 +5,4 @@ debug
 *.sln
 *.vcxproj
 *.vcxproj.filters
+*.autosave

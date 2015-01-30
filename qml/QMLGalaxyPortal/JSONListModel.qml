@@ -97,15 +97,27 @@ Item {
 
     // If we have json data - update the model.
     function updateJSONModel() {
-        if (json !== "" || clearOnEmptyData)
-            jsonModel.clear();
-
         if (json === "")
             return;
 
+        var index = 0;
+
         var objectArray = JSON.parse(json);
         for ( var object in objectArray ) {
-            jsonModel.append(objectArray[object]);
+            // Check if item exists at exactly the current index.
+
+            if (index >= jsonModel.count) {
+                // We are beyond the current model (or model empty).
+                jsonModel.append(objectArray[object]);
+            } else if (jsonModel.get(index).id === objectArray[object].id) {
+                // Exists - update.
+                jsonModel.set(index, objectArray[object]);
+            } else {
+                // Did not exists, insert it at current position.
+                jsonModel.insert(index, objectArray[object]);
+            }
+
+            index++;
         }
     }
 }

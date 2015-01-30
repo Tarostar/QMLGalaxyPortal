@@ -1,5 +1,6 @@
-import QtQuick 2.0
+import QtQuick 2.3
 import QtQuick.Window 2.2
+import QtMultimedia 5.4
 
 import "utils.js" as Utils
 
@@ -12,6 +13,34 @@ Item {
     property color itemColor: Utils.itemColour(model.state, false)
     property color itemSelectColor: Utils.itemColour(model.state, true)
     property string currentText: ""
+
+    // Tracks status for user notification when it changes.
+    property string currentState: ""
+
+    Audio {
+        id: notificationSound
+        source: "qrc:/resources/resources/sounds/ping.mp3"
+    }
+    Audio {
+        id: alertSound
+        source: "qrc:/resources/resources/sounds/alert.mp3"
+    }
+
+    function checkNotify() {
+        // Check if we have a current state and if it has changed.
+        if (model.state !== currentState) {
+            if (currentState && currentState.length > 0) {
+                // Play alert if we go from "running" state to a new state, otherwise play notification.
+                if (currentState === "running") {
+                    alertSound.play();
+                } else {
+                    notificationSound.play();
+                }
+            }
+
+            currentState = model.state;
+        }
+    }
 
     onAppearChanged: {
         jobItem.startRotation = 0.5
@@ -29,6 +58,9 @@ Item {
         // note this may generate a false error: "QML Text: Binding loop detected for property "style"
         // This is a known Qt bug in v 5.3 QTBUG-36849: False binding loops in QtQuick Controls: https://bugreports.qt-project.org/browse/QTBUG-36849
 
+        // Check status to see if user should be notified.
+        checkNotify();
+
         if (currentJobID !== model.id)
         {
             // This is not the current job item, so just return current text.
@@ -40,7 +72,7 @@ Item {
         if (advancedFields && jsonHistoryJobContent.text && jsonHistoryJobContent.text.length > 0)
         {
             // Set current text to display from JSON data.
-            currentText = "<b>Status</b>: " + model.state + jsonHistoryJobContent.text;
+            currentText = "<b>Status</b>: " + model.state + " <b>Content</b>: " + jsonHistoryJobContent.text;
         }
         else
         {

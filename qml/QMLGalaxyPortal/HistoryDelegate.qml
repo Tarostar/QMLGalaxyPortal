@@ -7,8 +7,8 @@ Rectangle {
     width: parent.width
     // pixelDensity: the number of physical pixels per millimeter.
     height: Screen.pixelDensity * 9;
-    //source: "../../Images/" + res[resIndex] + "/item_" + devwidth[widthIndex] + ".png"
     color: "ivory"
+
 
     Separator {
         id: separator

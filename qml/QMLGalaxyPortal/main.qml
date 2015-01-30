@@ -75,14 +75,14 @@ Rectangle {
         id: jsonHistoriesModel
         source: dataKey.length > 0 ? dataSource.length > 0 ? dataSource + "/api/histories?key=" + dataKey : "" : ""
         clearOnEmptyData: true
-        pollInterval: main.periodicPolls
+        pollInterval: main.periodicPolls / 1000
     }
 
     // Model for the list of jobs in a selected history (source set when history selected).
     JSONListModel {
         id: jsonHistoryJobsModel
         clearOnEmptyData: false
-        pollInterval: main.periodicPolls
+        pollInterval: main.periodicPolls / 1000
         source: main.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + main.currentHistoryID + "/contents?key=" + dataKey : "";
     }
 

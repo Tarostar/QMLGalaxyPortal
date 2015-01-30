@@ -111,10 +111,6 @@ Item {
             fieldArray.push("data_type");
             fieldArray.push("genome_build");
             fieldArray.push("update_time");
-            /*datasetItem.fields.push("metadata_data_lines");
-            datasetItem.fields.push("history_content_type");
-            datasetItem.fields.push("file_ext");
-            datasetItem.fields.push("file_size");*/
 
             // Set field list to contain the default list
             main.fieldList = fieldArray.join();
