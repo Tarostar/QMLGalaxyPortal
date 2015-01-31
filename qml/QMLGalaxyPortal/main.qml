@@ -101,8 +101,8 @@ Rectangle {
 
     JSONDataset {
         id: jsonHistoryJobContent
-        source: main.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + main.currentHistoryID + "/contents/datasets/" + main.currentJobID + "?key=" + dataKey : "";
         pollInterval: main.periodicPolls
+        source: main.currentHistoryID.length > 0 ? dataSource + "/api/histories/" + main.currentHistoryID + "/contents/datasets/" + main.currentJobID + "?key=" + dataKey : "";
     }
 
     PasscodeChallenge {

@@ -23,6 +23,11 @@ Item {
     property int pollInterval: 0
 
     function onReady(request) {
+        if (request === undefined) {
+            datasetItem.text = "Timed out after five seconds....";
+            return;
+        }
+
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 json = request.responseText;
@@ -62,21 +67,10 @@ Item {
     function doPoll() {
         json = "";
 
-        // update field list before polling
+        // Update field list before polling.
         updateFieldArray();
 
-        Utils.poll(onReady, httpTimeout);
-    }
-
-    // Timeout handling since Qt XMLHttpRequest does not support "timeout".
-    Timer {
-        id: httpTimeout
-        interval: 5000 // 5 seconds interval, should eventually be user configurable.
-        repeat: false
-        running: false
-        onTriggered: {
-            datasetItem.text = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
-        }
+        Utils.poll(source, onReady, datasetItem);
     }
 
     // Update JSON data when source or fields changes.

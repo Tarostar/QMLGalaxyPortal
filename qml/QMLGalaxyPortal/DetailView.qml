@@ -15,8 +15,14 @@ Rectangle {
     property string json: ""
 
     function onReady(request) {
+
+        if (request === undefined) {
+            detailListModel.clear();
+            detailListModel.append({"fieldName": "Timeout" , "fieldData": "after five seconds."});
+            return;
+        }
+
         if (request.readyState === XMLHttpRequest.DONE) {
-            httpTimeout.running = false;
             if (request.status === 200) {
                 json = request.responseText;
             } else {
@@ -45,19 +51,7 @@ Rectangle {
 
     function doPoll() {
         json = "";
-        Utils.poll(onReady, httpTimeout);
-    }
-
-    // Timeout handling since Qt XMLHttpRequest does not support "timeout".
-    Timer {
-        id: httpTimeout
-        interval: 5000 // 5 seconds interval, should eventually be user configurable.
-        repeat: false
-        running: false
-        onTriggered: {
-            detailListModel.clear();
-            detailListModel.append({"fieldName": "Timeout" , "fieldData": "after " + httpTimeout.interval / 1000 + " seconds."});
-        }
+        Utils.poll(source, onReady, details);
     }
 
     // Update JSON data when source changes.

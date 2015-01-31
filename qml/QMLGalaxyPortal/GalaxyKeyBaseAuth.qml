@@ -1,13 +1,36 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
+import "utils.js" as Utils
 
 Rectangle {
+    id: galaxyKeyAuthentication
     // Set rect to size of all children (+ margin).
     height: childrenRect.height + Screen.pixelDensity * 2
 
     property bool editFocus: baseAuthUsername.hasActiveFocus || baseAuthPassword.hasActiveFocus
     property string statusMessages: ""
+
+    function onReady(request) {
+
+        if (request === undefined) {
+            statusMessages = "Timed out after five seconds.";
+            galaxyLoginStatus.color = "red";
+            return;
+        }
+
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
+                var jsonObject = JSON.parse(request.responseText);
+                dataKey = jsonObject["api_key"].toString();
+                statusMessages = "Login Success"
+                galaxyLoginStatus.color = "green";
+            } else {
+                statusMessages = "Error - check URL, username and password";
+                galaxyLoginStatus.color = "red";
+            }
+        }
+    }
 
     function pasteKey(){
         if (baseAuthUsername.hasActiveFocus) {
@@ -74,39 +97,8 @@ Rectangle {
             dataKey = "";
             statusMessages = "retrieving API...";
             galaxyLoginStatus.color = "black";
-            var authorizationHeader = "Basic "+Qt.btoa(baseAuthUsername.text+":"+baseAuthPassword.text);
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", galaxyUrl.text + "/api/authenticate/baseauth");
-            xhr.setRequestHeader("Authorization", authorizationHeader);
-            xhr.setRequestHeader('Accept-Language', 'en');
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState === XMLHttpRequest.DONE) {
-                  httpTimeout.running = false;
-                  if (xhr.status === 200) {
-                      var jsonObject = JSON.parse(xhr.responseText);
-                      dataKey = jsonObject["api_key"].toString();
-                      statusMessages = "Login Success"
-                      galaxyLoginStatus.color = "green";
-                  } else {
-                      statusMessages = "Error - check URL, username and password";
-                      galaxyLoginStatus.color = "red";
-                  }
-              }
-            }
-            httpTimeout.running = true;
-            xhr.send();
-        }
 
-        // Timeout handling since Qt XMLHttpRequest does not support "timeout".
-        Timer {
-            id: httpTimeout
-            interval: 5000 // 5 seconds interval, should eventually be user configurable.
-            repeat: false
-            running: false
-            onTriggered: {
-                statusMessages = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
-                galaxyLoginStatus.color = "red";
-            }
+            Utils.poll(galaxyUrl.text + "/api/authenticate/baseauth", onReady, galaxyKeyAuthentication, "Basic "+Qt.btoa(baseAuthUsername.text+":"+baseAuthPassword.text));
         }
     }
     Text {

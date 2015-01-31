@@ -16,6 +16,8 @@ import QtQuick 2.3
 import "utils.js" as Utils
 
 Item {
+    id: jsonListModel
+
     // URL to connect to.
     property string source: ""
 
@@ -32,6 +34,12 @@ Item {
     property alias count: jsonModel.count
 
     function onReady(request) {
+
+        if (request === undefined) {
+            error = "Timed out after five seconds.";
+            return;
+        }
+
         if (request.readyState === XMLHttpRequest.DONE) {
             if (request.status === 200) {
                 error = "";
@@ -72,18 +80,7 @@ Item {
     function doPoll() {
         json = "";
         error = "loading...";
-        Utils.poll(onReady, httpTimeout);
-    }
-
-    // Timeout handling since Qt XMLHttpRequest does not support "timeout".
-    Timer {
-        id: httpTimeout
-        interval: 5000 // 5 seconds interval, should eventually be user configurable.
-        repeat: false
-        running: false
-        onTriggered: {
-            error = "Timed out after " + httpTimeout.interval / 1000 + " seconds.";
-        }
+        Utils.poll(source, onReady, jsonListModel);
     }
 
     // JSON data has changed - update model.
