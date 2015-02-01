@@ -92,12 +92,27 @@ Item {
         if (json === "")
             return;
 
-        var index = 0;
-
         var objectArray = JSON.parse(json);
-        for ( var object in objectArray ) {
-            // Check if item exists at exactly the current index.
 
+        // First remove any items from the model that no longer exist.
+        for (var i = jsonModel.count - 1; i >= 0; i--) {
+            var bFound = false;
+            for ( var object in objectArray ) {
+                if (jsonModel.get(i).id === objectArray[object].id) {
+                    bFound = true;
+                    break;
+                }
+            }
+
+            if (!bFound) {
+                jsonModel.remove(i);
+            }
+        }
+
+        // Now update model and insert any new items.
+        var index = 0;
+        for ( object in objectArray ) {
+            // Check if item exists at exactly the current index.
             if (index >= jsonModel.count) {
                 // We are beyond the current model (or model empty).
                 jsonModel.append(objectArray[object]);
@@ -105,8 +120,22 @@ Item {
                 // Exists - update.
                 jsonModel.set(index, objectArray[object]);
             } else {
-                // Did not exists, insert it at current position.
-                jsonModel.insert(index, objectArray[object]);
+                // Did not exists, see if exists at a different position.
+                var bFound = false;
+                for (i = 0; i < jsonModel.count; i++) {
+                    if (jsonModel.get(i).id === objectArray[object].id) {
+                        // Found it, move it and update.
+                        bFound = true;
+                        jsonModel.move(i, index, 1);
+                        jsonModel.set(index, objectArray[object]);
+                        break;
+                    }
+                }
+
+                if (!bFound) {
+                    // Did not find it, so simply insert it.
+                    jsonModel.insert(index, objectArray[object]);
+                }
             }
 
             index++;

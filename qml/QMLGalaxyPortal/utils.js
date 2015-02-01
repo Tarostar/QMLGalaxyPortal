@@ -86,7 +86,7 @@ function poll(source, onReady, parentID, authorizationHeader) {
 
     // Connect the "triggered" signal to timeout function
     pollTimer.triggered.connect(function() {
-        // Abort and call OnReady without parameters which will report error.
+        // Abort and call onReady without parameters which will report error.
         request.abort();
         onReady();
     });
