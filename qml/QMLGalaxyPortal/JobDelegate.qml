@@ -13,31 +13,6 @@ Item {
     property color itemSelectColor: Utils.itemColour(model.state, true)
     property string currentText: ""
 
-    // Tracks status for user notification when it changes.
-    property string currentState: ""
-
-    function checkNotify() {
-        // Check if we have a current state and if it has changed.
-        if (model.state && model.state.length > 0 && model.state !== currentState) {
-            if (currentState && currentState.length > 0) {
-                if (main.audioNotifications) {
-                    // Play alert if we go from "running" state to a new state, otherwise play notification.
-                    if (currentState === "running") {
-                        alertSound.play();
-                    } else {
-                        notificationSound.play();
-                    }
-                }
-
-                // update colour
-                frontItem.color = Utils.itemColour(model.state, false);
-                backItem.color = Utils.itemColour(model.state, false);
-            }
-
-            currentState = model.state;
-        }
-    }
-
     onAppearChanged: {
         jobItem.startRotation = 0.5
         flipBar.animDuration = appear;
@@ -53,9 +28,6 @@ Item {
     function datasetText() {
         // note this may generate a false error: "QML Text: Binding loop detected for property "style"
         // This is a known Qt bug in v 5.3 QTBUG-36849: False binding loops in QtQuick Controls: https://bugreports.qt-project.org/browse/QTBUG-36849
-
-        // Check status to see if user should be notified.
-        checkNotify();
 
         if (currentJobID !== model.id)
         {

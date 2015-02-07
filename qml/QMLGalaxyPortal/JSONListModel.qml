@@ -55,10 +55,8 @@ Item {
     }
 
     onPollIntervalChanged: {
-        // Kick timer if enabled.
-        if (pollInterval > 0) {
-            pollTimer.start();
-        }
+        // Set C++ background thread tick interval which will provide periodic polls (divide to go from ms to seconds).
+        Bridge.setTickInterval(pollInterval / 1000);
     }
 
     // Poll for data when source changes.
@@ -67,6 +65,12 @@ Item {
         if (source.length > 0) {
             doPoll()
         }
+    }
+
+    // Connection to C++ background thread.
+    Connections {
+        target: Bridge
+        onDoWork: { doPoll();}
     }
 
     // Timer triggers periodic poll to retrieve any changes server side.
@@ -78,6 +82,8 @@ Item {
     }
 
     function doPoll() {
+        notificationClient.notification = "User is happy!";
+
         json = "";
         error = "loading...";
         Utils.poll(source, onReady, jsonListModel);
@@ -117,16 +123,18 @@ Item {
                 // We are beyond the current model (or model empty).
                 jsonModel.append(objectArray[object]);
             } else if (jsonModel.get(index).id === objectArray[object].id) {
-                // Exists - update.
+                // Exists - check state and update.
+                checkState(jsonModel.get(index).state, objectArray[object].state);
                 jsonModel.set(index, objectArray[object]);
             } else {
                 // Did not exists, see if exists at a different position.
                 var bFound = false;
                 for (i = 0; i < jsonModel.count; i++) {
                     if (jsonModel.get(i).id === objectArray[object].id) {
-                        // Found it, move it and update.
+                        // Found it, move it, check state and update.
                         bFound = true;
                         jsonModel.move(i, index, 1);
+                        checkState(jsonModel.get(index).state, objectArray[object].state);
                         jsonModel.set(index, objectArray[object]);
                         break;
                     }
@@ -139,6 +147,22 @@ Item {
             }
 
             index++;
+        }
+    }
+
+    function checkState(currentState, newState) {
+        if (currentState === undefined || currentState.length === 0 || newState === undefined || newState.length === 0) {
+            return;
+        }
+
+        // Check if stat (ok, running, queued, error) changed.
+        if (currentState !== newState) {
+            // Changed - if current state was running then play job completion/error alert.
+            if (currentState === "running") {
+                alertSound.play();
+            } else {
+                notificationSound.play();
+            }
         }
     }
 }

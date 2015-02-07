@@ -121,6 +121,7 @@ Rectangle {
 
     // Init view at startup.
     Component.onCompleted:{
+        notificationClient.notification = "User is happy!";
         if (main.currentHistoryID.length > 0) {
             main.state = "historyItems";
         }
