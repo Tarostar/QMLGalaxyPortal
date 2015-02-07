@@ -82,8 +82,6 @@ Item {
     }
 
     function doPoll() {
-        notificationClient.notification = "User is happy!";
-
         json = "";
         error = "loading...";
         Utils.poll(source, onReady, jsonListModel);

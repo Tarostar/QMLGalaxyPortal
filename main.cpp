@@ -7,10 +7,7 @@
 #include "ticker.h"
 #include "bridge.h"
 
-#include <QDebug>
 #include <QQuickItem>
-
-#include <notificationclient.h>
 
 int main(int argc, char *argv[])
 {
@@ -41,10 +38,6 @@ int main(int argc, char *argv[])
     // Setup QQuickView window for displaying Qt Quick GUI and connect with background thread through the bridge interface.
     QtQuick2ApplicationViewer viewer;    
     viewer.rootContext()->setContextProperty("Bridge", bridge);
-
-    NotificationClient *notificationClient = new NotificationClient(&viewer);
-    viewer.engine()->rootContext()->setContextProperty(QLatin1String("notificationClient"),
-                                                     notificationClient);
 
     viewer.setMainQmlFile(QStringLiteral("qml/QMLGalaxyPortal/main.qml"));
     viewer.showExpanded();

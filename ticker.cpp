@@ -10,8 +10,6 @@ Ticker::Ticker(QObject *parent) :
 
 void Ticker::mainThread()
 {
-     qDebug("mainThread");
-
     int secondsCounter = 0;
     int tickInterval = 0;
 
@@ -39,7 +37,7 @@ void Ticker::mainThread()
             secondsCounter += sleep_interval;
         }
 
-        qDebug("Count: " + QString::number(secondsCounter).toLatin1() + " / " + QString::number(tickInterval).toLatin1());
+        // qDebug("Count: " + QString::number(secondsCounter).toLatin1() + " / " + QString::number(tickInterval).toLatin1());
     }
 
     // Terminate thread and signal for any cleanup.

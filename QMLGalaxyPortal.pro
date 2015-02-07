@@ -9,7 +9,7 @@ qtHaveModule(webengine) {
 }
 
 # Qt Modules for C++
-QT += qml quick multimedia androidextras
+QT += qml quick multimedia
 
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
@@ -19,13 +19,11 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     ticker.cpp \
-    bridge.cpp \
-    notificationclient.cpp
+    bridge.cpp
 
 HEADERS += \
     ticker.h \
-    bridge.h \
-    notificationclient.h
+    bridge.h
 
 # Installation path
 # target.path =
@@ -69,7 +67,6 @@ OTHER_FILES += \
     qml/QMLGalaxyPortal/Settings.qml \
     qml/QMLGalaxyPortal/WebView.qml \
     qml/QMLGalaxyPortal/Welcome.qml \
-    NotificationClient.java \
     qml/QMLGalaxyPortal/utils.js \
     qml/QMLGalaxyPortal/scrollbar.svg
 
