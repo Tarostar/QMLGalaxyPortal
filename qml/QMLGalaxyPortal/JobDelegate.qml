@@ -21,17 +21,15 @@ Item {
     }
 
     width: parent.width
-    height: flipBar.flipped ? (backItem.textHeight + Screen.pixelDensity * 2) * hm : Screen.pixelDensity * 9 * hm
+    height: flipBar.flipped ? backItem.textHeight + Screen.pixelDensity * 5: frontItem.textHeight + Screen.pixelDensity * 5
 
     Flip {
         id: flipBar
 
         property bool flipped: false
-        vertexDelta: startRotation
 
-        // Width fills screen, height is pixelDensity (number of physical pixels per millimeter).
-        width: parent.width
-        height: parent.height
+        vertexDelta: startRotation
+        anchors.fill: parent
 
         // Set how much to fold edges (3D effect) based on item width to get a realistic effect.
         factor: width <= 200 ? 0.1 : 0.1 / (width / 200.0)

@@ -6,7 +6,7 @@ Rectangle {
 
     width: parent.width
     // pixelDensity: the number of physical pixels per millimeter.
-    height: Screen.pixelDensity * 9;
+    height: Screen.pixelDensity * 9
     color: "ivory"
 
 

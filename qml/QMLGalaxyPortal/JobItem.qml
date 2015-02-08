@@ -8,7 +8,7 @@ Rectangle {
     color: itemColor
 
     property bool front: true
-    property alias textHeight: jobItemText.height
+    property alias textHeight: jobItemText.contentHeight
     property color itemColor: Utils.itemColour(model.state, false)
     property color itemSelectColor: Utils.itemColour(model.state, true)
     property string currentText: ""
@@ -18,7 +18,7 @@ Rectangle {
         // This is a known Qt bug in v 5.3 QTBUG-36849: False binding loops in QtQuick Controls: https://bugreports.qt-project.org/browse/QTBUG-36849
 
         if (front) {
-            return Screen.desktopAvailableHeight//model.name;
+            return model.name;
         }
 
         if (currentJobID !== model.id)
@@ -29,18 +29,16 @@ Rectangle {
 
         // Current job.
 
-        /*if (advancedFields && jsonHistoryJobContent.text && jsonHistoryJobContent.text.length > 0)
+        if (advancedFields && jsonHistoryJobContent.text && jsonHistoryJobContent.text.length > 0)
         {
             // Set current text to display from JSON data.
-            currentText = "<b>Status</b>: " + model.state + " <b>Content</b>: " + jsonHistoryJobContent.text;
+            currentText = "<b>Status</b>: " + model.state + jsonHistoryJobContent.text;
         }
         else
         {
             // No display text, just show basic information.
             currentText = "<b>Status</b>:" + model.state + " <b>Content</b>: " + model.history_content_type + " <b>Type</b>: " + model.type;
-        }*/
-
-        currentText = "<b>Status</b>: " + model.state + " <b>Content</b>: " + jsonHistoryJobContent.text;
+        }
 
         return currentText;
     }
@@ -61,8 +59,7 @@ Rectangle {
         anchors.rightMargin: 5
         anchors.topMargin: 5
         anchors.bottomMargin: 5
-        // Default is AlignTop, and to avoid binding loop we say that if it has been set to AlignVCenter then it stays that way.
-        verticalAlignment: Text.AlignVCenter// ? Text.AlignVCenter : contentHeight > parent.height ? Text.AlignTop : Text.AlignVCenter
+        verticalAlignment: Text.AlignVCenter
         elide: Text.ElideMiddle
         text: datasetText();
         font.pointSize: front ? 14 : 12
@@ -76,7 +73,7 @@ Rectangle {
         anchors.top: parent.top
         anchors.rightMargin: 5
         height: parent.height - 2
-        width: parent.height - 2
+        width: parent.height > parent.width / 6 ? parent.width / 6 : parent.height - 2
         Image {
             id: image
             anchors.verticalCenter: parent.verticalCenter
