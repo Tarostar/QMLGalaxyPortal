@@ -1,17 +1,12 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
 
-import "utils.js" as Utils
-
 Item {
     id: jobItem
 
     property real hm: 1.0
     property real appear: 1.0
     property real startRotation: 1.0
-    property color itemColor: Utils.itemColour(model.state, false)
-    property color itemSelectColor: Utils.itemColour(model.state, true)
-    property string currentText: ""
 
     onAppearChanged: {
         jobItem.startRotation = 0.5
@@ -25,36 +20,8 @@ Item {
         ScriptAction { script: flipBar.flipDown(startRotation); }
     }
 
-    function datasetText() {
-        // note this may generate a false error: "QML Text: Binding loop detected for property "style"
-        // This is a known Qt bug in v 5.3 QTBUG-36849: False binding loops in QtQuick Controls: https://bugreports.qt-project.org/browse/QTBUG-36849
-
-        if (currentJobID !== model.id)
-        {
-            // This is not the current job item, so just return current text.
-            return currentText;
-        }
-
-        // Current job.
-
-        if (advancedFields && jsonHistoryJobContent.text && jsonHistoryJobContent.text.length > 0)
-        {
-            // Set current text to display from JSON data.
-            currentText = "<b>Status</b>: " + model.state + " <b>Content</b>: " + jsonHistoryJobContent.text;
-        }
-        else
-        {
-            // No display text, just show basic information.
-            currentText = "<b>Status</b>:" + model.state + " <b>Content</b>: " + model.history_content_type + " <b>Type</b>: " + model.type;
-        }
-
-        return currentText;
-    }
-
     width: parent.width
-
-    // When flipped to show backside the item should be sized to text content.
-    height: flipBar.flipped ? Screen.pixelDensity * 9 * hm > (backItem.textHeight + 10) * hm ? Screen.pixelDensity * 9 * hm : (backItem.textHeight + 10) * hm : Screen.pixelDensity * 9 * hm
+    height: flipBar.flipped ? (backItem.textHeight + Screen.pixelDensity * 2) * hm : Screen.pixelDensity * 9 * hm
 
     Flip {
         id: flipBar
@@ -73,16 +40,12 @@ Item {
         front: JobItem {
             id: frontItem
             front: true
-            color: itemColor
         }
 
         // Rectangle for backside of the flip item.
         back: JobItem {
             id: backItem
             front: false
-            color: itemColor
-            fontSize: 12
-            itemText: datasetText();
         }
     }
 }

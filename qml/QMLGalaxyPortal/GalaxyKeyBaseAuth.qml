@@ -4,7 +4,7 @@ import QtQuick.Controls 1.2
 import "utils.js" as Utils
 
 Rectangle {
-    id: galaxyKeyAuthentication
+    id: galaxyAuthentication
     // Set rect to size of all children (+ margin).
     height: childrenRect.height + Screen.pixelDensity * 2
 
@@ -40,9 +40,27 @@ Rectangle {
         }
     }
 
+    Separator {
+        id: separator
+        anchors.top: parent.top
+        width: parent.width
+        margin: Screen.pixelDensity * 5
+        color: parent.color
+    }
+    Text {
+        id: galaxyLogin
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: separator.bottom
+        anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+        anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+        elide: Text.ElideMiddle
+        text: qsTr("Login")
+        font.pointSize: 15
+        font.bold: true
+    }
     Text {
         id: baseAuthUsernameTitle
-        anchors.top: parent.top
+        anchors.top: galaxyLogin.bottom
         anchors.left: parent.left
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
@@ -98,7 +116,7 @@ Rectangle {
             statusMessages = "retrieving API...";
             galaxyLoginStatus.color = "black";
 
-            Utils.poll(galaxyUrl.text + "/api/authenticate/baseauth", onReady, galaxyKeyAuthentication, "Basic "+Qt.btoa(baseAuthUsername.text+":"+baseAuthPassword.text));
+            Utils.poll(galaxyUrl.text + "/api/authenticate/baseauth", onReady, galaxyAuthentication, "Basic "+Qt.btoa(baseAuthUsername.text+":"+baseAuthPassword.text));
         }
     }
     Text {

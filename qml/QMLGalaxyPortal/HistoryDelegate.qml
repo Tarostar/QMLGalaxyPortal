@@ -11,7 +11,6 @@ Rectangle {
 
 
     Separator {
-        id: separator
         anchors.bottom: parent.bottom
         width: parent.width
     }

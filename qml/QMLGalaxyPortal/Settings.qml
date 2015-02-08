@@ -13,6 +13,7 @@ Rectangle {
         id: settingsActionBar
         width: parent.width
         height: Screen.pixelDensity * 9
+        settingsButton.visible: false
         backButton.visible: true
         // Paste button is visible if an editbox has focus.
         pasteButton.visible: galaxyUrl.hasActiveFocus || galaxyKeySettings.editFocus || galaxyKeyBaseAuth.editFocus || passcodeSettings.editFocus
@@ -72,11 +73,18 @@ Rectangle {
             anchors.top: galaxyUrl.bottom
             color: settings.color
         }
+        GalaxyKeyBaseAuth {
+            id: galaxyKeyBaseAuth
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: instanceList.bottom
+            color: settings.color
+        }
         GalaxyKeySettings {
             id: galaxyKeySettings
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: instanceList.bottom
+            anchors.top: galaxyKeyBaseAuth.bottom
             color: settings.color
         }
         PollFrequencySettings {

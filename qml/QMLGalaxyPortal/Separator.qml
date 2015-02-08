@@ -6,12 +6,11 @@ Rectangle {
     property alias middleColor: middleLine.color
     property alias bottomColor: bottomLine.color
 
-    property int lineWidth : 1
     property int margin : 0
 
-    height: childrenRect.height + margin
+    height: 3 + margin
 
-    Rectangle { id: topLine; color: "white"; width: parent.width; height: lineWidth; anchors.verticalCenter: parent.verticalCenter }
-    Rectangle { id: middleLine; color: "#cdcdc1"; width: parent.width; height: lineWidth; anchors.top: topLine.bottom}
-    Rectangle { id: bottomLine; color: "white"; width: parent.width; height: lineWidth; anchors.top: middleLine.bottom }
+    Rectangle { id: topLine; color: "white"; width: parent.width; height: 1; anchors.verticalCenter: parent.verticalCenter }
+    Rectangle { id: middleLine; color: "#cdcdc1"; width: parent.width; height: 1; anchors.top: topLine.bottom}
+    Rectangle { id: bottomLine; color: "white"; width: parent.width; height: 1; anchors.top: middleLine.bottom }
 }

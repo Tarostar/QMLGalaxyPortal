@@ -9,38 +9,12 @@ Rectangle {
     property alias editFocus: galaxyAPIKey.hasActiveFocus
 
     function pasteKey(){
-        galaxyKey.paste();
+        galaxyAPIKey.paste();
     }
 
-    Separator {
-        id: separator
-        anchors.top: parent.top
-        width: parent.width
-        margin: Screen.pixelDensity * 5
-        color: parent.color
-    }
-
-    Text {
-        id: galaxyLogin
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: separator.bottom
-        anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
-        anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
-        elide: Text.ElideMiddle
-        text: qsTr("Login")
-        font.pointSize: 15
-        font.bold: true
-    }
-    GalaxyKeyBaseAuth {
-        id: galaxyKeyBaseAuth
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: galaxyLogin.bottom
-        color: settings.color
-    }
     CheckBox {
         id: showAPIKey
-        anchors.top: galaxyKeyBaseAuth.bottom
+        anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
         height: Screen.pixelDensity * 9
         text: qsTr("Show API Key")

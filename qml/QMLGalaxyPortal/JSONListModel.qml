@@ -103,7 +103,9 @@ Item {
             var bFound = false;
             for ( var object in objectArray ) {
                 if (jsonModel.get(i).id === objectArray[object].id) {
-                    bFound = true;
+                    if (objectArray[object].deleted === false) {
+                        bFound = true;
+                    }
                     break;
                 }
             }
@@ -119,7 +121,9 @@ Item {
             // Check if item exists at exactly the current index.
             if (index >= jsonModel.count) {
                 // We are beyond the current model (or model empty).
-                jsonModel.append(objectArray[object]);
+                if (objectArray[object].deleted === false) {
+                    jsonModel.append(objectArray[object]);
+                }
             } else if (jsonModel.get(index).id === objectArray[object].id) {
                 // Exists - check state and update.
                 checkState(jsonModel.get(index).state, objectArray[object].state);
@@ -140,7 +144,9 @@ Item {
 
                 if (!bFound) {
                     // Did not find it, so simply insert it.
-                    jsonModel.insert(index, objectArray[object]);
+                    if (objectArray[object].deleted === false) {
+                        jsonModel.insert(index, objectArray[object]);
+                    }
                 }
             }
 

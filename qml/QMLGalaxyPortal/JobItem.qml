@@ -1,14 +1,49 @@
 import QtQuick 2.3
+import QtQuick.Window 2.2
+import "utils.js" as Utils
 
 Rectangle {
     id: jobItem
     anchors.fill: parent
-    color: "ivory"
+    color: itemColor
 
     property bool front: true
-    property alias itemText: jobItemText.text
-    property alias fontSize: jobItemText.font.pointSize
     property alias textHeight: jobItemText.height
+    property color itemColor: Utils.itemColour(model.state, false)
+    property color itemSelectColor: Utils.itemColour(model.state, true)
+    property string currentText: ""
+
+    function datasetText() {
+        // note this may generate a false error: "QML Text: Binding loop detected for property "style"
+        // This is a known Qt bug in v 5.3 QTBUG-36849: False binding loops in QtQuick Controls: https://bugreports.qt-project.org/browse/QTBUG-36849
+
+        if (front) {
+            return Screen.desktopAvailableHeight//model.name;
+        }
+
+        if (currentJobID !== model.id)
+        {
+            // This is not the current job item, so just return current text.
+            return currentText;
+        }
+
+        // Current job.
+
+        /*if (advancedFields && jsonHistoryJobContent.text && jsonHistoryJobContent.text.length > 0)
+        {
+            // Set current text to display from JSON data.
+            currentText = "<b>Status</b>: " + model.state + " <b>Content</b>: " + jsonHistoryJobContent.text;
+        }
+        else
+        {
+            // No display text, just show basic information.
+            currentText = "<b>Status</b>:" + model.state + " <b>Content</b>: " + model.history_content_type + " <b>Type</b>: " + model.type;
+        }*/
+
+        currentText = "<b>Status</b>: " + model.state + " <b>Content</b>: " + jsonHistoryJobContent.text;
+
+        return currentText;
+    }
 
     Separator {
         id: separator
@@ -24,10 +59,13 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.leftMargin: 20
         anchors.rightMargin: 5
-        verticalAlignment: contentHeight > parent.height ? Text.AlignTop : Text.AlignVCenter
+        anchors.topMargin: 5
+        anchors.bottomMargin: 5
+        // Default is AlignTop, and to avoid binding loop we say that if it has been set to AlignVCenter then it stays that way.
+        verticalAlignment: Text.AlignVCenter// ? Text.AlignVCenter : contentHeight > parent.height ? Text.AlignTop : Text.AlignVCenter
         elide: Text.ElideMiddle
-        text: model.name;
-        font.pointSize: 14
+        text: datasetText();
+        font.pointSize: front ? 14 : 12
         font.strikeout: model.deleted
         wrapMode: Text.WordWrap
     }
@@ -36,6 +74,7 @@ Rectangle {
         color: "lemonchiffon"
         anchors.right: parent.right
         anchors.top: parent.top
+        anchors.rightMargin: 5
         height: parent.height - 2
         width: parent.height - 2
         Image {
@@ -43,7 +82,6 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             height: sourceSize.height
-            width: sourceSize.width
             fillMode: Image.PreserveAspectFit
             source: mouseArea.pressed ? imagePath + "ic_action_search_pressed.png" : imagePath + "ic_action_search.png"
             MouseArea {
