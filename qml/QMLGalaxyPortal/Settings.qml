@@ -115,10 +115,27 @@ Rectangle {
             anchors.right: parent.right
             color: settings.color
         }
+        Separator {
+            id: versionSeparator
+            anchors.top: passcodeSettings.bottom
+            width: parent.width
+            margin: Screen.pixelDensity * 5
+            color: settings.color
+        }
+        Text {
+            id: version
+            anchors.top: versionSeparator.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            elide: Text.ElideMiddle
+            text: qsTr("Version 0.8 (beta)")
+            font.pointSize: 15
+        }
+
         // Line at bottom to "round-off" the settings menu and put some footer space for better scrolling experience.
         Separator {
-            id: separator
-            anchors.bottom: passcodeSettings.bottom
+            anchors.top: version.bottom
             anchors.topMargin: Screen.pixelDensity * 2;
             anchors.bottomMargin: Screen.pixelDensity * 2
             width: parent.width

@@ -3,8 +3,8 @@ import QtQuick.Window 2.2
 import QtQuick.Controls 1.2
 
 Rectangle {
-    // Set rect to size of all children (+ margin - bit more than usual as otherwise it cuts off bottom of passcode edit field).
-    height: childrenRect.height + Screen.pixelDensity * 8
+    // Set rect to size of all children (+ margin). - minus description and edit field if not shown.
+    height: passcodeEnabledField.checked ? childrenRect.height + Screen.pixelDensity * 2 : childrenRect.height + Screen.pixelDensity * 2 - passcodeDescription.height - passcodeField.height
 
     property alias editFocus: passcodeField.hasActiveFocus
 
@@ -31,19 +31,9 @@ Rectangle {
         font.pointSize: 15
         font.bold: true
     }
-    Text {
-        id: passcodeDescription
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: passcodeTitle.bottom
-        anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
-        anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
-        elide: Text.ElideMiddle
-        text: qsTr("When enabled must type passcode for access.")
-        font.pointSize: 12
-    }
     CheckBox {
         id: passcodeEnabledField
-        anchors.top: passcodeDescription.bottom
+        anchors.top: passcodeTitle.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         text: qsTr("Enable Passcode")
@@ -52,10 +42,21 @@ Rectangle {
             passcodeEnabled = passcodeEnabledField.checked;
         }
     }
+    Text {
+        id: passcodeDescription
+        visible: passcodeEnabledField.checked ? true : false
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: passcodeEnabledField.bottom
+        anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+        anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+        elide: Text.ElideMiddle
+        text: qsTr("When enabled must type passcode for access.")
+        font.pointSize: 12
+    }
     EditBox {
         id: passcodeField
         visible: passcodeEnabledField.checked ? true : false
-        anchors.top: passcodeEnabledField.bottom
+        anchors.top: passcodeDescription.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
