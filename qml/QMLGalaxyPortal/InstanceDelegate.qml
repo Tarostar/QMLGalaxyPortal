@@ -13,6 +13,7 @@ Rectangle {
         id: separator
         anchors.bottom: parent.bottom
         width: parent.width
+        margin: 0
     }
 
     // Item title.

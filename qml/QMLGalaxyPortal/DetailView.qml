@@ -111,7 +111,7 @@ Rectangle {
             color: index%2 == 0 ? stateColour : stateColourAlt
             width: parent.width
             // Set height to height of text, plus a bit of margin.
-            height: textTitle.height > textData.height ? textTitle.height + 2 : textData.height + 5
+            height: textTitle.height > textData.height ? textTitle.height + mmItemMargin : textData.height + mmItemMargin
 
             Text {
                 id: textTitle

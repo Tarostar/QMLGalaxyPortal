@@ -4,6 +4,8 @@ import QtQuick.Controls 1.2
 import QtQuick.Controls.Styles 1.3
 
 Rectangle {
+    // IMPORTANT: If slider is set with minimumValue 1 then it keeps resetting, so adjust from scale starting at 0
+
     // Set rect to size of all children (+ margin).
     height: childrenRect.height + Screen.pixelDensity * 2
 
@@ -15,37 +17,39 @@ Rectangle {
     }
 
     Text {
-        id: pollFrequencyTitle
+        id: scaleTitle
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: separator.bottom
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
-        text: qsTr("Poll Frequency")
+        text: qsTr("Size Scale")
         font.pointSize: 15
         font.bold: true
     }
     Text {
-        id: pollFrequencyDescription
+        id: scaleDescription
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: pollFrequencyTitle.bottom
+        anchors.top: scaleTitle.bottom
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
-        text: pollFrequencyField.value === 0 ? qsTr("No update polling") : qsTr("Poll server every ") + pollFrequencyField.value + qsTr(" minutes.")
+        text: qsTr("x") + main.scale
         font.pointSize: 12
     }
     Slider {
-        id: pollFrequencyField
-        anchors.top: pollFrequencyDescription.bottom
+        id: scaleField
+        anchors.top: scaleDescription.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity * 2; anchors.rightMargin: Screen.pixelDensity * 2
-        value: main.periodicPolls / 60000
-        stepSize: 1
+        value: main.scale - 1
+        stepSize: 0.5
         minimumValue: 0
-        maximumValue: 60
+        maximumValue: 2
+        updateValueWhileDragging: false
+        tickmarksEnabled: true
         style: SliderStyle {
             groove: Rectangle {
                 implicitHeight: 4
@@ -65,8 +69,7 @@ Rectangle {
             }
         }
         onValueChanged: {
-            // Set poll interval in ms (from minutes) - remember zero is no polling.
-            main.periodicPolls = pollFrequencyField.value * 60000;
+            main.scale = scaleField.value + 1;
         }
     }
 }

@@ -6,7 +6,7 @@ Rectangle {
     property alias middleColor: middleLine.color
     property alias bottomColor: bottomLine.color
 
-    property int margin : 0
+    property int margin : mmItemMargin
 
     height: 3 + margin
 

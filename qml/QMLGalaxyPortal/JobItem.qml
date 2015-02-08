@@ -47,6 +47,7 @@ Rectangle {
         id: separator
         anchors.bottom: parent.bottom
         width: parent.width
+        margin: 0
     }
 
     Text {
@@ -62,7 +63,7 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideMiddle
         text: datasetText();
-        font.pointSize: front ? 14 : 12
+        font.pointSize: advancedFields && !front ? 12 : 14
         font.strikeout: model.deleted
         wrapMode: Text.WordWrap
     }
@@ -71,9 +72,9 @@ Rectangle {
         color: "lemonchiffon"
         anchors.right: parent.right
         anchors.top: parent.top
-        anchors.rightMargin: 5
+        anchors.rightMargin: 1
         height: parent.height - 2
-        width: parent.height > parent.width / 6 ? parent.width / 6 : parent.height - 2
+        width: parent.height > parent.width / 5 ? parent.width / 5 : parent.height - 2
         Image {
             id: image
             anchors.verticalCenter: parent.verticalCenter
@@ -81,19 +82,19 @@ Rectangle {
             height: sourceSize.height
             fillMode: Image.PreserveAspectFit
             source: mouseArea.pressed ? imagePath + "ic_action_search_pressed.png" : imagePath + "ic_action_search.png"
-            MouseArea {
-                id: mouseArea
-                hoverEnabled: true
-                anchors.fill: parent
-                onEntered: {jobItemDetails.color = "aquamarine" }
-                onPressed: {jobItemDetails.color = "aquamarine" }
-                onExited: {jobItemDetails.color = "lemonchiffon" }
-                onReleased: {jobItemDetails.color = "lemonchiffon" }
-                onPressAndHold: {jobItemDetails.color = "lemonchiffon" }
-                onClicked: {
-                    main.currentJobID = model.id;
-                    mainLoader.source = "DetailView.qml";
-                }
+        }
+        MouseArea {
+            id: mouseArea
+            hoverEnabled: true
+            anchors.fill: parent
+            onEntered: {jobItemDetails.color = "aquamarine" }
+            onPressed: {jobItemDetails.color = "aquamarine" }
+            onExited: {jobItemDetails.color = "lemonchiffon" }
+            onReleased: {jobItemDetails.color = "lemonchiffon" }
+            onPressAndHold: {jobItemDetails.color = "lemonchiffon" }
+            onClicked: {
+                main.currentJobID = model.id;
+                mainLoader.source = "DetailView.qml";
             }
         }
     }

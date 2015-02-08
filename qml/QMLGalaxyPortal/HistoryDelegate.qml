@@ -6,13 +6,14 @@ Rectangle {
 
     width: parent.width
     // pixelDensity: the number of physical pixels per millimeter.
-    height: Screen.pixelDensity * 9
+    height: Math.max(mmItemHeight, itemtitle.contentHeight + mmItemMargin)
     color: "ivory"
 
 
     Separator {
         anchors.bottom: parent.bottom
         width: parent.width
+        margin: 0
     }
 
     // Item title.

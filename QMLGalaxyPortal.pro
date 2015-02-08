@@ -68,7 +68,8 @@ OTHER_FILES += \
     qml/QMLGalaxyPortal/WebView.qml \
     qml/QMLGalaxyPortal/Welcome.qml \
     qml/QMLGalaxyPortal/utils.js \
-    qml/QMLGalaxyPortal/scrollbar.svg
+    qml/QMLGalaxyPortal/scrollbar.svg \
+    qml/QMLGalaxyPortal/ScaleSettings.qml
 
 # Icons / Images / Sounds
 RESOURCES += \

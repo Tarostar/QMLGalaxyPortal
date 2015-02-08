@@ -44,7 +44,6 @@ Rectangle {
         id: separator
         anchors.top: parent.top
         width: parent.width
-        margin: Screen.pixelDensity * 5
         color: parent.color
     }
     Text {

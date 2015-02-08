@@ -21,7 +21,7 @@ Item {
     }
 
     width: parent.width
-    height: flipBar.flipped ? backItem.textHeight + Screen.pixelDensity * 5: frontItem.textHeight + Screen.pixelDensity * 5
+    height: Math.max(mmItemHeight, flipBar.flipped ? backItem.textHeight + mmItemMargin : frontItem.textHeight + mmItemMargin)
 
     Flip {
         id: flipBar

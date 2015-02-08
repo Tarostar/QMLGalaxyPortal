@@ -101,11 +101,18 @@ Rectangle {
             anchors.top: pollFrequencySettings.bottom
             color: settings.color
         }
+        ScaleSettings {
+            id: scaleSettings
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: audioNotifications.bottom
+            color: settings.color
+        }
         FieldSettings {
             id: fieldSettings
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: audioNotifications.bottom
+            anchors.top: scaleSettings.bottom
             color: settings.color
         }
         AdvancedFieldsSettings {
@@ -127,7 +134,6 @@ Rectangle {
             id: versionSeparator
             anchors.top: passcodeSettings.bottom
             width: parent.width
-            margin: Screen.pixelDensity * 5
             color: settings.color
         }
         Text {
@@ -147,7 +153,6 @@ Rectangle {
             anchors.topMargin: Screen.pixelDensity * 2;
             anchors.bottomMargin: Screen.pixelDensity * 2
             width: parent.width
-            margin: Screen.pixelDensity * 5
             color: settings.color
         }
     }

@@ -35,6 +35,13 @@ Rectangle {
 
     property bool audioNotifications: true
 
+    // User set size multiplier.
+    property real scale: 1.5
+
+    // List item in millimetre (pixelDensity is number of pixels per mm).
+    property int mmItemHeight: Screen.pixelDensity * 10 * scale;
+    property int mmItemMargin: Screen.pixelDensity * 3 * scale;
+
     // Save settings.
     Settings {
         // Galaxy API settings.
@@ -64,6 +71,9 @@ Rectangle {
 
         // Audio Alerts
         property alias audioNotifications : main.audioNotifications
+
+        // User set size multiplier.
+        property alias scale : main.scale
     }
 
     // loader to spawn pages on top of list (e.g. for settings)
