@@ -11,7 +11,6 @@ Rectangle {
     ActionBar {
         id: webViewActionBar
         width: parent.width
-        height: Screen.pixelDensity * 9
         backButton.visible: true
         copyButton.visible: false
         backState: main.state

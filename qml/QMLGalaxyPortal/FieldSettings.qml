@@ -23,7 +23,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("Flipped History Fields")
-        font.pointSize: 15
+        font.pointSize: largeFonts ? 20 : 15
         font.bold: true
     }
     Text {
@@ -34,7 +34,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("Fields shown for history items when flipped.")
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 16 : 12
     }
     CheckBox {
         id: advanced_fields

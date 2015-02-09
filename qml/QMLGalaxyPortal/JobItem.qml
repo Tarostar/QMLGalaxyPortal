@@ -63,7 +63,7 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideMiddle
         text: datasetText();
-        font.pointSize: advancedFields && !front ? 12 : 14
+        font.pointSize: largeFonts ? 18 : advancedFields && !front ? 12 : 14
         font.strikeout: model.deleted
         wrapMode: Text.WordWrap
     }

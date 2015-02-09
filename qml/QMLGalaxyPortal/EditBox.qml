@@ -36,7 +36,7 @@ Rectangle {
         color: "black"
         // Workaround for QTBUG-36515.
         selectByMouse: Qt.platform.os !== "android"
-        font.pointSize: 16
+        font.pointSize: largeFonts ? 20 : 16
         width: parent.width - 16
         anchors.centerIn: parent
         onAccepted: {

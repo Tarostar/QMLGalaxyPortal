@@ -26,7 +26,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle
         text: model.name
-        font.pointSize: 15
+        font.pointSize: largeFonts ? 20 : 15
     }
     // Icon for item.
     Image {

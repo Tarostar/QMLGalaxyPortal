@@ -9,7 +9,7 @@ Rectangle {
         horizontalAlignment: Text.AlignHCenter
         width: parent.width
         text: qsTr("Welcome")
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 17 : 12
         font.bold: true
     }
     Text {
@@ -20,7 +20,7 @@ Rectangle {
         width: parent.width
         wrapMode: Text.WordWrap
         text: qsTr("Current Galaxy URL: ") + dataSource
-        font.pointSize: 11
+        font.pointSize: largeFonts ? 16 : 11
     }
     Text {
         id: httpStatus
@@ -30,7 +30,7 @@ Rectangle {
         width: parent.width
         wrapMode: Text.WordWrap
         text: dataSource.length > 0 && dataKey.length > 0 ? "Connection Status: " + jsonHistoriesModel.error : "Please set Galaxy URL and API Key"
-        font.pointSize: 11
+        font.pointSize: largeFonts ? 16 : 11
         color: jsonHistoriesModel.error.length > 0 ? "red" : "black"
         font.bold: true
     }
@@ -42,7 +42,7 @@ Rectangle {
         width: parent.width
         wrapMode: Text.WordWrap
         text: qsTr("Select the cog wheel on the right in the top action bar to configure.")
-        font.pointSize: 11
+        font.pointSize: largeFonts ? 16 : 11
     }
     Text {
         id: userguide
@@ -53,7 +53,7 @@ Rectangle {
         textFormat: Text.RichText
         wrapMode: Text.WordWrap
         text: qsTr("Download user guide:")
-        font.pointSize: 11
+        font.pointSize: largeFonts ? 16 : 11
     }
     Text {
         id: userguideURL
@@ -64,6 +64,6 @@ Rectangle {
         textFormat: Text.RichText
         wrapMode: Text.WordWrap
         text: "<a href=\"https://github.com/Tarostar/QMLGalaxyPortal/blob/master/GalaxyPortalUserGuide.pdf?raw=true\">https://github.com/Tarostar/QMLGalaxyPortal/blob/master/GalaxyPortalUserGuide.pdf?raw=true</a>"
-        font.pointSize: 9
+        font.pointSize: largeFonts ? 13 : 9
     }
 }

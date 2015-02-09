@@ -14,7 +14,7 @@ Rectangle {
         anchors.margins: 10
         elide: Text.ElideMiddle
         text: qsTr("Passcode")
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 16 : 12
         font.bold: true
     }
     EditBox {
@@ -51,7 +51,7 @@ Rectangle {
         anchors.margins: 10
         elide: Text.ElideMiddle
         text: qsTr("You can bypass the passcode, but you will have to enter your API key and passcode again.")
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 16 : 12
         wrapMode: Text.WordWrap
     }
     ImageButton {

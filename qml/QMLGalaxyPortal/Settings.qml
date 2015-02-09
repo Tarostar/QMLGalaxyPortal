@@ -12,7 +12,6 @@ Rectangle {
     ActionBar {
         id: settingsActionBar
         width: parent.width
-        height: Screen.pixelDensity * 9
         settingsButton.visible: false
         backButton.visible: true
         // Paste button is visible if an editbox has focus.
@@ -48,7 +47,7 @@ Rectangle {
             anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
             elide: Text.ElideMiddle
             text: qsTr("Galaxy URL")
-            font.pointSize: 15
+            font.pointSize: largeFonts ? 20 : 15
             font.bold: true
         }
         EditBox {
@@ -108,11 +107,18 @@ Rectangle {
             anchors.top: audioNotifications.bottom
             color: settings.color
         }
+        FontSettings {
+            id: fontSettings
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.top: scaleSettings.bottom
+            color: settings.color
+        }
         FieldSettings {
             id: fieldSettings
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.top: scaleSettings.bottom
+            anchors.top: fontSettings.bottom
             color: settings.color
         }
         AdvancedFieldsSettings {
@@ -144,7 +150,7 @@ Rectangle {
             anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             elide: Text.ElideMiddle
             text: qsTr("Version 0.8 (beta)")
-            font.pointSize: 15
+            font.pointSize: largeFonts ? 20 : 15
         }
 
         // Line at bottom to "round-off" the settings menu and put some footer space for better scrolling experience.

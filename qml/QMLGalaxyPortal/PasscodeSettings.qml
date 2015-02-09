@@ -27,7 +27,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("Passcode")
-        font.pointSize: 15
+        font.pointSize: largeFonts ? 20 : 15
         font.bold: true
     }
     CheckBox {
@@ -50,7 +50,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("When enabled must type passcode for access.")
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 16 : 12
     }
     EditBox {
         id: passcodeField

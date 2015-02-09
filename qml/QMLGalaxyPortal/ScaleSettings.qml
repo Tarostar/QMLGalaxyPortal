@@ -24,7 +24,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("Size Scale")
-        font.pointSize: 15
+        font.pointSize: largeFonts ? 20 : 15
         font.bold: true
     }
     Text {
@@ -35,7 +35,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("x") + main.scale
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 16 : 12
     }
     Slider {
         id: scaleField

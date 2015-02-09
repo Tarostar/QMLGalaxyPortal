@@ -42,6 +42,8 @@ Rectangle {
     property int mmItemHeight: Screen.pixelDensity * 10 * scale;
     property int mmItemMargin: Screen.pixelDensity * 3 * scale;
 
+    property bool largeFonts: false;
+
     // Save settings.
     Settings {
         // Galaxy API settings.
@@ -74,6 +76,9 @@ Rectangle {
 
         // User set size multiplier.
         property alias scale : main.scale
+
+        // Larger font size.
+        property alias largeFonts : main.largeFonts
     }
 
     // loader to spawn pages on top of list (e.g. for settings)
@@ -142,7 +147,6 @@ Rectangle {
         ActionBar {
             id: mainActionbar
             width: main.width
-            height: Screen.pixelDensity * 9
             // Back button only visible when possible to navigate back.
             backButton.visible: main.state === "" ? false : true
             actionBarTitle: main.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"

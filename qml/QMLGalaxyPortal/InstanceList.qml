@@ -45,7 +45,6 @@ Rectangle {
     ActionBar {
         id: instanceListActionBar
         width: parent.width
-        height: Screen.pixelDensity * 9
         backButton.visible: true
         backState: main.state
         backSource: "Settings.qml";

@@ -54,7 +54,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("Login")
-        font.pointSize: 15
+        font.pointSize: largeFonts ? 20 : 15
         font.bold: true
     }
     Text {
@@ -64,7 +64,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("Username")
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 16 : 12
     }
     EditBox {
         id: baseAuthUsername
@@ -87,7 +87,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("Password")
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 16 : 12
     }
     EditBox {
         id: baseAuthPassword
@@ -127,6 +127,6 @@ Rectangle {
         anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: statusMessages
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 16 : 12
     }
 }

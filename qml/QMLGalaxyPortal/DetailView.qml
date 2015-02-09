@@ -92,7 +92,6 @@ Rectangle {
     ActionBar {
         id: detailsActionBar
         width: main.width
-        height: Screen.pixelDensity * 9
         backButton.visible: true
         backState: main.state
     }
@@ -120,7 +119,7 @@ Rectangle {
                 anchors.leftMargin: 10
                 width: Math.max(160, paintedWidth)
                 text: model.fieldName + ":"
-                font.pointSize: 12
+                font.pointSize: largeFonts ? 16 : 12
                 font.bold: true
             }
             Text {
@@ -130,7 +129,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 elide: Text.ElideMiddle
                 text: model.fieldData
-                font.pointSize: 12
+                font.pointSize: largeFonts ? 16 : 12
                 textFormat: Text.RichText
             }
             MouseArea {

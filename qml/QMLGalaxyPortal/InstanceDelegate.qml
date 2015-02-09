@@ -26,7 +26,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle
         text: model.url
-        font.pointSize: 15
+        font.pointSize: largeFonts ? 20 : 15
     }
     Rectangle {
         id: deleteInstance

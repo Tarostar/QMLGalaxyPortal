@@ -4,6 +4,7 @@ import QtQuick.Window 2.2
 Rectangle {
 
     color: "burlywood"
+    height: mmItemHeight
 
     // Expose action bar properties so they can be changed.
     property alias actionBarTitle: title.text
@@ -30,12 +31,12 @@ Rectangle {
     Text {
         id: title
         anchors.left: actionBack.right
-        anchors.leftMargin: 5
+        anchors.leftMargin: mmItemMargin / 2
         anchors.right: actionCopy.visible ? actionCopy.left : actionPaste.visible ? actionPaste.left : actionSettings.visible ? actionSettings.left : parent.right
         anchors.verticalCenter: parent.verticalCenter
         elide: Text.ElideMiddle
         text: qsTr("Galaxy Portal")
-        font.pointSize: 15
+        font.pointSize: largeFonts ? 18 : 15
     }
 
     // Back button.
@@ -46,7 +47,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
         width: image.sourceSize.width
-        anchors.rightMargin: 10
+        anchors.rightMargin: mmItemMargin
         imageSource: iconRoot + "ic_action_back.png"
         pressedImageSource: iconRoot + "ic_action_back_pressed.png"
         onClicked: {
@@ -70,7 +71,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
         width: image.sourceSize.width
-        anchors.rightMargin: 10
+        anchors.rightMargin: mmItemMargin
         imageSource: iconRoot + "ic_action_copy.png"
         pressedImageSource: iconRoot + "ic_action_copy_pressed.png"
         onClicked: {
@@ -86,7 +87,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
         width: image.sourceSize.width
-        anchors.rightMargin: 10
+        anchors.rightMargin: mmItemMargin
         imageSource: iconRoot + "ic_action_paste.png"
         pressedImageSource: iconRoot + "ic_action_paste_pressed.png"
         onClicked: {
@@ -103,7 +104,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
         width: image.sourceSize.width
-        anchors.rightMargin: 10
+        anchors.rightMargin: mmItemMargin
         imageSource: iconRoot + "ic_action_web_site.png"
         pressedImageSource: iconRoot + "ic_action_web_site_pressed.png"
         onClicked: {
@@ -119,7 +120,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         height: image.sourceSize.height
         width: image.sourceSize.width
-        anchors.rightMargin: 10
+        anchors.rightMargin: mmItemMargin
         imageSource: iconRoot + "ic_action_settings.png"
         pressedImageSource: iconRoot + "ic_action_settings_pressed.png"
         onClicked: {

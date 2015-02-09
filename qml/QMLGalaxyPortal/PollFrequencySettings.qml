@@ -22,7 +22,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: qsTr("Poll Frequency")
-        font.pointSize: 15
+        font.pointSize: largeFonts ? 20 : 15
         font.bold: true
     }
     Text {
@@ -33,7 +33,7 @@ Rectangle {
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
         text: pollFrequencyField.value === 0 ? qsTr("No update polling") : qsTr("Poll server every ") + pollFrequencyField.value + qsTr(" minutes.")
-        font.pointSize: 12
+        font.pointSize: largeFonts ? 16 : 12
     }
     Slider {
         id: pollFrequencyField

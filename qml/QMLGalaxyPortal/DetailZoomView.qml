@@ -13,7 +13,6 @@ Rectangle {
     ActionBar {
         id: detailZoomActionBar
         width: parent.width
-        height: Screen.pixelDensity * 9
         backButton.visible: true
         copyButton.visible: true
         backState: main.state
@@ -38,7 +37,7 @@ Rectangle {
             anchors.top: parent.top
             anchors.margins: 10
             text: ""
-            font.pointSize: 12
+            font.pointSize: largeFonts ? 16 : 12
             font.bold: true
         }
         Text {
@@ -47,7 +46,7 @@ Rectangle {
             anchors.top: textTitle.bottom
             anchors.margins: 10
             text: ""
-            font.pointSize: 12
+            font.pointSize: largeFonts ? 16 : 12
             textFormat: Text.RichText
         }
         // Hidden copy of field for copying (Text fields don't have access to clipboard copy/cut/paste)
