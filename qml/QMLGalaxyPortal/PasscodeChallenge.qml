@@ -69,6 +69,8 @@ Rectangle {
             main.dataKey = "";
             main.passcode = "";
             main.username = "";
+            main.instanceList = "";
+            main.instanceListKeys = "";
             passcodeChallenge.done();
         }
     }

@@ -74,12 +74,12 @@ Item {
     }
 
     // Timer triggers periodic poll to retrieve any changes server side.
-    Timer {
+    /*Timer {
         id: pollTimer
         interval: pollInterval
         repeat: true
         onTriggered: { doPoll(); }
-    }
+    }*/
 
     function doPoll() {
         json = "";
