@@ -1,22 +1,21 @@
 #include "ticker.h"
 #include <chrono>
 #include <thread>
-#include <QDebug>
 
 Ticker::Ticker(QObject *parent) :
     QObject(parent)
 {
+    m_tickInterval = 0;
 }
 
 void Ticker::mainThread()
 {
     int secondsCounter = 0;
-    int tickInterval = 0;
 
     // Loops every SLEEP_INTERVAL and checks if the tickInterval has elapsed (zero means disabled).
     while(true)
     {
-        if (tickInterval > 0 && secondsCounter >= tickInterval)
+        if (m_tickInterval > 0 && secondsCounter >= m_tickInterval)
         {
             secondsCounter = 0;
             emit tick();
@@ -24,11 +23,14 @@ void Ticker::mainThread()
 
         std::this_thread::sleep_for(std::chrono::seconds(sleep_interval));
 
-        // Update the tickInerval.
-        tickInterval = emit getTickInterval();
+        if (m_tickInterval < 0)
+        {
+            // Time to die.
+            break;
+        }
 
         // Interval can have changed, so ensure counter stays at zero if tick interval is set to zero.
-        if (tickInterval == 0)
+        if (m_tickInterval == 0)
         {
             secondsCounter = 0;
         }
@@ -36,10 +38,13 @@ void Ticker::mainThread()
         {
             secondsCounter += sleep_interval;
         }
-
-        // qDebug("Count: " + QString::number(secondsCounter).toLatin1() + " / " + QString::number(tickInterval).toLatin1());
     }
 
-    // Terminate thread and signal for any cleanup.
-    emit finished();
+    // Terminate thread - cleanup handled by aboutToQuit signal.
+}
+
+void Ticker::setTickInterval(int interval)
+{
+    // This should only ever be set here, and only by the event thread (otherwise we need to start using mutex and so on).
+    m_tickInterval = interval;
 }

@@ -8,25 +8,20 @@
 #ifndef BRIDGE_H
 #define BRIDGE_H
 
+class Ticker;
 #include <QObject>
-#include <QMediaPlayer>
 
 class Bridge : public QObject
 {
     Q_OBJECT
-    // Q_PROPERTY(int count READ count WRITE setCount NOTIFY countChanged)
 
 public:
     explicit Bridge(QObject *parent = 0);
+    void setTicker(Ticker* ticker);
 
 private:
-    int m_tickInterval; // seconds, zero is disabled
-    // int m_count;
-    // QMediaPlayer * m_player;
-
-/*public:
-    void setCount(const int i);
-    int count() const;*/
+    Ticker *    m_ticker;
+    bool        m_bTickerShutdown;
 
 signals:
     // void countChanged();
@@ -34,8 +29,9 @@ signals:
 
 public slots:
     void setTickInterval(const int seconds);
-    int getTickInterval();
     void tick();
+    void killTicker();
+    void tickerStopped();
 
 };
 

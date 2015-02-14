@@ -17,11 +17,14 @@ class Ticker : public QObject
     Q_OBJECT
 public:
     explicit Ticker(QObject *parent = 0);
+    void setTickInterval(int interval);
+
+private:
+    int m_tickInterval;
 
 signals:
     void tick();
-    void finished();
-    int getTickInterval();
+    void exitThread();
 
 public slots:
     void mainThread();
