@@ -49,6 +49,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: login.bottom
         anchors.margins: 10
+        width: parent.width
         elide: Text.ElideMiddle
         text: qsTr("You can bypass the passcode, but you will have to enter your API key and passcode again.")
         font.pointSize: largeFonts ? 16 : 12
