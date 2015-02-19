@@ -180,7 +180,7 @@ Rectangle {
             target: screenlayout
             easing.type: Easing.OutCubic
             property: "x"
-            duration: 500.0
+            duration: 1000.0
         }
     }
     states:
