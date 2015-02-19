@@ -129,11 +129,6 @@ Rectangle {
         }
     }
 
-    // Empty list view.
-    Welcome {
-        visible: (!challengeDialog.visible && jsonHistoriesModel.count === 0 && main.state === "")
-    }
-
     // Init view at startup.
     Component.onCompleted:{
         if (main.currentHistoryID.length > 0) {
@@ -150,6 +145,12 @@ Rectangle {
             // Back button only visible when possible to navigate back.
             backButton.visible: main.state === "" ? false : true
             actionBarTitle: main.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
+        }
+        // Empty list view.
+        Welcome {
+            width: main.width
+            height: main.height - mainActionbar.height
+            visible: (!challengeDialog.visible && jsonHistoriesModel.count === 0 && main.state === "")
         }
         Row {
             id: screenlayout

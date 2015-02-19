@@ -31,10 +31,10 @@ int main(int argc, char *argv[])
     QObject::connect(ticker, SIGNAL(tick()), bridge, SLOT(tick()), Qt::BlockingQueuedConnection);
     QObject::connect(thread, SIGNAL(started()), ticker, SLOT(mainThread()));
     QObject::connect(&app, SIGNAL(aboutToQuit()), bridge, SLOT(killTicker()));
-    QObject::connect(ticker, SIGNAL(aboutToQuit()), thread, SLOT(quit()));
-    QObject::connect(ticker, SIGNAL(aboutToQuit()), ticker, SLOT(deleteLater()));
-    QObject::connect(ticker, SIGNAL(aboutToQuit()), thread, SLOT(deleteLater()));
-    QObject::connect(ticker, SIGNAL(aboutToQuit()), bridge, SLOT(deleteLater()));
+    QObject::connect(&app, SIGNAL(aboutToQuit()), thread, SLOT(quit()));
+    QObject::connect(&app, SIGNAL(aboutToQuit()), ticker, SLOT(deleteLater()));
+    QObject::connect(&app, SIGNAL(aboutToQuit()), thread, SLOT(deleteLater()));
+    QObject::connect(&app, SIGNAL(aboutToQuit()), bridge, SLOT(deleteLater()));
     thread->start();
 
     // Setup QQuickView window for displaying Qt Quick GUI and connect with background thread through the bridge interface.

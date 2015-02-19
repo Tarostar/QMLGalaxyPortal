@@ -1,10 +1,9 @@
 import QtQuick 2.3
 
 Rectangle {
-    anchors.fill: parent
     Text {
         id: welcome
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.top: parent.top
         anchors.margins: 10
         horizontalAlignment: Text.AlignHCenter
         width: parent.width
