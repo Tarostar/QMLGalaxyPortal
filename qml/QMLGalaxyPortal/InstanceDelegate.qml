@@ -42,7 +42,7 @@ Rectangle {
             height: sourceSize.height
             width: sourceSize.width
             fillMode: Image.PreserveAspectFit
-            source: mouseArea.pressed ? imagePath + "ic_action_discard_pressed.png" : imagePath + "ic_action_discard.png"
+            source: mouseArea.pressed ? iconRoot + "ic_action_discard_pressed.png" : iconRoot + "ic_action_discard.png"
             MouseArea {
                 id: mouseArea
                 hoverEnabled: true

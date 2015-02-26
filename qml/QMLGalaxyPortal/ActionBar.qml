@@ -24,9 +24,6 @@ Rectangle {
     signal paste()
     signal copy()
 
-    // Draws buttons at original size for a given resolution (i.e. mdpi, hdpi, xhdpi or xxhdpi).
-    property string iconRoot: "qrc:/resources/resources/icons/" + res[resIndex] + "/"
-
     // Title shown in Action Bar (can be overriden using actionBarTitle alias for custom headings).
     Text {
         id: title

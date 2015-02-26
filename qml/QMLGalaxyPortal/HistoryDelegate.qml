@@ -37,7 +37,7 @@ Rectangle {
         height: sourceSize.height / 2
         width: sourceSize.width / 2
         fillMode: Image.PreserveAspectFit
-        source: mouseArea.pressed ? imagePath + "ic_action_next_item_pressed.png" : imagePath + "ic_action_next_item.png"
+        source: mouseArea.pressed ? iconRoot + "ic_action_next_item_pressed.png" : iconRoot + "ic_action_next_item.png"
     }
 
     // Items in the history list are clickable.
