@@ -42,7 +42,6 @@ Rectangle {
         onAccepted: {
             Qt.inputMethod.commit()
             Qt.inputMethod.hide()
-            textfield.accepted()
         }
         onEditingFinished: {
             // Edit field lost focus, or return/enter was pressed so send signal.

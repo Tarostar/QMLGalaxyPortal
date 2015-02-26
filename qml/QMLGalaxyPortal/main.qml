@@ -94,11 +94,9 @@ Rectangle {
     }
 
     // Properties to manage different device resolutions and screen sizes (handled in utils.js).
-    property var res: ["mdpi","hdpi","xhdpi", "xxhdpi"]
-    property var devwidth: ["320", "480", "600", "1024", "1280", "1920", "2560"]
+    readonly property var res: ["mdpi","hdpi","xhdpi", "xxhdpi"]
     readonly property int resIndex: Utils.getResolutionIndex(Screen.pixelDensity)
-    readonly property int widthIndex: Utils.getScreenWidthIndex(Screen.width)
-    property string imagePath: "qrc:/resources/resources/icons/" + res[resIndex] + "/"
+    readonly property string imagePath: "qrc:/resources/resources/icons/" + res[resIndex] + "/"
 
     // Model for the list of histories (main list).
     JSONListModel {
