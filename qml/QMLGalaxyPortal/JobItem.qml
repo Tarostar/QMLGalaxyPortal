@@ -81,7 +81,7 @@ Rectangle {
             anchors.horizontalCenter: parent.horizontalCenter
             height: sourceSize.height
             fillMode: Image.PreserveAspectFit
-            source: mouseArea.pressed ? iconRoot + "ic_action_search_pressed.png" : iconRoot + "ic_action_search.png"
+            source: mouseArea.pressed ? iconRoot + "ic_action_zoom_pressed.png" : iconRoot + "ic_action_zoom.png"
         }
         MouseArea {
             id: mouseArea

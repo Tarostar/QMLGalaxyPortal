@@ -45,14 +45,6 @@
         <file>resources/images/red_button_100_32_pressed.png</file>
         <file>resources/images/green_button_100_32.png</file>
         <file>resources/images/green_button_100_32_pressed.png</file>
-        <file>resources/icons/mdpi/ic_action_search.png</file>
-        <file>resources/icons/mdpi/ic_action_search_pressed.png</file>
-        <file>resources/icons/hdpi/ic_action_search.png</file>
-        <file>resources/icons/hdpi/ic_action_search_pressed.png</file>
-        <file>resources/icons/xhdpi/ic_action_search.png</file>
-        <file>resources/icons/xhdpi/ic_action_search_pressed.png</file>
-        <file>resources/icons/xxhdpi/ic_action_search.png</file>
-        <file>resources/icons/xxhdpi/ic_action_search_pressed.png</file>
         <file>resources/icons/mdpi/ic_action_paste.png</file>
         <file>resources/icons/mdpi/ic_action_paste_pressed.png</file>
         <file>resources/icons/hdpi/ic_action_paste.png</file>
@@ -87,5 +79,13 @@
         <file>resources/icons/xxhdpi/ic_action_discard_pressed.png</file>
         <file>resources/sounds/ping.mp3</file>
         <file>resources/sounds/alert.mp3</file>
+        <file>resources/icons/hdpi/ic_action_zoom.png</file>
+        <file>resources/icons/hdpi/ic_action_zoom_pressed.png</file>
+        <file>resources/icons/mdpi/ic_action_zoom.png</file>
+        <file>resources/icons/mdpi/ic_action_zoom_pressed.png</file>
+        <file>resources/icons/xhdpi/ic_action_zoom.png</file>
+        <file>resources/icons/xhdpi/ic_action_zoom_pressed.png</file>
+        <file>resources/icons/xxhdpi/ic_action_zoom.png</file>
+        <file>resources/icons/xxhdpi/ic_action_zoom_pressed.png</file>
     </qresource>
 </RCC>
