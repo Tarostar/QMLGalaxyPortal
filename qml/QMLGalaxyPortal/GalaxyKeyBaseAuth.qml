@@ -115,7 +115,7 @@ Rectangle {
             statusMessages = "retrieving API...";
             galaxyLoginStatus.color = "black";
 
-            Utils.poll(galaxyUrl.text + "/api/authenticate/baseauth", onReady, galaxyAuthentication, "Basic "+Qt.btoa(baseAuthUsername.text+":"+baseAuthPassword.text));
+            Utils.poll(galaxyUrl.text + "/api/authenticate/baseauth", onReady, galaxyAuthentication, "Basic " + Qt.btoa(baseAuthUsername.text + ":" + baseAuthPassword.text));
         }
     }
     Text {

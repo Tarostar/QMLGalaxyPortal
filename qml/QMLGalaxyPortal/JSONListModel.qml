@@ -134,7 +134,7 @@ Item {
                 checkState(jsonModel.get(index).state, objectArray[object].state);
                 jsonModel.set(index, objectArray[object]);
             } else {
-                // Did not exists, see if exists at a different position.
+                // Did not exist, see if exists at a different position.
                 var bFound = false;
                 for (i = 0; i < jsonModel.count; i++) {
                     if (jsonModel.get(i).id === objectArray[object].id) {

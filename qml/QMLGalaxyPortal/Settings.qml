@@ -152,10 +152,25 @@ Rectangle {
             text: qsTr("Version 1.0 (beta)")
             font.pointSize: largeFonts ? 20 : 15
         }
+        ImageButton {
+            id: license
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: version.bottom
+            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
+            height: image.sourceSize.height
+            width: image.sourceSize.width
+            imageSource: "qrc:/resources/resources/images/green_button_100_32.png"
+            pressedImageSource: "qrc:/resources/resources/images/green_button_100_32_pressed.png"
+            title: "License"
+            onClicked: {
+                focus = true;
+                mainLoader.source = "GPL.qml";
+            }
+        }
 
         // Line at bottom to "round-off" the settings menu and put some footer space for better scrolling experience.
         Separator {
-            anchors.top: version.bottom
+            anchors.top: license.bottom
             anchors.topMargin: Screen.pixelDensity * 2;
             anchors.bottomMargin: Screen.pixelDensity * 2
             width: parent.width
