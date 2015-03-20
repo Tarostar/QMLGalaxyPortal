@@ -17,7 +17,15 @@ Use the magnifier glass to zoom in and retrieve additional details and take a pe
 
 # Development
 
-Developed at the Biomedicial Informatics research group at the Department of Informatics, University of Oslo. The app was developed in Qt using the QML language and JavaScript for cross-platform deployment. The app is completely free and open source.
+Developed at the Biomedicial Informatics research group at the Department of Informatics, University of Oslo. The app was developed in Qt (http://www.qt.io) using the QML language and JavaScript for cross-platform deployment. Access to Galaxy is done through the RESTful Galaxy API using JSON formatted data. This keeps bandwidth use low, and the polling frequency can be configured by the user in the settings.
+
+There are many public and private Galaxy instances and being open-source a local instance can easily be deployed. In addition there are other services, such as the Hyperbrowser, which build upon the Galaxy platform and if these have a recent version of the Galaxy API enabled it is possible to also use the Galaxy Portal app to interface with these servers. To make it easier for researchers to use the app with multiple such Galaxy instances the app allows saving connection details to easily switch between sites.
+
+The app is completely free and open source.
+
+Qt (http://www.qt.io), a cross platform framework, has been used to develop an app that compiles to an OS native app, and provides a touch based interface that scales according to screen size and resolution. The Qt framework is C++ based, but the app was primarily developed using JavaScript and the Qt Modelling Language (QML). Compiling to a native Android and iOS app ensures that it performs optimally, while being able to implement the user interface and logic using QML and JavaScript allows for rapid development of a sophisticated and responsive interface using animations and platform native styling.
+Access to Galaxy data is achieved using the RESTful Galaxy API to retrieve JSON formatted data which keeps bandwidth use low, and the polling frequency can be configured by the user. Interfacing to Galaxy through the API also means that the app can connect to any Galaxy site, or any tools built on top of the Galaxy source. 
+Future versions of the app could be extended to allow jobs to be scheduled providing a more complete mobile interface for Galaxy.
 
 # Documentation
 
