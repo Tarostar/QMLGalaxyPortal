@@ -149,7 +149,7 @@ Rectangle {
             anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
             anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
             elide: Text.ElideMiddle
-            text: qsTr("Version 1.0 (beta)")
+            text: qsTr("Version 1.0")
             font.pointSize: largeFonts ? 20 : 15
         }
         ImageButton {
