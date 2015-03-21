@@ -42,6 +42,7 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         height: Screen.pixelDensity * 9
+        scale: main.scale >= 2 ? 1.5 : 1
         text: qsTr("Enable Advanced Fields")
         checked: main.advancedFields
         onClicked: {

@@ -37,6 +37,7 @@ Rectangle {
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         text: qsTr("Enable Passcode")
         checked: passcodeEnabled
+        scale: main.scale >= 2 ? 1.5 : 1
         onClicked: {
             passcodeEnabled = passcodeEnabledField.checked;
         }

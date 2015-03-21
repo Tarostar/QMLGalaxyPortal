@@ -7,7 +7,9 @@ Item {
     property url pressedImageSource
     property alias image: buttonImage
     // Optional button text
-    property string title: ""
+    property alias title: information.text
+    property alias textHeight: information.contentHeight
+    property alias textWidth: information.contentWidth
 
     signal clicked
 
@@ -23,7 +25,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             elide: Text.ElideMiddle
             text: title
-            font.pointSize: 10
+            font.pointSize: largeFonts ? 18 : 10
         }
     }
 

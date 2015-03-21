@@ -36,7 +36,7 @@ Rectangle {
     property bool audioNotifications: true
 
     // User set size multiplier.
-    property real scale: 1.5
+    property real scale: 1.0
 
     // List item in millimetre (pixelDensity is number of pixels per mm).
     property int mmItemHeight: Screen.pixelDensity * 10 * scale;
@@ -97,6 +97,7 @@ Rectangle {
     readonly property var res: ["mdpi","hdpi","xhdpi", "xxhdpi"]
     readonly property int resIndex: Utils.getResolutionIndex(Screen.pixelDensity)
     readonly property string iconRoot: "qrc:/resources/resources/icons/" + res[resIndex] + "/"
+    readonly property string imageRoot: "qrc:/resources/resources/images/" + res[resIndex] + "/"
 
     // Model for the list of histories (main list).
     JSONListModel {

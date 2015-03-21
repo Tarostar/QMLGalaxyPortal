@@ -52,20 +52,20 @@ Rectangle {
         tickmarksEnabled: true
         style: SliderStyle {
             groove: Rectangle {
-                implicitHeight: 4
                 color: "white"
                 border.color: "gray"
-                border.width: 1
-                radius: 2
+                border.width: Screen.pixelDensity / 4
+                implicitHeight: Screen.pixelDensity * main.scale
+                radius: Screen.pixelDensity / 2 * main.scale
             }
             handle: Rectangle {
                 anchors.centerIn: parent
                 color: control.pressed ? "lightgray" : "white"
                 border.color: "gray"
-                border.width: 1
-                implicitWidth: 18
-                implicitHeight: 18
-                radius: 12
+                border.width: Screen.pixelDensity / 4
+                implicitWidth: Screen.pixelDensity * 5 * main.scale
+                implicitHeight: Screen.pixelDensity * 5 * main.scale
+                radius: Screen.pixelDensity * 4 * main.scale
             }
         }
         onValueChanged: {

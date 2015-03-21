@@ -5,7 +5,6 @@
         <file>resources/icons/biotech-48.png</file>
         <file>resources/icons/biotech-64.png</file>
         <file>resources/icons/biotech-128.png</file>
-        <file alias="main_image">resources/images/QMLGalaxyPortal80.png</file>
         <file>resources/icons/btn.png</file>
         <file>resources/icons/btn_highlighted.png</file>
         <file>resources/icons/xxhdpi/ic_action_settings.png</file>
@@ -40,11 +39,6 @@
         <file>resources/icons/xhdpi/ic_action_next_item_pressed.png</file>
         <file>resources/icons/xxhdpi/ic_action_next_item.png</file>
         <file>resources/icons/xxhdpi/ic_action_next_item_pressed.png</file>
-        <file>resources/images/red_button_300_96.png</file>
-        <file>resources/images/red_button_100_32.png</file>
-        <file>resources/images/red_button_100_32_pressed.png</file>
-        <file>resources/images/green_button_100_32.png</file>
-        <file>resources/images/green_button_100_32_pressed.png</file>
         <file>resources/icons/mdpi/ic_action_paste.png</file>
         <file>resources/icons/mdpi/ic_action_paste_pressed.png</file>
         <file>resources/icons/hdpi/ic_action_paste.png</file>
@@ -87,5 +81,17 @@
         <file>resources/icons/xhdpi/ic_action_zoom_pressed.png</file>
         <file>resources/icons/xxhdpi/ic_action_zoom.png</file>
         <file>resources/icons/xxhdpi/ic_action_zoom_pressed.png</file>
+        <file>resources/images/mdpi/gray_button.png</file>
+        <file>resources/images/mdpi/green_button.png</file>
+        <file>resources/images/mdpi/red_button.png</file>
+        <file>resources/images/hdpi/gray_button.png</file>
+        <file>resources/images/hdpi/green_button.png</file>
+        <file>resources/images/hdpi/red_button.png</file>
+        <file>resources/images/xhdpi/gray_button.png</file>
+        <file>resources/images/xhdpi/green_button.png</file>
+        <file>resources/images/xhdpi/red_button.png</file>
+        <file>resources/images/xxhdpi/gray_button.png</file>
+        <file>resources/images/xxhdpi/green_button.png</file>
+        <file>resources/images/xxhdpi/red_button.png</file>
     </qresource>
 </RCC>

@@ -30,11 +30,11 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: passcode.bottom
         anchors.margins: 5
-        height: image.sourceSize.height
-        width: image.sourceSize.width
-        imageSource: "qrc:/resources/resources/images/green_button_100_32.png"
-        pressedImageSource: "qrc:/resources/resources/images/green_button_100_32_pressed.png"
-        title: "Login"
+        height: textHeight + mmItemMargin * 4
+        width: textWidth + mmItemMargin * 4
+        imageSource: imageRoot + "green_button.png"
+        pressedImageSource: imageRoot + "gray_button.png"
+        title: qsTr("Login")
         onClicked: {
             if (main.passcode === passcode.text) {
                 passcodeChallenge.done();
@@ -61,11 +61,11 @@ Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: information.bottom
         anchors.margins: 5
-        height: image.sourceSize.height
-        width: image.sourceSize.width
-        imageSource: "qrc:/resources/resources/images/red_button_100_32.png"
-        pressedImageSource: "qrc:/resources/resources/images/red_button_100_32_pressed.png"
-        title: "Bypass"
+        height: textHeight + mmItemMargin * 4
+        width: textWidth + mmItemMargin * 4
+        imageSource: imageRoot + "red_button.png"
+        pressedImageSource: imageRoot + "gray_button.png"
+        title: qsTr("Bypass")
         onClicked: {
             main.dataKey = "";
             main.passcode = "";

@@ -146,22 +146,22 @@ Rectangle {
             id: version
             anchors.top: versionSeparator.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
-            anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
+            anchors.topMargin: mmItemMargin; anchors.bottomMargin: mmItemMargin
+            anchors.leftMargin: mmItemMargin / 2; anchors.rightMargin: mmItemMargin / 2
             elide: Text.ElideMiddle
-            text: qsTr("Version 1.0")
+            text: qsTr("Version 1.1")
             font.pointSize: largeFonts ? 20 : 15
         }
         ImageButton {
             id: license
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: version.bottom
-            anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
-            height: image.sourceSize.height
-            width: image.sourceSize.width
-            imageSource: "qrc:/resources/resources/images/green_button_100_32.png"
-            pressedImageSource: "qrc:/resources/resources/images/green_button_100_32_pressed.png"
-            title: "License"
+            anchors.topMargin: mmItemMargin; anchors.bottomMargin: mmItemMargin
+            height: textHeight + mmItemMargin * 4
+            width: textWidth + mmItemMargin * 4
+            imageSource: imageRoot + "green_button.png"
+            pressedImageSource: imageRoot + "gray_button.png"
+            title: qsTr("License")
             onClicked: {
                 focus = true;
                 mainLoader.source = "GPL.qml";

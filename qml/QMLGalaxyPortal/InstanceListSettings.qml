@@ -11,11 +11,11 @@ Rectangle {
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.margins: 5
-        height: image.sourceSize.height
-        width: image.sourceSize.width
-        imageSource: "qrc:/resources/resources/images/green_button_100_32.png"
-        pressedImageSource: "qrc:/resources/resources/images/green_button_100_32_pressed.png"
-        title: "Save"
+        height: textHeight + mmItemMargin * 4
+        width: textWidth + mmItemMargin * 4
+        imageSource: imageRoot + "green_button.png"
+        pressedImageSource: imageRoot + "gray_button.png"
+        title: qsTr("Save")
         onClicked: {
             focus = true;
             if (main.dataSource.length > 0 && main.dataKey.length > 0) {
@@ -30,11 +30,11 @@ Rectangle {
         anchors.left: save.right
         anchors.top: parent.top
         anchors.margins: 5
-        height: image.sourceSize.height
-        width: image.sourceSize.width
-        imageSource: "qrc:/resources/resources/images/green_button_100_32.png"
-        pressedImageSource: "qrc:/resources/resources/images/green_button_100_32_pressed.png"
-        title: "Load"
+        height: textHeight + mmItemMargin * 4
+        width: textWidth + mmItemMargin * 4
+        imageSource: imageRoot + "green_button.png"
+        pressedImageSource: imageRoot + "gray_button.png"
+        title: qsTr("Load")
         onClicked: {
             focus = true;
             mainLoader.source = "InstanceList.qml";

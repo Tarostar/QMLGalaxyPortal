@@ -18,6 +18,7 @@ Rectangle {
         anchors.top: separator.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         height: Screen.pixelDensity * 9
+        scale: main.scale >= 2 ? 1.5 : 1
         text: qsTr("Audio Notifications")
         checked: main.audioNotifications
         onClicked: {

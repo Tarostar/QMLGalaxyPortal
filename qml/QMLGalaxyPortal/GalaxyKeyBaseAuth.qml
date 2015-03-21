@@ -104,10 +104,10 @@ Rectangle {
         anchors.top: baseAuthPassword.bottom
         anchors.topMargin: Screen.pixelDensity * 2; anchors.bottomMargin: Screen.pixelDensity * 2
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
-        height: image.sourceSize.height
-        width: image.sourceSize.width
-        imageSource: "qrc:/resources/resources/images/green_button_100_32.png"
-        pressedImageSource: "qrc:/resources/resources/images/green_button_100_32_pressed.png"
+        height: textHeight + mmItemMargin * 4
+        width: textWidth + mmItemMargin * 4
+        imageSource: imageRoot + "green_button.png"
+        pressedImageSource: imageRoot + "gray_button.png"
         title: qsTr("Login")
         onClicked: {
             // Retrieve API Key.
