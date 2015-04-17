@@ -30,8 +30,8 @@ Rectangle {
     property string passcode: ""
     property bool passcodeEnabled: false
 
-    // Frequency of periodic polls (zero means no polling) - default once a minute.
-    property int periodicPolls: 60000
+    // Frequency of periodic polls (zero means no polling) - default is never (requiring user to enable).
+    property int periodicPolls: 0
 
     property bool audioNotifications: true
 

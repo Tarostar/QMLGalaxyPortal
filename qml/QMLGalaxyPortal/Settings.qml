@@ -35,6 +35,8 @@ Rectangle {
         anchors.top: settingsActionBar.bottom
         width: main.width
         height: main.height - settingsActionBar.height
+        // Note binding loop might be reported, but may not be a real problem - see QTBUG-35038.
+        // This should be correct way to set flickable area. See: http://doc.qt.io/qt-5/qml-qtquick-flickable.html#contentHeight-prop
         contentWidth: contentItem.childrenRect.width
         contentHeight: contentItem.childrenRect.height
         clip: true
