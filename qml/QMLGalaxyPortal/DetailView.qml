@@ -14,6 +14,8 @@ Rectangle {
     property string source: dataSource + "/api/histories/" + main.currentHistoryID + "/contents/datasets/" + main.currentJobID + "?key=" + dataKey;
     property string json: ""
 
+    property string fullDataset: ""
+
     function onReady(request) {
 
         if (request === undefined) {
@@ -83,6 +85,9 @@ Rectangle {
             stateColour = Utils.itemColour(jsonObject["state"], false);
             stateColourAlt = Utils.itemColour(jsonObject["state"], true);
         }
+
+        // Link to full dataset.
+        fullDataset = jsonObject["download_url"].toString();
     }
 
     // Model that holds detail items to be displayed.
@@ -95,10 +100,25 @@ Rectangle {
         backButton.visible: true
         backState: main.state
     }
+    ImageButton {
+        id: dataset
+        visible: fullDataset.length > 0
+        anchors.top: detailsActionBar.bottom
+        anchors.left: parent.horizontalCenter
+        height: textHeight + mmItemMargin * 4
+        width: textWidth + mmItemMargin * 4
+        imageSource: imageRoot + "green_button.png"
+        pressedImageSource: imageRoot + "gray_button.png"
+        title: qsTr("View Dataset")
+        onClicked: {
+            mainLoader.source = "Dataset.qml";
+            mainLoader.item.url = fullDataset;
+            mainLoader.item.actionBarTitle = detailsActionBar.actionBarTitle;
+        }
+    }
     ListView {
         id: detailList
-        anchors.top: detailsActionBar.bottom
-        anchors.topMargin: 5
+        anchors.top: dataset.bottom
         width: main.width
         height: main.height - detailsActionBar.height
         clip: true
@@ -143,6 +163,6 @@ Rectangle {
                 }
             }
         }
-
     }
+
 }

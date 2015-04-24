@@ -78,11 +78,15 @@ function getScreenWidthIndex(width) {
 }
 
 // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
-function poll(source, onReady, parentID, authorizationHeader) {
+function poll(source, onReady, parentID, authorizationHeader, timeoutInterval) {
+    if (timeoutInterval === undefined) {
+        timeoutInterval = 5000;
+    }
+
     var request = new XMLHttpRequest;
 
     // Since XMLHttpRequest does not support timeout, dynamically create a timer object for this from QML string.
-    var pollTimer = Qt.createQmlObject("import QtQuick 2.3; Timer {interval: 5000; repeat: false; running: true;}", parentID, "PollTimer");
+    var pollTimer = Qt.createQmlObject("import QtQuick 2.3; Timer {interval:" + timeoutInterval +"; repeat: false; running: true;}", parentID, "PollTimer");
 
     // Connect the "triggered" signal to timeout function
     pollTimer.triggered.connect(function() {
@@ -95,7 +99,7 @@ function poll(source, onReady, parentID, authorizationHeader) {
 
     request.open("GET", source);
 
-    if (authorizationHeader !== undefined) {
+    if (authorizationHeader !== undefined && authorizationHeader !== null) {
         request.setRequestHeader("Authorization", authorizationHeader);
     } else {
         request.setRequestHeader("Content-type", "application/json");

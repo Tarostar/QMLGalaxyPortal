@@ -42,6 +42,7 @@ OTHER_FILES += \
     qml/QMLGalaxyPortal/JSONDataset.qml \
     qml/QMLGalaxyPortal/ImageButton.qml \
     qml/QMLGalaxyPortal/PollFrequencySettings.qml \
+    qml/QMLGalaxyPortal/Dataset.qml \
     qml/QMLGalaxyPortal/DetailView.qml \
     qml/QMLGalaxyPortal/DetailZoomView.qml \
     qml/QMLGalaxyPortal/InstanceListSettings.qml \
