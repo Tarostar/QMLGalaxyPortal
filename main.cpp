@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("Galaxy Portal");
 
     // Setup background thread and bridge interface between thread and QML.
-    Bridge* bridge = new Bridge();
+    /*Bridge* bridge = new Bridge();
     QThread* thread = new QThread;
     Ticker* ticker = new Ticker();
     ticker->moveToThread(thread);
@@ -35,11 +35,11 @@ int main(int argc, char *argv[])
     QObject::connect(&app, SIGNAL(aboutToQuit()), ticker, SLOT(deleteLater()));
     QObject::connect(&app, SIGNAL(aboutToQuit()), thread, SLOT(deleteLater()));
     QObject::connect(&app, SIGNAL(aboutToQuit()), bridge, SLOT(deleteLater()));
-    thread->start();
+    thread->start();*/
 
     // Setup QQuickView window for displaying Qt Quick GUI and connect with background thread through the bridge interface.
     QtQuick2ApplicationViewer viewer;    
-    viewer.rootContext()->setContextProperty("Bridge", bridge);
+    //viewer.rootContext()->setContextProperty("Bridge", bridge);
     viewer.setMainQmlFile(QStringLiteral("qml/QMLGalaxyPortal/main.qml"));
     viewer.showExpanded();
 

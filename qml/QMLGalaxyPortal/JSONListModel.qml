@@ -54,29 +54,38 @@ Item {
         }
     }
 
-    onPollIntervalChanged: {
-        // Set C++ background thread tick interval which will provide periodic polls (divide to go from ms to seconds).
-        Bridge.setTickInterval(pollInterval / 1000);
-    }
-
     // Poll for data when source changes.
     onSourceChanged: {
         refresh();
+    }
+
+    /*onPollIntervalChanged: {
+        // Set C++ background thread tick interval which will provide periodic polls (divide to go from ms to seconds).
+        Bridge.setTickInterval(pollInterval / 1000);
     }
 
     // Connection to C++ background thread.
     Connections {
         target: Bridge
         onDoWork: { doPoll();}
+    }*/
+
+    onPollIntervalChanged: {
+        // Kick timer if enabled.
+        if (pollInterval > 0) {
+            pollTimer.start();
+        }
     }
 
     // Timer triggers periodic poll to retrieve any changes server side.
-    /*Timer {
+    Timer {
         id: pollTimer
         interval: pollInterval
         repeat: true
-        onTriggered: { doPoll(); }
-    }*/
+        onTriggered: {
+            doPoll();
+        }
+    }
 
     function refresh() {
         jsonModel.clear();
