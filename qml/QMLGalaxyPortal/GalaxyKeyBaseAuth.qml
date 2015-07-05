@@ -63,7 +63,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: Screen.pixelDensity; anchors.rightMargin: Screen.pixelDensity
         elide: Text.ElideMiddle
-        text: qsTr("Username")
+        text: qsTr("Username / Email")
         font.pointSize: largeFonts ? 16 : 12
     }
     EditBox {

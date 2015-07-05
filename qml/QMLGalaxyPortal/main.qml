@@ -44,6 +44,8 @@ Rectangle {
 
     property bool largeFonts: false;
 
+    property bool wideScreen: width >= 1000 ? true : false
+
     // Save settings.
     Settings {
         // Galaxy API settings.
@@ -79,10 +81,20 @@ Rectangle {
 
         // Larger font size.
         property alias largeFonts : main.largeFonts
+
+        property alias state : main.state
     }
 
     // loader to spawn pages on top of list (e.g. for settings)
     Loader {  z: 1; id: mainLoader }
+
+    // we only want to go to job when one is loaded
+    function doJobTransition() {
+        // Trigger the state change to show the jobs list view.
+        if (main.state != "historyItems" && !wideScreen) {
+            main.state = "historyItems";
+        }
+    }
 
     Audio {
         id: notificationSound
@@ -128,13 +140,6 @@ Rectangle {
         }
     }
 
-    // Init view at startup.
-    Component.onCompleted:{
-        if (main.currentHistoryID.length > 0) {
-            main.state = "historyItems";
-        }
-    }
-
     Column {
         visible: !challengeDialog.visible
         anchors.fill: parent
@@ -143,7 +148,8 @@ Rectangle {
             width: main.width
             // Back button only visible when possible to navigate back.
             backButton.visible: main.state === "" ? false : true
-            actionBarTitle: main.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items"
+            actionBarTitle: wideScreen ? (currentHistory + " - " + jsonHistoryJobsModel.count + " items") :
+                                            (main.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items")
         }
         // Empty list view.
         Welcome {
@@ -155,7 +161,7 @@ Rectangle {
             id: screenlayout
             ListView {
                 id: historyListView
-                width: main.width
+                width: wideScreen ? main.width / 2 : main.width
                 height: main.height - mainActionbar.height
                 model: jsonHistoriesModel.model
                 delegate: HistoryDelegate {}
@@ -164,14 +170,13 @@ Rectangle {
             }
             ListView {
                 id: jobListItems
-                width: main.width
+                width: wideScreen ? main.width / 2 : main.width
                 height: main.height - mainActionbar.height
                 model: jsonHistoryJobsModel.model
                 delegate: JobDelegate {}
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
             }
-
         }
     }
     transitions: Transition {

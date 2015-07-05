@@ -47,6 +47,7 @@ Rectangle {
         checked: main.advancedFields
         onClicked: {
             main.advancedFields = !main.advancedFields;
+            jsonHistoryJobsModel.refresh();
         }
     }
 }

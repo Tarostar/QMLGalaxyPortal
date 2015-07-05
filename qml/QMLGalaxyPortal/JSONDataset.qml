@@ -74,7 +74,12 @@ Item {
     }
 
     // Update JSON data when source or fields changes.
-    onJsonChanged: if (json.length > 0) updateJSONText(JSON.parse(json))
+    onJsonChanged: {
+        if (json.length > 0) {
+            updateJSONText(JSON.parse(json))
+            main.doJobTransition();
+        }
+    }
 
     function updateJSONText(jsonData) {
         datasetItem.text = "";

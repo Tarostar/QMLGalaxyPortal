@@ -69,7 +69,7 @@ Rectangle {
     }
     Rectangle {
         id: jobItemDetails
-        color: "lemonchiffon"
+        color: "#AFF1AF"
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.rightMargin: 1
@@ -87,12 +87,13 @@ Rectangle {
             id: mouseArea
             hoverEnabled: true
             anchors.fill: parent
-            onEntered: {jobItemDetails.color = "aquamarine" }
-            onPressed: {jobItemDetails.color = "aquamarine" }
-            onExited: {jobItemDetails.color = "lemonchiffon" }
-            onReleased: {jobItemDetails.color = "lemonchiffon" }
-            onPressAndHold: {jobItemDetails.color = "lemonchiffon" }
+            onEntered: {jobItemDetails.color = itemSelectColor }
+            onPressed: {jobItemDetails.color = itemSelectColor }
+            onExited: {jobItemDetails.color = itemColor }
+            onReleased: {jobItemDetails.color = itemColor }
+            onPressAndHold: {jobItemDetails.color = itemColor }
             onClicked: {
+                jobListItems.currentIndex = index;
                 main.currentJobID = model.id;
                 mainLoader.source = "DetailView.qml";
             }

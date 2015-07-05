@@ -61,10 +61,7 @@ Item {
 
     // Poll for data when source changes.
     onSourceChanged: {
-        jsonModel.clear();
-        if (source.length > 0) {
-            doPoll()
-        }
+        refresh();
     }
 
     // Connection to C++ background thread.
@@ -80,6 +77,13 @@ Item {
         repeat: true
         onTriggered: { doPoll(); }
     }*/
+
+    function refresh() {
+        jsonModel.clear();
+        if (source.length > 0) {
+            doPoll()
+        }
+    }
 
     function doPoll() {
         json = "";

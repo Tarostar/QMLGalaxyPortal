@@ -3,7 +3,7 @@ function itemColour(state, selected)
     // Returns colour coding based on item state (from json data) and whether item is in a selected state (e.g. clicked or mouse hover).
 
     if (state === "ok")
-        return selected ? "lemonchiffon" : "ivory";
+        return selected ? "#94CC94" : "#AFF1AF";
 
     if (state === "error")
         return selected ? "red" : "tomato";
@@ -24,13 +24,13 @@ function itemColour(state, selected)
         return selected ? "yellow" : "gold";
 
     if (state === "queued")
-        return selected ? "deepskyblue" : "skyblue";
+        return selected ? "#CCCCCC" : "#EEEEEE";
 
     if (state === "resubmitted")
         return selected ? "cyan" : "lightcyan";
 
     if (state === "running")
-        return selected ? "#66cdaa" : "aquamarine";
+        return selected ? "#D3D3AB" : "#FFFFCC";
 
     if (state === "setting_metadata")
         return selected ? "lemonchiffon" : "ivory";

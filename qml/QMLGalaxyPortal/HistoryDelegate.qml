@@ -4,11 +4,16 @@ import QtQuick.Window 2.2
 Rectangle {
     id: historyItem
 
+    property alias itemTitleText: itemtitle.text
+
     width: parent.width
     // pixelDensity: the number of physical pixels per millimeter.
     height: Math.max(mmItemHeight, itemtitle.contentHeight + mmItemMargin)
-    color: "ivory"
+    color: "white"
 
+    function getModelId() {
+        return model.id;
+    }
 
     Separator {
         anchors.bottom: parent.bottom
@@ -47,19 +52,17 @@ Rectangle {
         id: mouseArea
         hoverEnabled: true
         anchors.fill: parent
-        onEntered: {historyItem.color = "lemonchiffon" }
-        onPressed: {historyItem.color = "lemonchiffon" }
-        onExited: {historyItem.color = "ivory" }
-        onReleased: {historyItem.color = "ivory" }
-        onPressAndHold: {historyItem.color = "ivory" }
+        onEntered: {historyItem.color = "lightgray" }
+        onPressed: {historyItem.color = "lightgray" }
+        onExited: {historyItem.color = "white" }
+        onReleased: {historyItem.color = "white" }
+        onPressAndHold: {historyItem.color = "white" }
 
         onClicked: {
             // set current history name
             main.currentHistory = itemtitle.text;
             main.currentHistoryID = model.id;
-
-            // Trigger the state change to show the jobs list view.
-            main.state = "historyItems";
+            historyListView.currentIndex = index;
         }
     }
 }

@@ -3,7 +3,7 @@ import QtQuick.Window 2.2
 
 Rectangle {
 
-    color: "burlywood"
+    color: "#DFE5F9"
     height: mmItemHeight
 
     // Expose action bar properties so they can be changed.
@@ -50,13 +50,6 @@ Rectangle {
         onClicked: {
             mainLoader.source = backSource;
             main.state = backState
-            if (main.state === "")
-            {
-                // Reset trackers when returning to main screen.
-                main.currentHistory = "";
-                main.currentHistoryID = "";
-                main.currentJobID = "";
-            }
         }
     }
 
