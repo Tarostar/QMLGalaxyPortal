@@ -148,8 +148,8 @@ Rectangle {
             width: main.width
             // Back button only visible when possible to navigate back.
             backButton.visible: main.state === "" ? false : true
-            actionBarTitle: periodicPolls/*wideScreen ? (currentHistory + " - " + jsonHistoryJobsModel.count + " items") :
-                                            (main.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items")*/
+            actionBarTitle: wideScreen ? (currentHistory + " - " + jsonHistoryJobsModel.count + " items") :
+                                            (main.state === "" ? "Galaxy Portal - " + jsonHistoriesModel.count + " items" :  currentHistory + " - " + jsonHistoryJobsModel.count + " items")
         }
         // Empty list view.
         Welcome {
