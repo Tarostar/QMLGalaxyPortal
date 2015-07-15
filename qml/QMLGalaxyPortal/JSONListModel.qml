@@ -141,7 +141,7 @@ Item {
             // Check if item exists at exactly the current index.
             if (index >= jsonModel.count) {
                 // We are beyond the current model (or model empty).
-                jsonModel.append(objectArray[object]);
+                jsonModel.insert(index, objectArray[object]);
             } else if (jsonModel.get(index).id === objectArray[object].id) {
                 // Exists - check state and update.
                 checkState(jsonModel.get(index).state, objectArray[object].state);

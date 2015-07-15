@@ -18,7 +18,7 @@ Rectangle {
         // This is a known Qt bug in v 5.3 QTBUG-36849: False binding loops in QtQuick Controls: https://bugreports.qt-project.org/browse/QTBUG-36849
 
         if (front) {
-            return model.name;
+            return model.hid + ": " + model.name;
         }
 
         if (currentJobID !== model.id)
