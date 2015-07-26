@@ -73,15 +73,7 @@ Rectangle {
 						if(dataset.deleted) continue; 
 						
 						var selected = "";
-						/*
-						console.log("old inputs: " + JSON.stringify(oldInputs));
-						if(oldInputs[input.name] !== undefined){
 						
-							if(dataset.id == oldInputs[input.name].id){
-								selected = "selected";
-							} 
-						}
-						*/
 						
 						input_html += "<option " + selected + " value='" +  dataset.id + "'>" + dataset. name + "</option>";
 					}
@@ -93,15 +85,26 @@ Rectangle {
 					var input_html = decodeURIComponent(input.html);
 				}
 				
-				html += "<p>" + input.label + "</p>" + "<p>" + input_html + "</p>";
+				
+				html += "<p>" + input.label + ":</p>" + "<p>" + input_html + "</p>";
+				
+				
+				// Get value from previous job and set it as default
+				if(oldJobData.params[input.name] != undefined){
+				
+					console.log("...: " + input.html + " -" + input.name + "-");
+					console.log("oldJobData2: ");
+					html += "<script>document.getElementsByName('" + input.name + "')[0].value = " + oldJobData.params[input.name] + ";</script>";
+				}
+				
 				//console.log("Input " + i + ": " + input_html);
 			}
 				
+			html += "<p><input type='button' onclick='postForm();' value='Run tool!' name='run'></p>";
 			html += data.help;
 		
 		}, false);
 
-		html += "<p><input type='button' onclick='postForm();' value='Run tool!' name='run'></p>";
 		html += "</body>";
 		
 		// Add some javascript that will return the form to qml through document.title
@@ -146,6 +149,7 @@ Rectangle {
 				
 				console.log("Prev job: " + data) 
 				data = JSON.parse(data);
+				var oldJobData = data;
 				toolId = data.tool_id;
 				
 				// 2: Get prev job input data (to re-use it)
@@ -156,7 +160,7 @@ Rectangle {
 					var inputs = data[0]; // [0] because it is in an array for some reason
 					
 					console.log("tool_ID:" + toolId);
-					var tool_html = loadToolHtml(data, toolId);
+					var tool_html = loadToolHtml(oldJobData, toolId);
 					loadHtmlToWebview(tool_html);
 					
 					/*
