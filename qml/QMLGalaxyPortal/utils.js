@@ -114,11 +114,10 @@ function poll(source, onReady, parentID, authorizationHeader, timeoutInterval) {
 // Hacky function that finds the id of the job that created a dataset in the history
 function findJobFromDatasetID(datasetID, callback){
 	console.info("Find job from dataset ID");
-	var currentHistoryID = main.currentHistoryID; //"03f5505eea258221"
+	var currentHistoryID = main.currentHistoryID;
 	
 	// Itereate over every job in this history, find the job that created dataset with id datasetID
 	sendRequest("jobs/", "history_id=" + currentHistoryID, {}, "GET", function(data){ 
-		console.info("Data: " + data);
 		data = JSON.parse(data);
 		
 		
@@ -131,18 +130,12 @@ function findJobFromDatasetID(datasetID, callback){
 		
 		for (var i = 0; i < jobIDs.length; i++){
 			var jobID = jobIDs[i];
-			console.info("Job: " + jobID);
 			
 			sendRequest("jobs/" + jobID, "", {}, "GET", function(jobInfo){ 
-				//console.info("Job data: " + jobInfo);
-
 				jobInfo = JSON.parse(jobInfo);
-				//console.info(JSON.stringify(jobInfo.outputs)); 
 				
-				// Hack: search in string of output:
+				// Dirty way: Search for output id in string of output:
 				if(JSON.stringify(jobInfo.outputs).indexOf(datasetID) !== -1){ 
-					// datasetID found in the job's output.
-					
 					callback(jobID);
 					i = jobIDs.length;
 					return;
@@ -175,38 +168,35 @@ function sendRequest(url, get_params, post_params, type, onSuccess, async) {
 	
 	// Add api key to params
 	get_params += "&key=" + dataKey;
-	//get_params += "&key=" + dataKey; //75e10f4f5146d600d7f06ae530f242de";
 	
+	// Start a new XMLHttpRequest
 	var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onload = function() { console.log("Success"); onSuccess(xmlhttp.responseText); }
 	xmlhttp.onerror = function(){ console.log("xmlhtt error"); };
 	
 	xmlhttp.onreadystatechange = function () {
-		//console.log("onreadystatechange: " + xmlhttp.readyState);
 		
 		if (xmlhttp.readyState != 4) return;
 		
 		if(xmlhttp.readyState == 4) onSuccess(xmlhttp.responseText); 
 		
+		/*
 		if (xmlhttp.status != 200 && xmlhttp.status != 304) {
 			console.log('HTTP error ' + xmlhttp.status + ", " + xmlhttp.responseText);
 			return;
 		}
+		*/
 		
 	}
 	
 	
-	
 	xmlhttp.open(type, dataSource + "/api/" + url + "?" + get_params, async);
-	
 	
 	if(type == "POST"){
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8;");
 	}
 	
-	//xmlhttp.send(JSON.stringify(post_params));
 	xmlhttp.send(post_params);
-	console.log("xmlhttp sent: " + xmlhttp);
 
 }
 

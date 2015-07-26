@@ -18,8 +18,6 @@ Rectangle {
 
     function onReady(request) {
 		
-		console.log("Current job id: " + main.currentJobID);
-		
         if (request === undefined) {
             detailListModel.clear();
             detailListModel.append({"fieldName": "Timeout" , "fieldData": "after five seconds."});
