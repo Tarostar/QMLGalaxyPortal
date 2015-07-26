@@ -17,7 +17,9 @@ Rectangle {
     property string fullDataset: ""
 
     function onReady(request) {
-
+		
+		console.log("Current job id: " + main.currentJobID);
+		
         if (request === undefined) {
             detailListModel.clear();
             detailListModel.append({"fieldName": "Timeout" , "fieldData": "after five seconds."});
@@ -25,6 +27,7 @@ Rectangle {
         }
 
         if (request.readyState === XMLHttpRequest.DONE) {
+               
             if (request.status === 200) {
                 json = request.responseText;
             } else {
@@ -89,6 +92,8 @@ Rectangle {
         // Link to full dataset.
         fullDataset = jsonObject["download_url"].toString();
     }
+    
+    
 
     // Model that holds detail items to be displayed.
     ListModel { id: detailListModel }
@@ -104,7 +109,8 @@ Rectangle {
         id: dataset
         visible: fullDataset.length > 0
         anchors.top: detailsActionBar.bottom
-        anchors.left: parent.horizontalCenter
+        anchors.left: rerun.right
+        anchors.leftMargin: 5;
         height: textHeight + mmItemMargin * 4
         width: textWidth + mmItemMargin * 4
         imageSource: imageRoot + "green_button.png"
@@ -116,9 +122,28 @@ Rectangle {
             mainLoader.item.actionBarTitle = detailsActionBar.actionBarTitle;
         }
     }
+
+
+    ImageButton {
+        id: rerun
+        visible: fullDataset.length > 0
+        anchors.top: detailsActionBar.bottom
+        
+        height: textHeight + mmItemMargin * 4
+        width: textWidth + mmItemMargin * 4
+        imageSource: imageRoot + "green_button.png"
+        pressedImageSource: imageRoot + "gray_button.png"
+        title: "Rerun job"
+        onClicked: {
+            //Utils.rerunJob();
+            mainLoader.source = "RunJob.qml";
+        }
+    }
+
+
     ListView {
         id: detailList
-        anchors.top: dataset.bottom
+        anchors.top: rerun.bottom
         width: main.width
         height: main.height - detailsActionBar.height
         clip: true
