@@ -193,8 +193,9 @@ Rectangle {
 		
 		Utils.sendRequest("tools/", "", postData, "POST", function(data){
 			console.info("Request for starting new job sent. Returned: " + data);	
+			data = JSON.parse(data);
 			if(data.jobs != undefined){
-				infoText.text = "Job has successfully been re-runned.";
+				loadHtmlToWebview("<div style='background-color: #b4eeb4; border: 1px solid #29ad29; padding: 10px; color: #000000; margin: 10px;'>1 job has been successfully added to the queue.</div>");
 			}
 		});
 	}
