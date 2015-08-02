@@ -53,7 +53,7 @@ Rectangle {
     Text {
         id: jobItemText
         anchors.left: parent.left
-        anchors.right: jobItemDetails.left
+        anchors.right: front ? frontRerunButton.left : backJobItemDetailsButton.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         anchors.leftMargin: 20
@@ -68,7 +68,8 @@ Rectangle {
         wrapMode: Text.WordWrap
     }
     Rectangle {
-        id: jobItemDetails
+        id: backJobItemDetailsButton
+        visible: !front
         color: "#AFF1AF"
         anchors.right: parent.right
         anchors.top: parent.top
@@ -76,22 +77,22 @@ Rectangle {
         height: parent.height - 2
         width: parent.height > parent.width / 5 ? parent.width / 5 : parent.height - 2
         Image {
-            id: image
+            id: metadataImage
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
             height: sourceSize.height
             fillMode: Image.PreserveAspectFit
-            source: mouseArea.pressed ? iconRoot + "ic_action_zoom_pressed.png" : iconRoot + "ic_action_zoom.png"
+            source: metadataImageMouseArea.pressed ? iconRoot + "ic_action_zoom_pressed.png" : iconRoot + "ic_action_zoom.png"
         }
         MouseArea {
-            id: mouseArea
+            id: metadataImageMouseArea
             hoverEnabled: true
             anchors.fill: parent
-            onEntered: {jobItemDetails.color = itemSelectColor }
-            onPressed: {jobItemDetails.color = itemSelectColor }
-            onExited: {jobItemDetails.color = itemColor }
-            onReleased: {jobItemDetails.color = itemColor }
-            onPressAndHold: {jobItemDetails.color = itemColor }
+            onEntered: {backJobItemDetailsButton.color = itemSelectColor }
+            onPressed: {backJobItemDetailsButton.color = itemSelectColor }
+            onExited: {backJobItemDetailsButton.color = itemColor }
+            onReleased: {backJobItemDetailsButton.color = itemColor }
+            onPressAndHold: {backJobItemDetailsButton.color = itemColor }
             onClicked: {
                 jobListItems.currentIndex = index;
                 main.currentJobID = model.id;
@@ -99,10 +100,77 @@ Rectangle {
             }
         }
     }
+    Rectangle {
+        id: frontDatasetButton
+        visible: front && jsonHistoryJobContent.fullDataset.length > 0
+        color: "#AFF1AF"
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.rightMargin: 1
+        height: parent.height - 2
+        width: parent.height > parent.width / 5 ? parent.width / 5 : parent.height - 2
+        Image {
+            id: datasetImage
+            visible: front
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: sourceSize.height
+            fillMode: Image.PreserveAspectFit
+            source: datasetImageMouseArea.pressed ? iconRoot + "ic_action_attachment_pressed.png" : iconRoot + "ic_action_attachment.png"
+        }
+        MouseArea {
+            id: datasetImageMouseArea
+            hoverEnabled: true
+            anchors.fill: parent
+            onEntered: {frontDatasetButton.color = itemSelectColor }
+            onPressed: {frontDatasetButton.color = itemSelectColor }
+            onExited: {frontDatasetButton.color = itemColor }
+            onReleased: {frontDatasetButton.color = itemColor }
+            onPressAndHold: {frontDatasetButton.color = itemColor }
+            onClicked: {
+                mainLoader.source = "Dataset.qml";
+                mainLoader.item.url = jsonHistoryJobContent.fullDataset;
+                mainLoader.item.actionBarTitle = detailsActionBar.actionBarTitle;
+            }
+        }
+    }
+    Rectangle {
+        id: frontRerunButton
+        visible: front
+        color: "#AFF1AF"
+        anchors.right: frontDatasetButton.visible ? frontDatasetButton.left : parent.right
+        anchors.top: parent.top
+        anchors.rightMargin: 1
+        height: parent.height - 2
+        width: parent.height > parent.width / 5 ? parent.width / 5 : parent.height - 2
+        Image {
+            id: rerunImage
+            visible: front
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            height: sourceSize.height
+            fillMode: Image.PreserveAspectFit
+            source: rerunImageMouseArea.pressed ? iconRoot + "ic_action_replay_pressed.png" : iconRoot + "ic_action_replay.png"
+        }
+        MouseArea {
+            id: rerunImageMouseArea
+            hoverEnabled: true
+            anchors.fill: parent
+            onEntered: {frontRerunButton.color = itemSelectColor }
+            onPressed: {frontRerunButton.color = itemSelectColor }
+            onExited: {frontRerunButton.color = itemColor }
+            onReleased: {frontRerunButton.color = itemColor }
+            onPressAndHold: {frontRerunButton.color = itemColor }
+            onClicked: {
+                //Utils.rerunJob();
+                mainLoader.source = "RunJob.qml";
+            }
+        }
+    }
     MouseArea {
         hoverEnabled: true
         anchors.left: parent.left
-        anchors.right: jobItemDetails.left
+        anchors.right: front ? frontRerunButton.left : backJobItemDetailsButton.left
         anchors.top: parent.top
         anchors.bottom: parent.bottom
         onEntered: {jobItem.color = itemSelectColor }

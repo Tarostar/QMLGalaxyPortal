@@ -75,7 +75,7 @@ Rectangle {
         backButton.visible: true
         copyButton.visible: true
         backState: main.state
-        backSource: "DetailView.qml";
+        backSource: "";
         onCopy: {
             datasetRaw.selectAll();
             datasetRaw.copy();

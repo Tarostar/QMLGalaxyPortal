@@ -22,6 +22,8 @@ Item {
     // Poll frequencey - if zero then does not poll and only retrieves data when source changes.
     property int pollInterval: 0
 
+    property string fullDataset: ""
+
     function onReady(request) {
         if (request === undefined) {
             datasetItem.text = "Timed out after five seconds....";
@@ -82,6 +84,10 @@ Item {
     }
 
     function updateJSONText(jsonData) {
+
+        if (jsonData["download_url"])
+            fullDataset = jsonData["download_url"].toString();
+
         datasetItem.text = "";
         // Compose string for each field in field array which exists in the json data (otherwise ignored).
         fields.forEach(function(field) {
@@ -96,6 +102,7 @@ Item {
         // Set name property to job name - if exists
         if (jsonData["name"])
             datasetItem.name = jsonData["name"];
+
     }
 
     // Init default field array at startup.

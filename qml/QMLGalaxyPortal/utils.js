@@ -152,7 +152,7 @@ function findJobFromDatasetID(datasetID, callback){
 
 // Send request to the galaxy api
 function sendRequest(url, get_params, post_params, type, onSuccess, async) {
-	console.log("SendRequest");
+
 	if (type === undefined) {
 		type = "GET";
 	}
@@ -189,10 +189,10 @@ function sendRequest(url, get_params, post_params, type, onSuccess, async) {
 		
 	}
 	
-	
+    console.log("SendRequest: " + dataSource + "/api/" + url + "?" + get_params);
 	xmlhttp.open(type, dataSource + "/api/" + url + "?" + get_params, async);
 	
-	if(type == "POST"){
+    if(type === "POST"){
 		xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8;");
 	}
 	
