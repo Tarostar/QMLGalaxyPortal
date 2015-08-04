@@ -131,7 +131,6 @@ function findJobFromDatasetID(datasetID, callback){
 		// Helper function that fires the next request
 		function fireRequest(jobID){
 			
-			console.log("fireRequest:" + jobID);
 			sendRequest("jobs/" + jobID, "", {}, "GET", function(jobInfo){ 
 				jobInfo = JSON.parse(jobInfo);
 				
@@ -145,7 +144,6 @@ function findJobFromDatasetID(datasetID, callback){
 					console.log("No hit with " + datasetID + " on " + JSON.stringify(jobInfo.outputs));
 					// Fire the next request
 					if(i < jobIDs.length){
-						console.log("Fire next: " + i);
 						fireRequest(jobIDs[i++]);
 					}
 				}
@@ -154,11 +152,7 @@ function findJobFromDatasetID(datasetID, callback){
 		
 		var jobID = jobIDs[i];	
 		fireRequest(jobID);
-		
-		//for (var i = 0; i < jobIDs.length; i++){
-			
-			
-		//}
+
 	});
 }
 
