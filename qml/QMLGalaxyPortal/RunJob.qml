@@ -33,12 +33,12 @@ Rectangle {
 	}
 	
 	// Gets the a list of datasets in the current history
-	function getDataSets(){
+	function getDataSets(callback){
 		var out = null;
 		Utils.sendRequest("histories/" + main.currentHistoryID + "/contents/datasets/", "", "", "GET", function(data){
-			out = JSON.parse(data);
-		}, false);
-		return out;
+			callback(JSON.parse(data));
+			return;
+		}, true);
 	}
 	
 	// Returns the html needed to display a tool
@@ -53,81 +53,82 @@ Rectangle {
 					"</style>"+
 					"<body><form>";
 			
-			
-			
-			data = JSON.parse(data);
-			html += "<h2>" + data.name + "</h2>";
-			
-			var inputs = data.inputs;
-			
-			for (var i = 0; i < 100; i++){
-				var input = data.inputs[i];
-				if(input == undefined){
-					break;
-				}
-			
-				// Html for type=data is somehow often missing, so we just create it:
-				if(input.type == "data"){
-					var input_html = "<select name='" + input.name + "'>";
-					
-					var datasets = getDataSets();
-					for(var j = 0; j < datasets.length; j++){
-						var dataset = datasets[j];
-						if(dataset.deleted) continue; 
+			getDataSets(function (datasets){
+				
+				data = JSON.parse(data);
+				html += "<h2>" + data.name + "</h2>";
+				
+				var inputs = data.inputs;
+				
+				for (var i = 0; i < 100; i++){
+					var input = data.inputs[i];
+					if(input == undefined){
+						break;
+					}
+				
+					// Html for type=data is somehow often missing, so we just create it:
+					if(input.type == "data"){
+						var input_html = "<select name='" + input.name + "'>";
 						
-						var selected = "";
+						//var datasets = getDataSets();
+						for(var j = 0; j < datasets.length; j++){
+							var dataset = datasets[j];
+							if(dataset.deleted) continue; 
+							
+							var selected = "";
+							
+							
+							input_html += "<option " + selected + " value='" +  dataset.id + "'>" + dataset. name + "</option>";
+						}
 						
-						
-						input_html += "<option " + selected + " value='" +  dataset.id + "'>" + dataset. name + "</option>";
+						input_html += "</select>";
+					}
+					// Other html seems to be there, so we just have to decode it
+					else{	
+						var input_html = decodeURIComponent(input.html);
 					}
 					
-					input_html += "</select>";
+					
+					html += "<p>" + input.label + ":</p>" + "<p>" + input_html + "</p>";
+					
+					
+					// Get value from previous job and set it as default
+					if(oldJobData.params[input.name] != undefined){
+					
+						console.log("...: " + input.html + " -" + input.name + "-");
+						console.log("oldJobData2: ");
+						html += "<script>document.getElementsByName('" + input.name + "')[0].value = " + oldJobData.params[input.name] + ";</script>";
+					}
+					
+					//console.log("Input " + i + ": " + input_html);
 				}
-				// Other html seems to be there, so we just have to decode it
-				else{	
-					var input_html = decodeURIComponent(input.html);
-				}
-				
-				
-				html += "<p>" + input.label + ":</p>" + "<p>" + input_html + "</p>";
-				
-				
-				// Get value from previous job and set it as default
-				if(oldJobData.params[input.name] != undefined){
-				
-					console.log("...: " + input.html + " -" + input.name + "-");
-					console.log("oldJobData2: ");
-					html += "<script>document.getElementsByName('" + input.name + "')[0].value = " + oldJobData.params[input.name] + ";</script>";
-				}
-				
-				//console.log("Input " + i + ": " + input_html);
-			}
-				
-			html += "<p><input type='button' onclick='postForm();' value='Run tool!' name='run'></p>";
-			html += data.help;
-			html += "</body>";
-		
-			// Add some javascript that will return the form to qml through document.title
-			html += "<script>";
-			html += "" +
-					"function postForm(){" +
-					"	var form = [];" +
-					"		" +
-					"	var inputs = document.getElementsByTagName('input');" +
-					"	for (var i = 0; i < inputs.length; i++){" +
-					"		form.push([inputs[i].name, inputs[i].value]);" +
-					"	}" +
-					"	var inputs = document.getElementsByTagName('select');" +
-					"	for (var i = 0; i < inputs.length; i++){" +
-					"		form.push([inputs[i].name, inputs[i].value]);" +
-					"	}" +
-					"	console.log(JSON.stringify(form));" +
-					"	document.title = JSON.stringify(form);" +
-					"}";
-
-			html += "</script></html>";
+					
+				html += "<p><input type='button' onclick='postForm();' value='Run tool!' name='run'></p>";
+				html += data.help;
+				html += "</body>";
 			
-			callback(html);
+				// Add some javascript that will return the form to qml through document.title
+				html += "<script>";
+				html += "" +
+						"function postForm(){" +
+						"	var form = [];" +
+						"		" +
+						"	var inputs = document.getElementsByTagName('input');" +
+						"	for (var i = 0; i < inputs.length; i++){" +
+						"		form.push([inputs[i].name, inputs[i].value]);" +
+						"	}" +
+						"	var inputs = document.getElementsByTagName('select');" +
+						"	for (var i = 0; i < inputs.length; i++){" +
+						"		form.push([inputs[i].name, inputs[i].value]);" +
+						"	}" +
+						"	console.log(JSON.stringify(form));" +
+						"	document.title = JSON.stringify(form);" +
+						"}";
+
+				html += "</script></html>";
+				
+				callback(html);
+			});
 		}, true);
 
 		
