@@ -42,16 +42,19 @@ Rectangle {
 	}
 	
 	// Returns the html needed to display a tool
-	function loadToolHtml(oldJobData, toolID){
+	function loadToolHtml(oldJobData, toolID, callback){
 		var currentHistoryID = main.currentHistoryID;
-		var html = "";
-		html += "<!html>" +
-				"<style type='text/css'>" + 
-				"body{ background-color: #fffff0; }" +
-				"</style>"+
-				"<body><form>";
 		
 		Utils.sendRequest("tools/" + toolID + "/build/", "history_id=" + currentHistoryID, "", "GET", function(data){
+			var html = "";
+			html += "<!html>" +
+					"<style type='text/css'>" + 
+					"body{ background-color: #fffff0; }" +
+					"</style>"+
+					"<body><form>";
+			
+			
+			
 			data = JSON.parse(data);
 			html += "<h2>" + data.name + "</h2>";
 			
@@ -102,32 +105,32 @@ Rectangle {
 				
 			html += "<p><input type='button' onclick='postForm();' value='Run tool!' name='run'></p>";
 			html += data.help;
+			html += "</body>";
 		
-		}, false);
+			// Add some javascript that will return the form to qml through document.title
+			html += "<script>";
+			html += "" +
+					"function postForm(){" +
+					"	var form = [];" +
+					"		" +
+					"	var inputs = document.getElementsByTagName('input');" +
+					"	for (var i = 0; i < inputs.length; i++){" +
+					"		form.push([inputs[i].name, inputs[i].value]);" +
+					"	}" +
+					"	var inputs = document.getElementsByTagName('select');" +
+					"	for (var i = 0; i < inputs.length; i++){" +
+					"		form.push([inputs[i].name, inputs[i].value]);" +
+					"	}" +
+					"	console.log(JSON.stringify(form));" +
+					"	document.title = JSON.stringify(form);" +
+					"}";
 
-		html += "</body>";
+			html += "</script></html>";
+			
+			callback(html);
+		}, true);
+
 		
-		// Add some javascript that will return the form to qml through document.title
-		html += "<script>";
-		html += "" +
-				"function postForm(){" +
-				"	var form = [];" +
-				"		" +
-				"	var inputs = document.getElementsByTagName('input');" +
-				"	for (var i = 0; i < inputs.length; i++){" +
-				"		form.push([inputs[i].name, inputs[i].value]);" +
-				"	}" +
-				"	var inputs = document.getElementsByTagName('select');" +
-				"	for (var i = 0; i < inputs.length; i++){" +
-				"		form.push([inputs[i].name, inputs[i].value]);" +
-				"	}" +
-				"	console.log(JSON.stringify(form));" +
-				"	document.title = JSON.stringify(form);" +
-				"}";
-
-		html += "</script></html>";
-
-		return html;
 	}
 
 
@@ -160,9 +163,11 @@ Rectangle {
 					var inputs = data[0]; // [0] because it is in an array for some reason
 					
 					console.log("tool_ID:" + toolId);
-					var tool_html = loadToolHtml(oldJobData, toolId);
-					loadHtmlToWebview(tool_html);
 					
+					loadToolHtml(oldJobData, toolId, function(tool_html){
+						console.log("Tool html ready to be loaded");
+						loadHtmlToWebview(tool_html);
+					});
 					/*
 					// This code is no longer in use. Instead, the form is loaded
 					// 3: Send a post request to start a new job using this data
@@ -183,10 +188,12 @@ Rectangle {
 		var postData = "tool_id=" + toolId + "&tool_version=&history_id=" + main.currentHistoryID;
 		var inputs = {};
 		for (var i = 0; i < form.length; i++) {
+			
 			if(form[i][0] == "input"){
-				inputs["input"] = test2; //"4ff6f47412c3e65e"; //JSON.stringify(test);
+				//inputs["input"] = test2; //"4ff6f47412c3e65e"; //JSON.stringify(test);
 				continue;
 			}
+			
 
 			inputs[form[i][0]] = form[i][1]; //inputs.push([form[i][0], form[i][1]]); // "&" + form[i][0] + "=" + form[i][1];
 		}
