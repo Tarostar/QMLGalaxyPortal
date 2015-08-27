@@ -176,7 +176,7 @@ Rectangle {
 					clip: true
 					boundsBehavior: Flickable.StopAtBounds
 
-
+					
 					onCountChanged: {
 						// Calculate height of listview, so that it does not overlap the listview below
 						var root = historyListView.visibleChildren[0];
@@ -191,13 +191,13 @@ Rectangle {
 						historyListView.height = listViewHeight
 					}
 				}
-
+				
 				Text {
 					x: 20;
 					text: "<b>Histories shared with me</b>"
 					visible: (jsonSharedHistoriesModel.count > 0)
 				}
-
+				
 				ListView {
 					id: sharedHistoryListView
 					width: wideScreen ? main.width / 2 : main.width
@@ -237,4 +237,3 @@ Rectangle {
         }
     }
 }
-
