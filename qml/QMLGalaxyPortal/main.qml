@@ -117,6 +117,13 @@ Rectangle {
         pollInterval: main.periodicPolls
         source: dataKey.length > 0 ? dataSource.length > 0 ? dataSource + "/api/histories?key=" + dataKey : "" : ""
     }
+    
+    // Model for list of histories (shared with user)
+    JSONListModel {
+        id: jsonSharedHistoriesModel
+        pollInterval: main.periodicPolls
+        source: dataKey.length > 0 ? dataSource.length > 0 ? dataSource + "/api/histories/shared_with_me?key=" + dataKey : "" : ""
+    }
 
     // Model for the list of jobs in a selected history (source set when history selected).
     JSONListModel {
@@ -159,15 +166,49 @@ Rectangle {
         }
         Row {
             id: screenlayout
-            ListView {
-                id: historyListView
-                width: wideScreen ? main.width / 2 : main.width
-                height: main.height - mainActionbar.height
-                model: jsonHistoriesModel.model
-                delegate: HistoryDelegate {}
-                clip: true
-                boundsBehavior: Flickable.StopAtBounds
-            }
+			Column {
+				ListView {
+					id: historyListView
+					width: wideScreen ? main.width / 2 : main.width
+					//height: ListView.count * itemHeight //main.height - mainActionbar.height
+					model: jsonHistoriesModel.model
+					delegate: HistoryDelegate {}
+					clip: true
+					boundsBehavior: Flickable.StopAtBounds
+
+					
+					onCountChanged: {
+						// Calculate height of listview, so that it does not overlap the listview below
+						var root = historyListView.visibleChildren[0];
+						var listViewHeight = 0;	var listViewWidth = 0;
+
+						// iterate over each delegate item to get their sizes
+						for (var i = 0; i < root.visibleChildren.length; i++) {
+							listViewHeight += root.visibleChildren[i].height
+							listViewWidth  = Math.max(listViewWidth, root.visibleChildren[i].width)
+						}
+
+						historyListView.height = listViewHeight
+					}
+				}
+				
+				Text {
+					x: 20;
+					text: "<b>Histories shared with me</b>"
+					visible: (jsonSharedHistoriesModel.count > 0)
+				}
+				
+				ListView {
+					id: sharedHistoryListView
+					width: wideScreen ? main.width / 2 : main.width
+					height: main.height - mainActionbar.height - historyListView.height
+					model: jsonSharedHistoriesModel.model
+					delegate: HistoryDelegate {}
+					clip: true
+					boundsBehavior: Flickable.StopAtBounds
+				}
+			}
+			
             ListView {
                 id: jobListItems
                 width: wideScreen ? main.width / 2 : main.width
@@ -196,4 +237,3 @@ Rectangle {
         }
     }
 }
-
