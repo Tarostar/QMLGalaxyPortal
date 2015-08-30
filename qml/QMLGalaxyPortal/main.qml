@@ -195,7 +195,7 @@ Rectangle {
 				Text {
 					x: 20;
 					text: "<b>Histories shared with me</b>"
-					visible: (jsonSharedHistoriesModel.count > 0)
+                    visible: (jsonSharedHistoriesModel.count > 0)
 				}
 				
 				ListView {
