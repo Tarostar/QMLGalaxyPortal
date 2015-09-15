@@ -1,6 +1,7 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
-import QtWebKit 3.0
+import QtWebView 1.0
+//import QtWebView.experimental 1.0
 //import QtWebKit.experimental 1.0
 import "utils.js" as Utils
 
@@ -23,7 +24,7 @@ Rectangle {
 		// Assume we are rerunning a job
 		//loadHtmlToWebview(loadToolHtml());
 		
-		
+		console.log("Init");
 		loadHtmlToWebview("<p>Loading data from previous job...</p>");
 		rerunJob();
 	}
@@ -138,11 +139,12 @@ Rectangle {
 	
 	// Simple function for rerunning a job. 
 	function rerunJob() {
+		console.log("Rerun job: " + main.currentJobID);
 		// Get inputs from previous job first, 
 		// then create new job with the same parameters
 		
 		var errorCallback = function() {
-			loadHtmlToWebview("<p>Error: Job data could not be loaded. This is probably because the galaxy instance you are connected to is missing the required backend. Only Galaxy servers running the newest version of galaxy is currently supported.</p>");
+			loadHtmlToWebview("<p>Error: Job data could not be loaded. This is probably because the galaxy instance you are connected to is missing the required backend. Only Galaxy servers running the newest version of galaxy are currently supported.</p>");
 		};
 		
 		// First, find the old job id from the id of this data set
