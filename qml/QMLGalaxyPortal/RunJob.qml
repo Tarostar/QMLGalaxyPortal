@@ -143,6 +143,8 @@ Rectangle {
 		// Get inputs from previous job first, 
 		// then create new job with the same parameters
 		
+		loadHtmlToWebview("<p>Loading previous job data...</p>");
+		
 		var errorCallback = function() {
 			loadHtmlToWebview("<p>Error: Job data could not be loaded. This is probably because the galaxy instance you are connected to is missing the required backend. Only Galaxy servers running the newest version of galaxy are currently supported.</p>");
 		};

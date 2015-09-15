@@ -147,6 +147,9 @@ function findJobFromDatasetID(datasetID, callback, errorCallback){
 					if(i < jobIDs.length){
 						fireRequest(jobIDs[i++]);
 					}
+					else{
+						errorCallback();
+					}
 				}
 			}, true);	
 		}
@@ -157,7 +160,6 @@ function findJobFromDatasetID(datasetID, callback, errorCallback){
 
 	});
 	
-	errorCallback();
 }
 
 
