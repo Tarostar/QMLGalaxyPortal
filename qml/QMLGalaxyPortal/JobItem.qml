@@ -163,6 +163,7 @@ Rectangle {
             onPressAndHold: {frontRerunButton.color = itemColor }
             onClicked: {
                 //Utils.rerunJob();
+                main.currentJobID = model.id;
                 mainLoader.source = "RunJob.qml";
             }
         }
