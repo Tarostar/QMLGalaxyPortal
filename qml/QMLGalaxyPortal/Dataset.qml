@@ -41,7 +41,7 @@ Rectangle {
                     }
                     
                     if (request.status === 206) {
-						topMessageText = "This dataset is larger than 5 MB. Only the first 5 MB are loaded to save bandwidth."
+						topMessageText = "If the dataset is larger than 5 MB, only the first 5 MB are loaded."
 					}
 
                     // More than one page, set display data for current page.
