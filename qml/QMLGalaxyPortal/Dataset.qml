@@ -12,6 +12,7 @@ Rectangle {
     property string source: dataSource + url + "?key=" + dataKey;
     property string fullDataset: ""
     property string displayDataset: ""
+    property string topMessageText: ""
     property int curPage: 1
     property int maxPage: 1
 
@@ -38,6 +39,10 @@ Rectangle {
                         displayDataset = fullDataset;
                         return;
                     }
+                    
+                    if (request.status === 206) {
+						topMessageText = "This dataset is larger than 5 MB. Only the first 5 MB are loaded to save bandwidth."
+					}
 
                     // More than one page, set display data for current page.
                     updateDisplayedData();
@@ -66,7 +71,7 @@ Rectangle {
     onSourceChanged: {
         // Poll when source url changes (we do not update this as result data is not expected to change once received).
         displayDataset = "requesting data...";
-        Utils.poll(source, onReady, dataset, null, 30000, 100000);
+        Utils.poll(source, onReady, dataset, null, 30000, 5000000);
     }
 
     ActionBar {
@@ -129,9 +134,17 @@ Rectangle {
         boundsBehavior: Flickable.StopAtBounds
 
         Text {
-            id: pageTitle
+            id: topMessage
             anchors.left: parent.left
             anchors.top: parent.top
+            anchors.margins: 10
+            text: topMessageText
+            font.pointSize: largeFonts ? 16 : 12
+        }
+        Text {
+            id: pageTitle
+            anchors.left: parent.left
+            anchors.top: topMessage.bottom
             anchors.margins: 10
             text: "Page:" + curPage + " of " + maxPage
             font.pointSize: largeFonts ? 16 : 12
