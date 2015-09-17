@@ -23,7 +23,7 @@ Rectangle {
         }
 
         if (request.readyState === XMLHttpRequest.DONE) {
-            if (request.status === 200) {
+            if (request.status === 200 || request.status === 206) {
                 // Data is application/octet-stream and should be formatted.
                 // Just display raw data for now.
                 if (request.getResponseHeader ("Content-Type") === "application/octet-stream") {
@@ -43,7 +43,7 @@ Rectangle {
                     updateDisplayedData();
                 }
             } else {
-                displayDataset = "error retrieving data";
+                displayDataset = "Error retrieving data. The server responded: " + request.status;
             }
         }
     }
@@ -66,7 +66,7 @@ Rectangle {
     onSourceChanged: {
         // Poll when source url changes (we do not update this as result data is not expected to change once received).
         displayDataset = "requesting data...";
-        Utils.poll(source, onReady, dataset, null, 30000);
+        Utils.poll(source, onReady, dataset, null, 30000, 100000);
     }
 
     ActionBar {

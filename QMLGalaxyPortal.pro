@@ -82,4 +82,12 @@ macx:CONFIG += x86_64 # 64 bit intel
 #macx:CONFIG += ppc64   # 64 bit PPC
 #macx:CONFIG += x86
 
+# openssl
+PKGCONFIG += openssl 
+Qt += network
 
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_EXTRA_LIBS = \
+        $$PWD/../../../usr/local/ssl/android-18/lib/libssl.so \
+        $$PWD/../../../usr/local/ssl/android-18/lib/libcrypto.so
+}
