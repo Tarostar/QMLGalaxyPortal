@@ -12,6 +12,7 @@ Rectangle {
     property string source: dataSource + url + "?key=" + dataKey;
     property string fullDataset: ""
     property string displayDataset: ""
+    property string topMessageText: ""
     property int curPage: 1
     property int maxPage: 1
 
@@ -23,7 +24,7 @@ Rectangle {
         }
 
         if (request.readyState === XMLHttpRequest.DONE) {
-            if (request.status === 200) {
+            if (request.status === 200 || request.status === 206) {
                 // Data is application/octet-stream and should be formatted.
                 // Just display raw data for now.
                 if (request.getResponseHeader ("Content-Type") === "application/octet-stream") {
@@ -38,12 +39,16 @@ Rectangle {
                         displayDataset = fullDataset;
                         return;
                     }
+                    
+                    if (request.status === 206) {
+						topMessageText = "If the dataset is larger than 5 MB, only the first 5 MB are loaded."
+					}
 
                     // More than one page, set display data for current page.
                     updateDisplayedData();
                 }
             } else {
-                displayDataset = "error retrieving data";
+                displayDataset = "Error retrieving data. The server responded: " + request.status;
             }
         }
     }
@@ -66,7 +71,7 @@ Rectangle {
     onSourceChanged: {
         // Poll when source url changes (we do not update this as result data is not expected to change once received).
         displayDataset = "requesting data...";
-        Utils.poll(source, onReady, dataset, null, 30000);
+        Utils.poll(source, onReady, dataset, null, 30000, 5000000);
     }
 
     ActionBar {
@@ -129,9 +134,17 @@ Rectangle {
         boundsBehavior: Flickable.StopAtBounds
 
         Text {
-            id: pageTitle
+            id: topMessage
             anchors.left: parent.left
             anchors.top: parent.top
+            anchors.margins: 10
+            text: topMessageText
+            font.pointSize: largeFonts ? 16 : 12
+        }
+        Text {
+            id: pageTitle
+            anchors.left: parent.left
+            anchors.top: topMessage.bottom
             anchors.margins: 10
             text: "Page:" + curPage + " of " + maxPage
             font.pointSize: largeFonts ? 16 : 12

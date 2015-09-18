@@ -78,11 +78,11 @@ function getScreenWidthIndex(width) {
 }
 
 // Poll server using the global XMLHttpRequest (note: does not enforce the same origin policy).
-function poll(source, onReady, parentID, authorizationHeader, timeoutInterval) {
+function poll(source, onReady, parentID, authorizationHeader, timeoutInterval, maxSize) {
     if (timeoutInterval === undefined) {
         timeoutInterval = 5000;
     }
-
+    
     var request = new XMLHttpRequest;
 
     // Since XMLHttpRequest does not support timeout, dynamically create a timer object for this from QML string.
@@ -104,7 +104,12 @@ function poll(source, onReady, parentID, authorizationHeader, timeoutInterval) {
     } else {
         request.setRequestHeader("Content-type", "application/json");
     }
-
+    
+    // Set maximum size of returned data (if maxSize is defined)
+    if (maxSize !== undefined) {
+		request.setRequestHeader('Range', 'bytes=0-' + maxSize);
+	}
+		
     request.setRequestHeader('Accept-Language', 'en');
     request.onreadystatechange = function(){ pollTimer.stop(); onReady(request); };
     request.send();

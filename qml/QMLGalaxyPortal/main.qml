@@ -44,7 +44,7 @@ Rectangle {
 
     property bool largeFonts: false;
 
-    property bool wideScreen: width >= 1000 ? true : false
+    property bool wideScreen: width / Screen.pixelDensity  >= 230 ? true : false
 
     // Save settings.
     Settings {
