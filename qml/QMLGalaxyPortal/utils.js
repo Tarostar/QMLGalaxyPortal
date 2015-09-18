@@ -136,6 +136,7 @@ function findJobFromDatasetID(datasetID, callback, errorCallback){
 				
 				// Dirty way: Search for output id in string of output:
 				if(JSON.stringify(jobInfo.outputs).indexOf(datasetID) !== -1){ 
+					console.log("Hit: " + datasetID + " in " + JSON.stringify(jobInfo.outputs));
 					callback(jobID);
 					//i = jobIDs.length;
 					return;
@@ -145,6 +146,9 @@ function findJobFromDatasetID(datasetID, callback, errorCallback){
 					// Fire the next request
 					if(i < jobIDs.length){
 						fireRequest(jobIDs[i++]);
+					}
+					else{
+						errorCallback();
 					}
 				}
 			}, true);	
@@ -156,7 +160,6 @@ function findJobFromDatasetID(datasetID, callback, errorCallback){
 
 	});
 	
-	errorCallback();
 }
 
 
