@@ -88,4 +88,7 @@ contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
         $$PWD/../libssl.so
 }
 
+# openssl
+PKGCONFIG += openssl 
+Qt += network
 
