@@ -82,4 +82,10 @@ macx:CONFIG += x86_64 # 64 bit intel
 #macx:CONFIG += ppc64   # 64 bit PPC
 #macx:CONFIG += x86
 
+contains(ANDROID_TARGET_ARCH,armeabi-v7a) {
+    ANDROID_EXTRA_LIBS = \
+        $$PWD/../libcrypto.so \
+        $$PWD/../libssl.so
+}
+
 
