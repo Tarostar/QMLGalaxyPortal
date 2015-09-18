@@ -151,7 +151,7 @@ Rectangle {
             anchors.topMargin: mmItemMargin; anchors.bottomMargin: mmItemMargin
             anchors.leftMargin: mmItemMargin / 2; anchors.rightMargin: mmItemMargin / 2
             elide: Text.ElideMiddle
-            text: qsTr("Version 1.2.1")
+            text: qsTr("Version 1.2.2")
             font.pointSize: largeFonts ? 20 : 15
         }
         ImageButton {
