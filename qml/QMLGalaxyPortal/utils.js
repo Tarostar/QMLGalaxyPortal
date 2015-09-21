@@ -118,7 +118,6 @@ function poll(source, onReady, parentID, authorizationHeader, timeoutInterval, m
 
 // Hacky function that finds the id of the job that created a dataset in the history
 function findJobFromDatasetID(datasetID, callback, errorCallback){
-	console.info("Find job from dataset ID");
 	var currentHistoryID = main.currentHistoryID;
 	
 	// Itereate over every job in this history, find the job that created dataset with id datasetID
