@@ -50,13 +50,14 @@ Rectangle {
 			var html = "";
 			html += "<!html>" +
 					"<style type='text/css'>" + 
-					"body{ background-color: #fffff0; }" +
+					"body{ background-color: #ffffdf0; }" +
 					"</style>"+
 					"<body><form>";
 			
 			getDataSets(function (datasets){
 				
 				data = JSON.parse(data);
+				html += "<p>This functionality is currently in beta. Some tools may not work as expected.</p><hr>";
 				html += "<h2>" + data.name + "</h2>";
 				
 				var inputs = data.inputs;
