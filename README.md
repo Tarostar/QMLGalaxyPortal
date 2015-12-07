@@ -34,7 +34,7 @@ The aim of the app is to be cross platform.
 Binaries in various formats will generally be available in the [Releases](https://github.com/Tarostar/QMLGalaxyPortal/releases) section together with the corresponding source code for those who wish to compile it themselves. Please report any issues you discover.
 
 * Windows binaries are provided as a zip file. Simply unzip and run QMLGalaxyPortal.exe
-* Linux binaries are packed as a tar.gz and can be run by executing GalaxyPortal.sh (e.g. ./GalaxyPortal.sh which sets up a temporary LD_LIBRARY_PATH to load the correct libraries and modules. If you already have Qt 5.3 or later installed you can optionally just run QMLGalaxyPortal directly which will then link to the installed libraries and modules.
+* Linux binaries are packed as a tar.gz and can be run by executing GalaxyPortal.sh (e.g. ./GalaxyPortal.sh which sets up a temporary LD_LIBRARY_PATH to load the correct libraries and modules. If you already have Qt 5.5 or later installed you can optionally just run QMLGalaxyPortal directly which will then link to the installed libraries and modules.
 * Android apk is included, but will also be available on Google Play (currently in testing, contact for invite).
 * iOS app (iPhone/iPad) is currently in closed testing, and a separate closed-source version based on a commercially licensed Qt version is planned for release through the Apple App Store.
 
@@ -62,7 +62,7 @@ A Mac and Windows Phone version is currently not planned, but may be added in fu
 
 ## Windows
 
-You will need to download Qt 5.3 or later (optionally with Qt Creator) on a Windows platform (Win 8.1 was used in testing). MinGW 4.8 was used, but similar compilers might work.
+You will need to download Qt 5.5 or later (optionally with Qt Creator) on a Windows platform (Win 8.1 was used in testing). MinGW 4.9.2 was used, but similar compilers might work.
 
 ## Linux
 

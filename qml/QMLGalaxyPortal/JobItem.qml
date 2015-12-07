@@ -130,7 +130,7 @@ Rectangle {
             onClicked: {
                 mainLoader.source = "Dataset.qml";
                 mainLoader.item.url = jsonHistoryJobContent.fullDataset;
-                mainLoader.item.actionBarTitle = detailsActionBar.actionBarTitle;
+                mainLoader.item.actionBarTitle = model.name;
             }
         }
     }
